@@ -11,8 +11,11 @@
 - Costo: depende de cómo se use; se arma una propuesta según el negocio. Se consulta por WhatsApp o desde el formulario de la web.
 
 ## Enlaces
-- Web: https://mbk.com.ar/
-- Preguntas frecuentes: https://mbk.com.ar/#preguntas
+- Inicio: https://mbk.com.ar/
+- El Sistema MBK (qué resuelve y cómo): https://mbk.com.ar/sistema
+- Consultoría y Belén Klundt: https://mbk.com.ar/consultoria
+- Planillas: https://mbk.com.ar/planillas
+- Preguntas frecuentes: https://mbk.com.ar/preguntas
 - Sistema (iniciar sesión): https://mbksistema.com.ar/login
 - Términos: https://mbksistema.com.ar/terminos
 - Privacidad: https://mbksistema.com.ar/privacidad

@@ -13,7 +13,7 @@ const VALORES = [
 /* 4 · Pensado desde la experiencia (lo que pidió Belén). */
 export function Belen() {
   return (
-    <section id="belen" className="bg-sand py-16 md:py-24" aria-labelledby="t-belen">
+    <section id="belen" className="bg-green-soft/70 py-16 md:py-24" aria-labelledby="t-belen">
       <div className="wrap grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <div data-reveal className="mx-auto w-full max-w-sm">
           {BELEN_PHOTO ? (

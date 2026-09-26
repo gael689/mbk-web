@@ -1,12 +1,6 @@
+import Link from "next/link";
 import { ArrowRight, Check } from "@/content/iconos";
 import { EncabezadoSeccion } from "./Piezas";
-
-/* 6 · Dos formas de usarlo, dentro de la escalera "Empezá por donde estés". */
-const ESCALERA = [
-  { n: "1", t: "Planillas", d: "Para ordenarte ya, sin sistema", href: "#planillas" },
-  { n: "2", t: "Sistema MBK", d: "Todo tu negocio en un lugar", href: "#formas-uso" },
-  { n: "3", t: "Consultoría", d: "Belén mira tu negocio con lupa", href: "#consultoria" },
-];
 
 const FORMAS = [
   {
@@ -40,33 +34,18 @@ const FORMAS = [
 
 export function Formas() {
   return (
-    <section id="formas" className="bg-white py-16 md:py-24" aria-labelledby="t-formas">
+    <section id="formas" className="bg-blue-soft/50 py-16 md:py-24" aria-labelledby="t-formas">
       <div className="wrap">
         <EncabezadoSeccion
           id="t-formas"
           etiqueta="Dos formas de usarlo"
           titulo={
             <>
-              Empezá por <span className="hl">donde estés</span>
+              Solo el sistema, o con <span className="hl">acompañamiento</span>
             </>
           }
-          bajada="No todos están en el mismo momento. Hay una puerta para cada uno, y podés pasar de una a otra cuando quieras."
+          bajada="Dos formas de usarlo. Elegí la que va con tu momento; se puede pasar de una a otra cuando quieras."
         />
-
-        <ol className="mb-12 grid gap-3 sm:grid-cols-3" aria-label="Escalera de productos" data-reveal>
-          {ESCALERA.map((e) => (
-            <li key={e.n}>
-              <a href={e.href} className="group flex h-full items-center gap-4 rounded-3xl border border-line bg-cream p-4 hover:border-ink">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-ink text-lg font-extrabold text-white">{e.n}</span>
-                <span>
-                  <span className="block text-[1.1rem] font-extrabold leading-tight">{e.t}</span>
-                  <span className="block text-[0.95rem] text-muted">{e.d}</span>
-                </span>
-                <ArrowRight className="ml-auto h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </a>
-            </li>
-          ))}
-        </ol>
 
         <div id="formas-uso" className="grid gap-5 md:grid-cols-2 md:gap-6">
           {FORMAS.map((f) => (
@@ -83,10 +62,10 @@ export function Formas() {
                   </li>
                 ))}
               </ul>
-              <a href="#probar" data-acomp={f.acomp ? "1" : "0"} className="btn btn-pink mt-8 self-start">
+              <Link href={f.acomp ? "/?acomp=1#probar" : "/#probar"} className="btn btn-pink mt-8 self-start">
                 Quiero probar MBK
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </a>
+              </Link>
             </article>
           ))}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
-import { ArrowRight, Check } from "@/content/iconos";
+import { useEffect, useState, useSyncExternalStore, type FormEvent } from "react";
+import { ArrowRight, Check, ChevronDown } from "@/content/iconos";
 import { whatsappUrl } from "@/content/site";
 import { registrar } from "@/lib/analytics";
 import { INTERESES, esquemaContacto, type ErroresContacto } from "@/lib/contacto";
@@ -19,13 +19,24 @@ const campoBase =
 export function ContactForm() {
   const [estado, setEstado] = useState<Estado>({ tipo: "quieto" });
   const [errores, setErrores] = useState<ErroresContacto>({});
-  const [acomp, setAcomp] = useState(false);
+  // Desde /sistema, "Sistema + acompañamiento" llega con ?acomp=1 y deja la casilla tildada
+  // (en el servidor vale false, así la hidratación coincide).
+  const acompUrl = useSyncExternalStore(
+    () => () => {},
+    () => new URLSearchParams(window.location.search).get("acomp") === "1",
+    () => false,
+  );
+  const [acompManual, setAcompManual] = useState<boolean | null>(null);
+  const [abiertoManual, setAbiertoManual] = useState<boolean | null>(null);
+  const acomp = acompManual ?? acompUrl;
+  // El bloque opcional se abre solo si viene con acompañamiento o si hay un error adentro.
+  const masDatos = abiertoManual ?? (acompUrl || !!errores.email);
 
   // Los botones "Quiero probar MBK" de "Sistema + acompañamiento" tildan la casilla.
   useEffect(() => {
     const alClic = (e: MouseEvent) => {
       const a = (e.target as HTMLElement | null)?.closest<HTMLElement>("a[data-acomp]");
-      if (a) setAcomp(a.dataset.acomp === "1");
+      if (a) setAcompManual(a.dataset.acomp === "1");
     };
     document.addEventListener("click", alClic);
     return () => document.removeEventListener("click", alClic);
@@ -135,35 +146,45 @@ export function ContactForm() {
           {err("whatsapp")}
         </div>
         <div>
-          <label htmlFor="email" className="font-bold">
-            Tu mail <span className="font-normal text-muted">(opcional)</span>
+          <label htmlFor="interes" className="font-bold">
+            ¿Qué querés resolver?
           </label>
-          <input id="email" name="email" type="email" autoComplete="email" maxLength={120} className={campoBase} aria-invalid={!!errores.email} aria-describedby={desc("email")} />
-          {err("email")}
+          <select id="interes" name="interes" required defaultValue="" className={campoBase} aria-invalid={!!errores.interes} aria-describedby={desc("interes")}>
+            <option value="" disabled>
+              Elegí una opción
+            </option>
+            {INTERESES.map((i) => (
+              <option key={i.valor} value={i.valor}>
+                {i.etiqueta}
+              </option>
+            ))}
+          </select>
+          {err("interes")}
         </div>
       </div>
 
-      <div>
-        <label htmlFor="interes" className="font-bold">
-          ¿Qué querés resolver?
-        </label>
-        <select id="interes" name="interes" required defaultValue="" className={campoBase} aria-invalid={!!errores.interes} aria-describedby={desc("interes")}>
-          <option value="" disabled>
-            Elegí una opción
-          </option>
-          {INTERESES.map((i) => (
-            <option key={i.valor} value={i.valor}>
-              {i.etiqueta}
-            </option>
-          ))}
-        </select>
-        {err("interes")}
-      </div>
-
-      <label className="flex min-h-12 cursor-pointer items-start gap-3 rounded-2xl bg-pink-soft p-4">
-        <input type="checkbox" checked={acomp} onChange={(e) => setAcomp(e.target.checked)} className="mt-0.5 h-6 w-6 shrink-0 accent-[#c4187e]" />
-        <span className="font-semibold leading-snug">Quiero también acompañamiento de Belén</span>
-      </label>
+      {/* Divulgación progresiva: lo esencial primero, lo opcional si la persona quiere sumarlo. */}
+      <details open={masDatos} onToggle={(e) => setAbiertoManual(e.currentTarget.open)} className="group rounded-2xl border border-line">
+        <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-4 py-3 font-bold marker:hidden [&::-webkit-details-marker]:hidden">
+          <span>
+            Sumar mail o acompañamiento <span className="font-normal text-muted">(opcional)</span>
+          </span>
+          <ChevronDown className="h-5 w-5 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
+        </summary>
+        <div className="space-y-4 px-4 pb-4">
+          <div>
+            <label htmlFor="email" className="font-bold">
+              Tu mail
+            </label>
+            <input id="email" name="email" type="email" autoComplete="email" maxLength={120} className={campoBase} aria-invalid={!!errores.email} aria-describedby={desc("email")} />
+            {err("email")}
+          </div>
+          <label className="flex min-h-12 cursor-pointer items-start gap-3 rounded-2xl bg-pink-soft p-4">
+            <input type="checkbox" checked={acomp} onChange={(e) => setAcompManual(e.target.checked)} className="mt-0.5 h-6 w-6 shrink-0 accent-[#c4187e]" />
+            <span className="font-semibold leading-snug">Quiero también acompañamiento de Belén</span>
+          </label>
+        </div>
+      </details>
 
       {/* Honeypot: las personas no lo ven ni lo completan. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">

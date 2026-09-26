@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "@/content/iconos";
 import { EncabezadoSeccion } from "./Piezas";
 
@@ -10,7 +11,7 @@ const PASOS = [
 /* 8 · Cómo empezar. */
 export function Pasos() {
   return (
-    <section id="empezar" className="bg-white py-16 md:py-24" aria-labelledby="t-empezar">
+    <section id="empezar" className="bg-orange-soft/40 py-16 md:py-24" aria-labelledby="t-empezar">
       <div className="wrap">
         <EncabezadoSeccion
           id="t-empezar"
@@ -32,10 +33,10 @@ export function Pasos() {
           ))}
         </ol>
         <div className="mt-10 text-center">
-          <a href="#probar" className="btn btn-pink">
+          <Link href="/#probar" className="btn btn-pink">
             Quiero probar MBK
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

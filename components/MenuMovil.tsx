@@ -1,16 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X } from "@/content/iconos";
-
-const ENLACES = [
-  { href: "#como-funciona", t: "Cómo funciona" },
-  { href: "#belen", t: "Belén" },
-  { href: "#formas", t: "Dos formas de usarlo" },
-  { href: "#consultoria", t: "Consultoría" },
-  { href: "#planillas", t: "Planillas" },
-  { href: "#preguntas", t: "Preguntas" },
-];
+import { NAV } from "./NavEnlaces";
 
 /* Menú desplegable del celular. Se cierra al elegir un enlace o con Escape. */
 export function MenuMovil() {
@@ -42,17 +35,17 @@ export function MenuMovil() {
         className="absolute inset-x-0 top-full border-b border-line bg-cream px-4 pb-6 pt-3 shadow-[var(--shadow-soft)]"
       >
         <ul className="mx-auto max-w-72 space-y-1 sm:max-w-none">
-          {ENLACES.map((e) => (
+          {NAV.map((e) => (
             <li key={e.href}>
-              <a href={e.href} onClick={() => setAbierto(false)} className="flex min-h-12 items-center rounded-2xl px-4 text-lg font-semibold hover:bg-sand">
+              <Link href={e.href} onClick={() => setAbierto(false)} className="flex min-h-12 items-center rounded-2xl px-4 text-lg font-semibold hover:bg-blue-soft">
                 {e.t}
-              </a>
+              </Link>
             </li>
           ))}
           <li className="pt-2">
-            <a href="#probar" onClick={() => setAbierto(false)} className="btn btn-pink w-full">
+            <Link href="/#probar" onClick={() => setAbierto(false)} className="btn btn-pink w-full">
               Quiero probar MBK
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

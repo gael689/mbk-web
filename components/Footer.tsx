@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { DEVELOPER_NAME, DEVELOPER_URL, INSTAGRAM_HANDLE, INSTAGRAM_URL, LOGIN_URL, PRIVACY_URL, SYSTEM_URL, TERMS_URL, YOUTUBE_URL, tiendaHref, whatsappUrl } from "@/content/site";
+import Link from "next/link";
+import { DEVELOPER_NAME, DEVELOPER_URL, INSTAGRAM_HANDLE, INSTAGRAM_URL, LOGIN_URL, PRIVACY_URL, TERMS_URL, YOUTUBE_URL, tiendaHref, whatsappUrl } from "@/content/site";
 import { IconInstagram, IconWhatsApp, IconYouTube } from "./Marcas";
 
 const enlace = "inline-flex min-h-11 items-center gap-2 rounded-full py-2 font-medium text-white/90 hover:text-white hover:underline";
@@ -41,16 +42,31 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Tienda y sistema">
-            <h2 className="text-[0.85rem] font-bold uppercase tracking-[0.14em] text-white/60">MBK</h2>
+            <h2 className="text-[0.85rem] font-bold uppercase tracking-[0.14em] text-white/60">Explorar</h2>
             <ul className="mt-3">
+              <li>
+                <Link href="/sistema" className={enlace}>
+                  Sistema MBK
+                </Link>
+              </li>
+              <li>
+                <Link href="/consultoria" className={enlace}>
+                  Consultoría
+                </Link>
+              </li>
+              <li>
+                <Link href="/planillas" className={enlace}>
+                  Planillas
+                </Link>
+              </li>
+              <li>
+                <Link href="/preguntas" className={enlace}>
+                  Preguntas frecuentes
+                </Link>
+              </li>
               <li>
                 <a href={tiendaHref()} data-track="clic_tienda" target="_blank" rel="noopener noreferrer" className={enlace}>
                   Tienda de planillas
-                </a>
-              </li>
-              <li>
-                <a href={SYSTEM_URL} rel="noopener" className={enlace}>
-                  Sistema MBK
                 </a>
               </li>
               <li>

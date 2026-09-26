@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="grid min-h-screen place-items-center px-4 text-center">
+    <div className="grid min-h-[70vh] place-items-center px-4 py-16 text-center">
       <div>
         <p className="tag">Error 404</p>
         <h1 className="display h1 mt-5">
@@ -19,6 +19,6 @@ export default function NotFound() {
           Volver al inicio
         </Link>
       </div>
-    </main>
+    </div>
   );
 }

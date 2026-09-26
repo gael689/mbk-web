@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Interacciones } from "@/components/Interacciones";
+import { WhatsAppFlotante } from "@/components/WhatsAppFlotante";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/content/site";
 import "./globals.css";
 
@@ -15,7 +19,7 @@ const poppins = Poppins({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#fff8f1",
+  themeColor: "#fcfaf7",
 };
 
 export const metadata: Metadata = {
@@ -47,7 +51,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es-AR" className={poppins.variable}>
       <body>
-        {children}
+        <a href="#contenido" className="skip-link">
+          Saltar al contenido
+        </a>
+        <Header />
+        <main id="contenido">{children}</main>
+        <Footer />
+        <WhatsAppFlotante />
+        <Interacciones />
         {/* Analytics solo se monta en Vercel: fuera de ahí no carga nada. */}
         {process.env.VERCEL ? <Analytics /> : null}
       </body>

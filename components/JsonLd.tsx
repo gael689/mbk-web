@@ -85,17 +85,7 @@ export function JsonLd() {
         jobTitle: "Licenciada y Profesora en Economía",
         worksFor: { "@id": org },
         address: { "@type": "PostalAddress", addressLocality: "Bahía Blanca", addressCountry: "AR" },
-        url: `${SITE_URL}/#belen`,
-      },
-      {
-        "@type": "FAQPage",
-        "@id": `${SITE_URL}/#preguntas`,
-        inLanguage: "es-AR",
-        mainEntity: FAQ.map((f) => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
+        url: `${SITE_URL}/consultoria#belen`,
       },
     ],
   };
@@ -107,4 +97,22 @@ export function JsonLd() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(grafo).replace(/</g, "\\u003c") }}
     />
   );
+}
+
+/* FAQPage: solo en /preguntas, donde las preguntas y respuestas están a la vista. */
+export function JsonLdFaq() {
+  const grafo = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}/preguntas#faq`,
+    url: `${SITE_URL}/preguntas`,
+    inLanguage: "es-AR",
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    mainEntity: FAQ.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(grafo).replace(/</g, "\\u003c") }} />;
 }

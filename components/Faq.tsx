@@ -6,7 +6,7 @@ import { EncabezadoSeccion } from "./Piezas";
  * respuestas están en el HTML para Google y para los buscadores con IA. */
 export function Faq() {
   return (
-    <section id="preguntas" className="bg-white py-16 md:py-24" aria-labelledby="t-faq">
+    <section id="preguntas" className="py-16 md:py-24" aria-labelledby="t-faq">
       <div className="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <div>
           <EncabezadoSeccion
