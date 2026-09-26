@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BarrasLogo } from "./Decoracion";
 import { DashboardCelular, DashboardEscritorio } from "./mockups/Dashboard";
 
 /* Notebook y celular (CSS) con el Dashboard del sistema adentro. */
@@ -89,7 +90,7 @@ export function EscenaEscritorio({ foto }: { foto?: string | null }) {
   return (
     <div
       className="relative isolate aspect-[5/4.2] overflow-hidden rounded-[2.5rem] shadow-[var(--shadow-lift)] sm:aspect-[5/3.9] lg:aspect-[1/0.92]"
-      style={{ background: "linear-gradient(160deg,#fff1e2 0%,#ffdfc4 55%,#f9caa3 100%)" }}
+      style={{ background: "linear-gradient(160deg,#e6f1fb 0%,#fbe6f2 58%,#ffece1 100%)" }}
       role="img"
       aria-label="Ilustración de un escritorio con un mate, una notebook y un celular que muestran el Sistema MBK"
     >
@@ -101,6 +102,7 @@ export function EscenaEscritorio({ foto }: { foto?: string | null }) {
         ))}
       </div>
       <Hoja className="absolute -left-[3%] top-[6%] h-[38%] w-auto" />
+      <BarrasLogo className="absolute right-[7%] top-[7%] h-[17%] w-[9%]" />
       {/* escritorio */}
       <div className="absolute inset-x-0 bottom-0 h-[24%]" style={{ background: "linear-gradient(180deg,#e2b283 0%,#cf9762 60%,#c08650 100%)" }} aria-hidden="true">
         <div className="h-[3px] w-full bg-white/50" />

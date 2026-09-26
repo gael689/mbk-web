@@ -1,9 +1,9 @@
 import { Check } from "@/content/iconos";
-import { INCLUYE_HOY, MODULOS, NOVEDADES, TONO } from "@/content/modulos";
+import { INCLUYE_HOY, NOVEDADES, TONO } from "@/content/modulos";
 import { SOLUCIONES, type MockId, type Solucion } from "@/content/soluciones";
 import { Celular } from "./Dispositivos";
 import { MockCaja, MockCobros, MockCostos, MockResultado, MockStock, MockTurnos } from "./mockups/Pantallas";
-import { EncabezadoSeccion, Orb, TagNovedad } from "./Piezas";
+import { EncabezadoSeccion, OrbIcono, TagNovedad } from "./Piezas";
 
 const MOCKS: Record<Exclude<MockId, "celular">, () => React.JSX.Element> = {
   resultado: MockResultado,
@@ -26,14 +26,13 @@ const EPIGRAFE: Record<MockId, string> = {
 
 function Bloque({ s, invertido }: { s: Solucion; invertido: boolean }) {
   const t = TONO[s.tono];
-  const modulo = MODULOS.find((m) => m.tono === s.tono) ?? MODULOS[0];
   const Mock = s.mock === "celular" ? null : MOCKS[s.mock];
 
   return (
     <article id={s.id} data-reveal className="card grid items-center gap-8 p-6 sm:p-8 lg:grid-cols-2 lg:gap-14 lg:p-12">
       <div className={invertido ? "lg:order-2" : ""}>
         <div className="flex flex-wrap items-center gap-3">
-          <Orb modulo={modulo} size={44} />
+          <OrbIcono Icon={s.Icon} tono={s.tono} size={44} />
           <span className={`chip ${t.soft}`}>{s.modulo}</span>
           {s.novedad ? <TagNovedad /> : null}
         </div>
@@ -101,7 +100,7 @@ export function Soluciones() {
           <p className="mt-6 text-[0.95rem] font-semibold text-muted">Novedades que se vienen:</p>
           <ul className="mt-2 flex flex-wrap gap-2">
             {NOVEDADES.map((x) => (
-              <li key={x} className="inline-flex items-center gap-2 rounded-full bg-sand px-3.5 py-1.5 text-[0.95rem] font-medium">
+              <li key={x} className="inline-flex items-center gap-2 rounded-full bg-blue-soft px-3.5 py-1.5 text-[0.95rem] font-medium">
                 <TagNovedad className="!px-2 !py-0.5 !text-[0.68rem]" />
                 {x}
               </li>

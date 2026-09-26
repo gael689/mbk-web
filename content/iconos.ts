@@ -28,6 +28,7 @@ export {
   Smartphone,
   Sparkles,
   Store,
+  Tag,
   Target,
   TrendingUp,
   Users,

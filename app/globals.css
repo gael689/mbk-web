@@ -12,9 +12,9 @@
 
   --color-ink: #0a0a0a;
   --color-muted: #4b4640;
-  --color-cream: #fff8f1;
-  --color-sand: #f7ecdf;
-  --color-line: #ecdfd0;
+  --color-cream: #fcfaf7;
+  --color-sand: #eef3f7;
+  --color-line: #e8e3dc;
 
   --color-pink: #e42e9a;
   --color-pink-strong: #c4187e;
@@ -264,6 +264,45 @@ main > section:not(#inicio) {
   .rv-in {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Efectos suaves (solo CSS, sin librerías; se apagan con prefers-reduced-motion). */
+.blob {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  animation: drift 22s ease-in-out infinite alternate;
+}
+.bar-grow {
+  transform-origin: bottom;
+  animation: grow 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0s);
+}
+.tono-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.tono-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px -22px var(--glow, rgb(60 30 10 / 0.35));
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 5%, 0) scale(1.08);
+  }
+}
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
   }
 }
 

@@ -3,12 +3,12 @@ import { PLANILLAS } from "@/content/planillas";
 import { tiendaHref } from "@/content/site";
 import { EncabezadoSeccion } from "./Piezas";
 
-const COLORES = ["bg-blue-soft", "bg-orange-soft", "bg-violet-soft", "bg-green-soft", "bg-pink-soft", "bg-sand"];
+const COLORES = ["bg-blue-soft", "bg-orange-soft", "bg-green-soft", "bg-pink-soft", "bg-blue-soft", "bg-green-soft"];
 
 /* 10 · Planillas (escalón 1). Sin precio: lo ve en la tienda. Cada link con utm. */
 export function Planillas() {
   return (
-    <section id="planillas" className="bg-white py-16 md:py-24" aria-labelledby="t-planillas">
+    <section id="planillas" className="py-16 md:py-24" aria-labelledby="t-planillas">
       <div className="wrap">
         <EncabezadoSeccion
           id="t-planillas"

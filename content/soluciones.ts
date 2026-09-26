@@ -1,3 +1,4 @@
+import { BarChart3, CalendarDays, Landmark, Package, Smartphone, Tag, Wallet, type LucideIcon } from "./iconos";
 import type { Tono } from "./modulos";
 
 /* La regla de toda la copy: problema -> solución -> lo que ganás.
@@ -9,6 +10,7 @@ export type MockId = "resultado" | "cobros" | "costos" | "stock" | "caja" | "tur
 export type Solucion = {
   id: string;
   tono: Tono;
+  Icon: LucideIcon;
   modulo: string;
   titulo: string;
   problema: string;
@@ -22,6 +24,7 @@ export const SOLUCIONES: Solucion[] = [
   {
     id: "gano-plata",
     tono: "blue",
+    Icon: BarChart3,
     modulo: "Ventas",
     titulo: "¿Cómo saber si tu emprendimiento gana plata?",
     problema: "“Vendo todo el mes y no sé si gané plata.”",
@@ -32,6 +35,7 @@ export const SOLUCIONES: Solucion[] = [
   {
     id: "cobros",
     tono: "pink",
+    Icon: Wallet,
     modulo: "Cobros y clientes",
     titulo: "¿Sabés cuánto te deben tus clientes?",
     problema: "“No sé cuánto me deben.”",
@@ -42,6 +46,7 @@ export const SOLUCIONES: Solucion[] = [
   {
     id: "precios",
     tono: "orange",
+    Icon: Tag,
     modulo: "Productos",
     titulo: "¿Cómo calcular el precio de un producto?",
     problema: "“Pongo los precios a ojo.”",
@@ -52,7 +57,8 @@ export const SOLUCIONES: Solucion[] = [
   },
   {
     id: "stock",
-    tono: "orange",
+    tono: "green",
+    Icon: Package,
     modulo: "Stock",
     titulo: "Control de stock para emprendedores: ¿cómo no quedarte sin mercadería?",
     problema: "“Me quedo sin mercadería sin darme cuenta.”",
@@ -63,7 +69,8 @@ export const SOLUCIONES: Solucion[] = [
   },
   {
     id: "caja",
-    tono: "violet",
+    tono: "blue",
+    Icon: Landmark,
     modulo: "Caja",
     titulo: "¿Cuánta plata tenés hoy y dónde está?",
     problema: "“A principio de mes no sé cuánta plata tengo.”",
@@ -75,6 +82,7 @@ export const SOLUCIONES: Solucion[] = [
   {
     id: "turnos",
     tono: "green",
+    Icon: CalendarDays,
     modulo: "Servicios y turnos",
     titulo: "¿Cómo organizar los turnos de tu negocio sin que se te pisen?",
     problema: "“Se me pisan los turnos y me olvido de pedidos.”",
@@ -85,6 +93,7 @@ export const SOLUCIONES: Solucion[] = [
   {
     id: "todo-en-uno",
     tono: "pink",
+    Icon: Smartphone,
     modulo: "Todo en un lugar",
     titulo: "Un programa para registrar ventas desde el celular, ¿y si tuvieras todo junto?",
     problema: "“Lo tengo todo en cuadernos y papelitos.”",
@@ -92,14 +101,4 @@ export const SOLUCIONES: Solucion[] = [
     gana: "Tiempo para vender en vez de ordenar.",
     mock: "celular",
   },
-];
-
-/* Los dolores, como los dice el emprendedor. `ir` apunta al bloque que lo resuelve. */
-export const PROBLEMAS: { texto: string; tono: Tono; ir: string }[] = [
-  { texto: "Anoto en un cuaderno y a fin de mes no sé si gané.", tono: "blue", ir: "gano-plata" },
-  { texto: "No sé cuánto me deben.", tono: "pink", ir: "cobros" },
-  { texto: "Pongo los precios a ojo.", tono: "orange", ir: "precios" },
-  { texto: "Me quedo sin mercadería sin darme cuenta.", tono: "orange", ir: "stock" },
-  { texto: "Mezclo la plata de la casa con la del negocio y no sé cuánta tengo.", tono: "violet", ir: "caja" },
-  { texto: "Se me pisan los turnos y me olvido de los pedidos.", tono: "green", ir: "turnos" },
 ];

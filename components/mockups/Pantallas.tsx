@@ -1,4 +1,4 @@
-import { Banknote, Bell, CalendarDays, Clock, CreditCard, FileText, Landmark, Package, Users, BarChart3 } from "@/content/iconos";
+import { Banknote, Bell, CalendarDays, Clock, CreditCard, Landmark, Package, Users, BarChart3 } from "@/content/iconos";
 import { Mock, Money } from "./Mock";
 
 /* Mockups chicos, uno por problema. Datos de ejemplo obviamente ficticios
@@ -34,7 +34,7 @@ export function MockResultado() {
           </div>
           <div className="mk-card !p-[0.9em]">
             <div className="mk-muted text-[0.75em] font-semibold">Gastos</div>
-            <div className="text-[1.15em] font-extrabold text-violet-strong">
+            <div className="text-[1.15em] font-extrabold text-orange-strong">
               <Money>62.900</Money>
             </div>
           </div>
@@ -57,7 +57,7 @@ export function MockResultado() {
               <span className="flex h-[0.9em] flex-1 overflow-hidden rounded-full bg-[#f1ece6]">
                 <span className="h-full rounded-full bg-blue" style={{ width: `${v}%` }} />
               </span>
-              <span className="h-[0.9em] rounded-full bg-violet" style={{ width: `${(g as number) * 0.5}%`, minWidth: "1.4em" }} />
+              <span className="h-[0.9em] rounded-full bg-orange" style={{ width: `${(g as number) * 0.5}%`, minWidth: "1.4em" }} />
             </div>
           ))}
         </div>
@@ -105,10 +105,10 @@ export function MockCobros() {
 export function MockCostos() {
   const partes = [
     ["Insumos", 2400, "bg-orange"],
-    ["Mano de obra", 1800, "bg-violet"],
+    ["Mano de obra", 1800, "bg-pink"],
     ["Packaging", 450, "bg-blue"],
     ["Inversión", 600, "bg-green"],
-    ["Otros", 150, "bg-pink"],
+    ["Otros", 150, "bg-ink/60"],
   ] as const;
   return (
     <Mock w={34} fluid>
@@ -175,15 +175,15 @@ export function MockCaja() {
   const filas = [
     ["Efectivo", "85.000", Banknote, "bg-green-soft text-green-strong"],
     ["Cuenta bancaria", "142.500", Landmark, "bg-blue-soft text-blue-strong"],
-    ["Mercado Pago", "85.000", CreditCard, "bg-violet-soft text-violet-strong"],
+    ["Mercado Pago", "85.000", CreditCard, "bg-orange-soft text-orange-strong"],
   ] as const;
   return (
     <Mock w={34} fluid>
       <div className="mk-panel p-[1.5em]">
-        <Encabezado Icon={FileText} tono="bg-violet text-white" titulo="Caja" sub="Por medio de pago" />
-        <div className="mb-[0.6em] rounded-[1em] bg-violet-soft px-[1em] py-[0.8em]">
-          <div className="text-[0.8em] font-semibold text-violet-strong">Tenés en total</div>
-          <div className="text-[1.7em] font-extrabold text-violet-strong">
+        <Encabezado Icon={Landmark} tono="bg-blue text-white" titulo="Caja" sub="Por medio de pago" />
+        <div className="mb-[0.6em] rounded-[1em] bg-blue-soft px-[1em] py-[0.8em]">
+          <div className="text-[0.8em] font-semibold text-blue-strong">Tenés en total</div>
+          <div className="text-[1.7em] font-extrabold text-blue-strong">
             <Money>312.500</Money>
           </div>
         </div>

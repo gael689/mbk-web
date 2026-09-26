@@ -6,7 +6,7 @@ const RUBROS: { rubro: string; texto: string; tono: Tono }[] = [
   { rubro: "Pastelería y gastronomía", texto: "Tus pedidos, tus cobros y tus costos, ordenados.", tono: "orange" },
   { rubro: "Estética y belleza", texto: "Turnos, clientas y cobros en un solo lugar.", tono: "green" },
   { rubro: "Lencería y comercios", texto: "Qué vendiste, a quién y cuánto te quedó.", tono: "blue" },
-  { rubro: "Servicios y oficios", texto: "Agenda, clientes y gastos, sin papelitos.", tono: "violet" },
+  { rubro: "Servicios y oficios", texto: "Agenda, clientes y gastos, sin papelitos.", tono: "orange" },
 ];
 
 /* 5 · Para quién es. Sin nombrar clientes reales. */

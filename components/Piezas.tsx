@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { LucideIcon } from "@/content/iconos";
 import { MODULOS, TONO, type Modulo, type Tono } from "@/content/modulos";
 
 /* Piezas chicas que se repiten en toda la página. */
@@ -9,6 +10,15 @@ export function Orb({ modulo, size = 64 }: { modulo: Modulo; size?: number }) {
   return (
     <span className={`orb ${t.solid} shrink-0`} style={{ width: size, height: size }}>
       <modulo.Icon style={{ width: size * 0.48, height: size * 0.48 }} strokeWidth={2} aria-hidden="true" />
+    </span>
+  );
+}
+
+/** Círculo de color con un ícono cualquiera (para los bloques que no son un módulo). */
+export function OrbIcono({ Icon, tono, size = 48 }: { Icon: LucideIcon; tono: Tono; size?: number }) {
+  return (
+    <span className={`orb ${TONO[tono].solid} shrink-0`} style={{ width: size, height: size }}>
+      <Icon style={{ width: size * 0.48, height: size * 0.48 }} strokeWidth={2} aria-hidden="true" />
     </span>
   );
 }
