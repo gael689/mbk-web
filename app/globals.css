@@ -1,0 +1,393 @@
+@import "tailwindcss";
+
+/* ── Identidad: la de las piezas de Instagram de Belén ─────────────────────
+ * Colores medidos del logo (azul, naranja, verde, rosa, tinta) más el violeta
+ * de "Costos y gastos". El rosa es el acento. Contraste AA:
+ *  - los tonos "puros" (pink, orange, green…) van en fondos de íconos y en
+ *    titulares grandes (>= 24px), nunca como texto chico sobre blanco;
+ *  - los "-strong" son los oscurecidos que sí alcanzan 4.5:1 para texto chico
+ *    y para botones con texto blanco. */
+@theme inline {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0a0a0a;
+  --color-muted: #4b4640;
+  --color-cream: #fff8f1;
+  --color-sand: #f7ecdf;
+  --color-line: #ecdfd0;
+
+  --color-pink: #e42e9a;
+  --color-pink-strong: #c4187e;
+  --color-pink-soft: #fce4f1;
+  --color-blue: #1b73b9;
+  --color-blue-strong: #175f99;
+  --color-blue-soft: #dcebf7;
+  --color-orange: #f15825;
+  --color-orange-strong: #b93a0a;
+  --color-orange-soft: #fde6db;
+  --color-green: #039145;
+  --color-green-strong: #027a3a;
+  --color-green-soft: #d9f1e4;
+  --color-violet: #7c4dff;
+  --color-violet-strong: #6236e0;
+  --color-violet-soft: #e9e0ff;
+
+  --font-weight-medium: 400;
+  --font-weight-bold: 600;
+
+  --shadow-soft: 0 1px 2px rgb(60 30 10 / 0.05), 0 12px 32px -12px rgb(60 30 10 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(60 30 10 / 0.06), 0 24px 48px -16px rgb(60 30 10 / 0.28);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: #fff;
+}
+
+/* Foco visible en todo lo interactivo. */
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 6px #fff;
+}
+.on-dark :focus-visible {
+  outline-color: #fff;
+  box-shadow: 0 0 0 6px var(--color-ink);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--color-ink);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Las secciones fuera de pantalla no se calculan ni se pintan hasta que el
+ * scroll se acerca: la carga inicial hace mucho menos trabajo. */
+main > section:not(#inicio) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .wrap {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section {
+    padding-block: 4rem;
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 6rem;
+    }
+  }
+
+  /* Titulares: sans muy negra, grande y apretada, como sus posts. */
+  .display {
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
+  .h1 {
+    font-size: clamp(2.5rem, 9vw, 4.4rem);
+  }
+  .h2 {
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    text-wrap: balance;
+  }
+  .h3 {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    font-size: clamp(1.5rem, 3.6vw, 2.15rem);
+    text-wrap: balance;
+  }
+  .lead {
+    font-size: clamp(1.125rem, 2.4vw, 1.3rem);
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+  .hl {
+    color: var(--color-pink);
+  }
+
+  /* Píldora de etiqueta (la rosa de arriba del titular). */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.25rem;
+    padding: 0.35rem 1.1rem;
+    border-radius: 999px;
+    background: var(--color-pink-strong);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.95rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-ink);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    text-align: center;
+    border: 2px solid transparent;
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-pink {
+    background: var(--color-pink-strong);
+    color: #fff;
+    box-shadow: 0 10px 24px -10px rgb(196 24 126 / 0.7);
+  }
+  .btn-pink:hover {
+    background: #a9106b;
+    box-shadow: 0 16px 28px -12px rgb(196 24 126 / 0.75);
+  }
+  .btn-ink {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-ink:hover {
+    background: #2b2622;
+  }
+  .btn-line {
+    background: #fff;
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+  .btn-line:hover {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-sm {
+    min-height: 2.75rem;
+    padding: 0.45rem 1.2rem;
+    font-size: 0.98rem;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: 1.75rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Círculo de color pleno con el ícono adentro + etiqueta en píldora pastel. */
+  .orb {
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    color: #fff;
+  }
+
+  /* Animaciones sutiles, solo CSS. */
+  .rise {
+    animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+  .float {
+    animation: float 7s ease-in-out infinite;
+  }
+  .rv {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .rv-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes wa-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgb(37 211 102 / 0.5);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 16px rgb(37 211 102 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+  .rv {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Mockups del sistema ───────────────────────────────────────────────────
+ * Todo en `em`: el componente <Mock> fija la ilustración a N em de ancho y el
+ * font-size sale del ancho del contenedor (cqw), así el mismo dibujo escala
+ * de un celular a una pantalla grande sin distorsionarse. Son decorativos
+ * (aria-hidden) y con datos de ejemplo obviamente ficticios. */
+.mk {
+  container-type: inline-size;
+}
+.mk-in {
+  font-size: calc(100cqw / var(--w));
+  line-height: 1.35;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  text-align: left;
+  user-select: none;
+}
+@media (max-width: 640px) {
+  .mk-fluid .mk-in {
+    font-size: calc(100cqw / (var(--w) * 0.8));
+  }
+}
+.mk-panel {
+  background: #fff;
+  border-radius: 1.6em;
+  border: 1px solid rgb(10 10 10 / 0.06);
+  box-shadow: 0 1.2em 3em -1.4em rgb(60 30 10 / 0.35);
+  overflow: hidden;
+}
+.mk-card {
+  background: #fff;
+  border: 1px solid rgb(10 10 10 / 0.07);
+  border-radius: 1em;
+  padding: 1em 1.1em;
+}
+.mk-muted {
+  color: #6b6560;
+}
+.mk-ico {
+  display: inline-grid;
+  place-items: center;
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 0.6em;
+  flex: none;
+}
+.mk-ico svg {
+  width: 1.15em;
+  height: 1.15em;
+}
+.mk-badge {
+  display: inline-block;
+  padding: 0.15em 0.7em;
+  border-radius: 999px;
+  font-size: 0.78em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.mk-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  padding: 0.75em 0;
+  border-top: 1px solid rgb(10 10 10 / 0.07);
+}
+.mk-row:first-child {
+  border-top: 0;
+}
+.mk-av {
+  display: grid;
+  place-items: center;
+  width: 2.3em;
+  height: 2.3em;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.8em;
+  flex: none;
+}
