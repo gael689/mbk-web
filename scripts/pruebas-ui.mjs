@@ -40,7 +40,7 @@ for (const [nombre, ancho, alto] of [["movil", 390, 844], ["escritorio", 1440, 9
   console.log(`[${nombre}] objetivos táctiles < 44px: ${chicos.length}`);
   for (const c of chicos.slice(0, 12)) console.log("  -", JSON.stringify(c));
 
-  if (nombre === "movil") {
+  if (nombre === "movil" && (await page.locator("#nombre").count())) {
     // Formulario: validación en el navegador, y error claro (sin variables de entorno en este server).
     await page.locator("#probar").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: "Quiero probar MBK" }).last().click();

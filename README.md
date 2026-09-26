@@ -1,10 +1,26 @@
 # mbk-web — la web pública de MBK (mbk.com.ar)
 
-Next.js 16 (App Router) + TypeScript + Tailwind 4. Una sola página larga que **vende el Sistema MBK**
-(consultoría y planillas en chico), pensada para el celular. El plan aprobado está en
+Next.js 16 (App Router) + TypeScript + Tailwind 4. **Vende el Sistema MBK** (consultoría y planillas en chico), pensada para el celular. El plan aprobado está en
 `system-mbk/planes/plan-web-mbk.md`. **Sin precios en ninguna parte.**
 
 > Estado: terminada y lista para desplegar, **sin desplegar**. No hay remoto ni dominio configurado.
+
+## Dos versiones para validar con Belén
+
+| | Rama / tag | Qué es | Cómo verla |
+|---|---|---|---|
+| **v1: landing larga** | rama `v1-landing-larga`, tag `v1` | Una sola página con las 14 secciones del plan (~16.000 px de alto en escritorio, ~26.000 en móvil). Carpeta hermana `../mbk-web-v1` (es un `git worktree` de esa rama). | `cd ../mbk-web-v1 && npm run build && PORT=3200 npm start` |
+| **v2: corta + páginas** (rama actual `v2-corta`) | rama `v2-corta` | Home corta (~4.800 px escritorio, ~8.300 móvil) y el detalle en `/sistema`, `/consultoria`, `/planillas` y `/preguntas`, que se abren solo si la persona lo pide. Más variedad de colores del logo y efectos suaves. | `npm run build && PORT=3300 npm start` |
+
+`main` sigue en la v1. Cuando Belén elija: si es la v2, `git merge v2-corta` en `main`; si es la v1, no hay nada que hacer. **Los dos comparten el mismo contenido** (`content/`): un cambio de texto se hace en una rama y se lleva a la otra con `git cherry-pick`.
+
+### Estructura de la v2
+
+- **Home (`/`)**: hero con CTA → "Lo que te pasa hoy y lo que cambia" (6 tarjetas problema → lo que ganás, cada una lleva a `/sistema#...`) → "Empezá por donde estés" (tres puertas: Planillas, Sistema, Consultoría) → Belén en resumen → CTA final con formulario.
+- **`/sistema`**: los 7 bloques problema → solución → ganancia con mockups, para quién es, dos formas de usarlo, tutoriales, cómo empezar, Instagram.
+- **`/consultoria`**: Belén (experiencia, misión, valores) y los 8 servicios. **`/planillas`**: las 6 planillas. **`/preguntas`**: FAQ completo (y su JSON-LD FAQPage).
+- **Un solo CTA principal** ("Quiero probar MBK") repetido en cada página y siempre llevando al formulario de la home (`/#probar`); "Sistema + acompañamiento" lo abre con `/?acomp=1#probar`. El formulario tiene lo esencial a la vista (nombre, negocio, WhatsApp, qué querés resolver) y el mail y el acompañamiento en un bloque opcional.
+- **Color y efectos**: los cuatro colores del logo (azul, naranja, verde, rosa) se reparten por bloque; el violeta queda solo para "Costos y gastos" (el color fijo de Belén). Efectos solo CSS y suaves: manchas de color, las cuatro barras del logo que crecen una vez, ondas entre secciones, tarjetas que se elevan al pasar el mouse. Todo se apaga con `prefers-reduced-motion`.
 
 ## Cómo correrlo
 
@@ -71,7 +87,7 @@ Probar sin mandar mails reales: `node scripts/resend-falso.mjs 3199` y arrancar 
 
 ## SEO / GEO
 
-- `metadataBase` y canónico salen de `SITE_URL` (una constante). `app/sitemap.ts`, `app/robots.ts` (abierto a los buscadores con IA), `public/llms.txt`, `app/opengraph-image.tsx` (+ `twitter-image`), JSON-LD en `components/JsonLd.tsx` (WebSite, Organization, ProfessionalService de Bahía Blanca, SoftwareApplication, Person y FAQPage).
+- `metadataBase` y canónico salen de `SITE_URL` (una constante); cada página arma su metadata con `lib/meta.ts` (canónico, Open Graph con imagen y Twitter). `app/sitemap.ts` (home + 4 páginas), `app/robots.ts` (abierto a los buscadores con IA), `public/llms.txt`, `app/opengraph-image.tsx` (+ `twitter-image`), JSON-LD en `components/JsonLd.tsx`: WebSite, Organization, ProfessionalService de Bahía Blanca, SoftwareApplication y Person en la home, y FAQPage solo en `/preguntas` (donde las respuestas están a la vista).
 - **`public/llms.txt` es un archivo estático**: tiene `https://mbk.com.ar` escrito. Si el host canónico termina siendo `www.mbk.com.ar`, editarlo.
 - `app/favicon.ico` está en la **raíz** de `app/` (nunca dentro de un grupo de rutas). Se genera del logo con `node scripts/generar-assets.mjs` (también genera `public/logo.png`, `public/logo-mark.png`, `app/icon.png`, `app/apple-icon.png`; el original está en `assets/logo-original.png`, copia de `system-mbk/frontend/src/assets/logo.png`).
 
