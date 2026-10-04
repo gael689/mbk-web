@@ -8,6 +8,7 @@
 - Hoy incluye: ventas, cobros, clientes, productos, servicios y turnos, costos y gastos, metas mensuales, notificaciones, mensajes y descarga a Excel.
 - Novedades (sin fecha): control de stock con avisos, caja por medio de pago, costo del producto dividido en cinco partes.
 - Dos formas de usarlo: solo el sistema, o sistema + acompañamiento de Belén desde su panel de asesora.
+- Contacto: WhatsApp +54 9 2954 36-2919 (Belén Klundt).
 - Costo: depende de cómo se use; se arma una propuesta según el negocio. Se consulta por WhatsApp o desde el formulario de la web.
 
 ## Enlaces

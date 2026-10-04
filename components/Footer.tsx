@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DEVELOPER_NAME, DEVELOPER_URL, INSTAGRAM_HANDLE, INSTAGRAM_URL, LOGIN_URL, PRIVACY_URL, SYSTEM_URL, TERMS_URL, YOUTUBE_URL, tiendaHref, whatsappUrl } from "@/content/site";
+import { DEVELOPER_NAME, DEVELOPER_URL, INSTAGRAM_HANDLE, INSTAGRAM_URL, LOGIN_URL, PRIVACY_URL, SYSTEM_URL, TERMS_URL, WHATSAPP_DISPLAY, YOUTUBE_URL, tiendaHref, whatsappUrl } from "@/content/site";
 import { IconInstagram, IconWhatsApp, IconYouTube } from "./Marcas";
 
 const enlace = "inline-flex min-h-11 items-center gap-2 rounded-full py-2 font-medium text-white/90 hover:text-white hover:underline";
@@ -24,7 +24,7 @@ export function Footer() {
             <ul className="mt-3">
               <li>
                 <a href={whatsappUrl()} data-track="clic_whatsapp" target="_blank" rel="noopener noreferrer" className={enlace}>
-                  <IconWhatsApp className="h-5 w-5" /> WhatsApp
+                  <IconWhatsApp className="h-5 w-5" /> WhatsApp {WHATSAPP_DISPLAY}
                 </a>
               </li>
               <li>

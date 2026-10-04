@@ -35,13 +35,14 @@ export const DEVELOPER_NAME = "Gael González";
 export const DEVELOPER_URL = "https://gaelgonzalez.com.ar";
 
 /* ── WhatsApp ─────────────────────────────────────────────────────────────
- * TODO (Belén): falta su número. El que aparece en la propuesta original es de
- * Gael y NO se usa acá. Se define en NEXT_PUBLIC_WHATSAPP_NUMBER (formato
- * internacional sin + ni espacios, ej. 5492911234567). Mientras no esté, todos
- * los botones apuntan a este número de mentira. */
-export const WHATSAPP_PLACEHOLDER = "5490000000000";
-export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").replace(/\D/g, "") || WHATSAPP_PLACEHOLDER;
-export const WHATSAPP_CONFIGURED = WHATSAPP_NUMBER !== WHATSAPP_PLACEHOLDER;
+ * El número de Belén es público: se muestra en la web y en los datos de Google.
+ * Formato internacional sin + ni espacios. NEXT_PUBLIC_WHATSAPP_NUMBER lo pisa si
+ * hace falta cambiarlo sin tocar el código. El de la propuesta original es de Gael
+ * y NO se usa acá. */
+const WHATSAPP_DEFAULT = "5492954362919";
+export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").replace(/\D/g, "") || WHATSAPP_DEFAULT;
+/** Cómo se lee en pantalla: +54 9 2954 36-2919. */
+export const WHATSAPP_DISPLAY = WHATSAPP_NUMBER.replace(/^54(9)(\d{4})(\d{2})(\d{4})$/, "+54 $1 $2 $3-$4");
 export const WHATSAPP_MESSAGE = "Hola Belén, vi la web de MBK y quiero saber más";
 export const whatsappUrl = (message: string = WHATSAPP_MESSAGE) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
