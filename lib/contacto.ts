@@ -3,6 +3,7 @@ import { z } from "zod";
 /* Validación del formulario. La usa la ruta /api/contacto (la que manda) y el
  * formulario del navegador (para no viajar al servidor con datos obviamente mal). */
 export const INTERESES = [
+  { valor: "demo", etiqueta: "Quiero ver una demo del sistema" },
   { valor: "ventas", etiqueta: "Ordenar mis ventas y cobros" },
   { valor: "costos", etiqueta: "Costos y precios" },
   { valor: "stock", etiqueta: "Stock" },

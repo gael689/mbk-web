@@ -16,14 +16,14 @@ export function BelenResumen() {
     <section id="belen-resumen" className="relative overflow-hidden bg-green-soft py-14 md:py-20" aria-labelledby="t-belen-resumen">
       <BarrasLogo className="absolute -right-4 bottom-0 hidden h-56 w-52 opacity-[0.16] md:flex" animar={false} />
       <div className="wrap relative grid items-center gap-8 md:grid-cols-[auto_1fr] md:gap-12">
-        <div data-reveal className="mx-auto">
+        <div data-reveal="zoom" className="mx-auto">
           {BELEN_PHOTO ? (
             <Image
               src={BELEN_PHOTO}
               alt="Belén Klundt, Licenciada y Profesora en Economía"
-              width={220}
-              height={220}
-              className="h-44 w-44 rounded-full object-cover shadow-[var(--shadow-lift)] md:h-52 md:w-52"
+              width={250}
+              height={250}
+              className="h-[13.2rem] w-[13.2rem] rounded-full object-cover object-[50%_40%] shadow-[var(--shadow-lift)] md:h-[15.6rem] md:w-[15.6rem]"
             />
           ) : (
             <div className="grid h-44 w-44 place-items-center rounded-full bg-white shadow-[var(--shadow-lift)] md:h-52 md:w-52">
@@ -31,7 +31,7 @@ export function BelenResumen() {
             </div>
           )}
         </div>
-        <div data-reveal>
+        <div data-reveal="der">
           <span className="tag !bg-green-strong">Pensado desde la experiencia</span>
           <h2 id="t-belen-resumen" className="h2 mt-4">
             Lo pensó <span className="text-green-strong">una economista</span> que trabaja con emprendedores

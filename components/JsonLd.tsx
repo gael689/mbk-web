@@ -6,6 +6,7 @@ import {
   SITE_NAME,
   SITE_URL,
   SYSTEM_URL,
+  WHATSAPP_NUMBER,
   YOUTUBE_URL,
 } from "@/content/site";
 
@@ -44,6 +45,7 @@ export function JsonLd() {
         description:
           "Consultoría económica y financiera para emprendedores y pymes de Bahía Blanca, y el Sistema MBK de gestión para llevar ventas, cobros, costos y turnos.",
         url: SITE_URL,
+        telephone: `+${WHATSAPP_NUMBER}`,
         image: `${SITE_URL}/logo.png`,
         parentOrganization: { "@id": org },
         address: {

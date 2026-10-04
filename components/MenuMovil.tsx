@@ -43,8 +43,8 @@ export function MenuMovil() {
             </li>
           ))}
           <li className="pt-2">
-            <Link href="/#probar" onClick={() => setAbierto(false)} className="btn btn-pink w-full">
-              Quiero probar MBK
+            <Link href="/?demo=1#probar" onClick={() => setAbierto(false)} className="btn btn-pink w-full">
+              Solicitar demo
             </Link>
           </li>
         </ul>

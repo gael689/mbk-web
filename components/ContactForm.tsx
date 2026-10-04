@@ -26,13 +26,21 @@ export function ContactForm() {
     () => new URLSearchParams(window.location.search).get("acomp") === "1",
     () => false,
   );
+  // Los botones "Solicitar demo" llegan con ?demo=1 y dejan elegida esa opción.
+  const demoUrl = useSyncExternalStore(
+    () => () => {},
+    () => new URLSearchParams(window.location.search).get("demo") === "1",
+    () => false,
+  );
+  const [interesManual, setInteresManual] = useState<string | null>(null);
+  const interes = interesManual ?? (demoUrl ? "demo" : "");
   const [acompManual, setAcompManual] = useState<boolean | null>(null);
   const [abiertoManual, setAbiertoManual] = useState<boolean | null>(null);
   const acomp = acompManual ?? acompUrl;
   // El bloque opcional se abre solo si viene con acompañamiento o si hay un error adentro.
   const masDatos = abiertoManual ?? (acompUrl || !!errores.email);
 
-  // Los botones "Quiero probar MBK" de "Sistema + acompañamiento" tildan la casilla.
+  // Los botones de "Sistema + acompañamiento" (?acomp=1) tildan la casilla.
   useEffect(() => {
     const alClic = (e: MouseEvent) => {
       const a = (e.target as HTMLElement | null)?.closest<HTMLElement>("a[data-acomp]");
@@ -104,7 +112,7 @@ export function ContactForm() {
           <Check className="h-8 w-8" strokeWidth={3} aria-hidden="true" />
         </span>
         <h3 className="h3 mt-5">¡Listo, recibimos tu consulta!</h3>
-        <p className="mt-3 text-[1.1rem]">Belén te va a escribir por WhatsApp para contarte cómo seguir.</p>
+        <p className="mt-3 text-[1.1rem]">Te vamos a escribir por WhatsApp para contarte cómo seguir.</p>
       </div>
     );
   }
@@ -149,7 +157,7 @@ export function ContactForm() {
           <label htmlFor="interes" className="font-bold">
             ¿Qué querés resolver?
           </label>
-          <select id="interes" name="interes" required defaultValue="" className={campoBase} aria-invalid={!!errores.interes} aria-describedby={desc("interes")}>
+          <select id="interes" name="interes" required value={interes} onChange={(e) => setInteresManual(e.target.value)} className={campoBase} aria-invalid={!!errores.interes} aria-describedby={desc("interes")}>
             <option value="" disabled>
               Elegí una opción
             </option>
@@ -181,7 +189,7 @@ export function ContactForm() {
           </div>
           <label className="flex min-h-12 cursor-pointer items-start gap-3 rounded-2xl bg-pink-soft p-4">
             <input type="checkbox" checked={acomp} onChange={(e) => setAcompManual(e.target.checked)} className="mt-0.5 h-6 w-6 shrink-0 accent-[#c4187e]" />
-            <span className="font-semibold leading-snug">Quiero también acompañamiento de Belén</span>
+            <span className="font-semibold leading-snug">Quiero también el acompañamiento del equipo</span>
           </label>
         </div>
       </details>
@@ -200,14 +208,14 @@ export function ContactForm() {
           {estado.conWhatsApp ? (
             <a href={whatsappUrl()} data-track="clic_whatsapp" target="_blank" rel="noopener noreferrer" className="btn btn-ink btn-sm mt-3">
               <IconWhatsApp className="h-5 w-5" />
-              Escribir a Belén por WhatsApp
+              Escribinos por WhatsApp
             </a>
           ) : null}
         </div>
       ) : null}
 
       <button type="submit" disabled={enviando} className="btn btn-pink w-full disabled:cursor-wait disabled:opacity-70 sm:w-auto">
-        {enviando ? "Enviando…" : "Quiero probar MBK"}
+        {enviando ? "Enviando…" : "Solicitar demo"}
         {enviando ? null : <ArrowRight className="h-5 w-5" aria-hidden="true" />}
       </button>
       <p className="text-[0.92rem] text-muted">Usamos tus datos solo para contactarte por esta consulta.</p>

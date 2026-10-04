@@ -18,7 +18,7 @@ export default function ConsultoriaPagina() {
         tono="blue"
         titulo={
           <>
-            Una economista mirando <span className="hl">tu negocio</span>
+            Un equipo mirando <span className="hl">tu negocio</span>
           </>
         }
         bajada="Quién está detrás de MBK y los ocho servicios de consultoría para emprendimientos y pymes."

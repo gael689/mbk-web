@@ -1,4 +1,4 @@
-import { BarChart3, CalendarDays, FileText, Package, Users, type LucideIcon } from "./iconos";
+import { Bell, BarChart3, CalendarDays, Clock, FileText, Package, Plus, Sparkles, Users, type LucideIcon } from "./iconos";
 
 /* Un color por módulo, el que Belén ya usa en sus piezas de Instagram.
  * Las clases van completas (no armadas con template strings) para que Tailwind
@@ -22,6 +22,15 @@ export const MODULOS: Modulo[] = [
   { id: "servicios", label: "Servicios", tono: "green", Icon: CalendarDays },
   { id: "ventas", label: "Ventas", tono: "blue", Icon: BarChart3 },
   { id: "costos", label: "Costos y gastos", tono: "violet", Icon: FileText },
+];
+
+/* La fila del hero: los módulos, más lo que el sistema hace solo ("y más"). */
+export const MODULOS_HERO: Modulo[] = [
+  ...MODULOS,
+  { id: "turnos", label: "Turnos", tono: "pink", Icon: Clock },
+  { id: "notificaciones", label: "Notificaciones automáticas", tono: "orange", Icon: Bell },
+  { id: "actualizaciones", label: "Actualizaciones continuas", tono: "green", Icon: Sparkles },
+  { id: "mas", label: "¡Y más!", tono: "blue", Icon: Plus },
 ];
 
 /* Qué existe hoy y qué viene. Las novedades se nombran sin fecha. */

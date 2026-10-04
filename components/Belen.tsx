@@ -14,11 +14,11 @@ const VALORES = [
 export function Belen() {
   return (
     <section id="belen" className="bg-green-soft/70 py-16 md:py-24" aria-labelledby="t-belen">
-      <div className="wrap grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-        <div data-reveal className="mx-auto w-full max-w-sm">
+      <div className="wrap grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+        <div data-reveal className="mx-auto w-full max-w-[28.8rem]">
           {BELEN_PHOTO ? (
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-[var(--shadow-lift)]">
-              <Image src={BELEN_PHOTO} alt="Belén Klundt, Licenciada y Profesora en Economía" fill sizes="(min-width: 1024px) 30vw, 90vw" className="object-cover" />
+              <Image src={BELEN_PHOTO} alt="Belén Klundt, Licenciada y Profesora en Economía" fill sizes="(min-width: 1024px) 30vw, 90vw" className="object-cover object-[50%_40%]" />
             </div>
           ) : (
             <div className="card flex aspect-[4/5] flex-col items-center justify-center gap-6 rounded-[2.5rem] p-8 text-center">
@@ -44,8 +44,8 @@ export function Belen() {
           />
           <div className="-mt-4 space-y-4 text-[1.12rem] leading-relaxed md:-mt-8" data-reveal>
             <p>
-              Soy Belén Klundt, Licenciada y Profesora en Economía, de Bahía Blanca. Con MBK Consultoría acompaño a emprendimientos y
-              pequeñas pymes, y en cada negocio veía lo mismo: ventas anotadas en cuadernos, costos que nunca se calculaban y plata que nadie
+              Soy Belén Klundt, Licenciada y Profesora en Economía, de Bahía Blanca. Con MBK Consultoría, junto a mi equipo, acompañamos a
+              emprendimientos y pequeñas pymes, y en cada negocio veía lo mismo: ventas anotadas en cuadernos, costos que nunca se calculaban y plata que nadie
               sabía dónde estaba.
             </p>
             <p>

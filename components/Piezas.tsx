@@ -24,21 +24,24 @@ export function OrbIcono({ Icon, tono, size = 48 }: { Icon: LucideIcon; tono: To
 }
 
 /** Ícono en círculo + etiqueta en píldora pastel: la fila de sus posts. */
-export function IconoModulo({ modulo, size = 64 }: { modulo: Modulo; size?: number }) {
+export function IconoModulo({ modulo, size = 64, retraso }: { modulo: Modulo; size?: number; retraso?: number }) {
   const t = TONO[modulo.tono];
   return (
-    <li className="flex flex-col items-center gap-2 text-center">
+    <li
+      className={`flex flex-col items-center gap-2 text-center ${retraso !== undefined ? "rise" : ""}`}
+      style={retraso !== undefined ? { ["--d" as string]: `${retraso}s` } : undefined}
+    >
       <Orb modulo={modulo} size={size} />
       <span className={`chip ${t.soft} -mt-1`}>{modulo.label}</span>
     </li>
   );
 }
 
-export function FilaModulos({ size = 64, className = "" }: { size?: number; className?: string }) {
+export function FilaModulos({ size = 64, className = "", modulos = MODULOS }: { size?: number; className?: string; modulos?: Modulo[] }) {
   return (
     <ul className={`flex flex-wrap items-start justify-center gap-x-4 gap-y-5 sm:gap-x-7 ${className}`} aria-label="Módulos del sistema">
-      {MODULOS.map((m) => (
-        <IconoModulo key={m.id} modulo={m} size={size} />
+      {modulos.map((m, i) => (
+        <IconoModulo key={m.id} modulo={m} size={size} retraso={0.45 + i * 0.07} />
       ))}
     </ul>
   );

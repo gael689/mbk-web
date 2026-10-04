@@ -27,7 +27,7 @@ export function Beneficios() {
               Lo que te pasa hoy, y <span className="hl">lo que cambia</span>
             </>
           }
-          bajada="Son las frases que Belén escucha en cada negocio que asesora."
+          bajada="Son las frases que escuchamos en cada negocio que asesoramos."
         />
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((s, i) => {

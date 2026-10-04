@@ -56,7 +56,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/planillas" className={enlace}>
-                  Planillas
+                  Planillas de Excel
                 </Link>
               </li>
               <li>

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { ArrowRight } from "@/content/iconos";
-import { HERO_PHOTO } from "@/content/site";
 import { Manchas } from "./Decoracion";
-import { EscenaEscritorio } from "./Dispositivos";
+import { EscenaSistema } from "./EscenaSistema";
+import { MODULOS_HERO } from "@/content/modulos";
+import { Metricas } from "./Metricas";
 import { FilaModulos } from "./Piezas";
 
 export function Hero() {
@@ -12,7 +13,7 @@ export function Hero() {
       <div className="wrap grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div>
           <span className="tag rise">Sistema MBK</span>
-          <h1 className="display h1 mt-5">
+          <h1 className="display h1 rise mt-5" style={{ ["--d" as string]: "0.08s" }}>
             ¿Vendés todos los días y no sabés <span className="hl">cuánto ganás</span>?
           </h1>
           <p className="rise mt-6 max-w-xl text-[1.3rem] font-medium leading-snug sm:text-[1.5rem]" style={{ ["--d" as string]: "0.16s" }}>
@@ -23,23 +24,32 @@ export function Hero() {
             con emprendedores y pymes.
           </p>
           <div className="rise mt-8 flex flex-col gap-3 sm:flex-row" style={{ ["--d" as string]: "0.3s" }}>
-            <Link href="/#probar" className="btn btn-pink">
-              Quiero probar MBK
+            <Link href="/?demo=1#probar" className="btn btn-pink">
+              Solicitar demo
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Link>
             <Link href="/sistema" className="btn btn-line">
               Ver cómo funciona
             </Link>
           </div>
+          <p className="rise mt-4 font-semibold text-ink/80" style={{ ["--d" as string]: "0.38s" }}>
+            Te mostramos el sistema funcionando. Sin compromiso.
+          </p>
         </div>
 
         <div className="rise" style={{ ["--d" as string]: "0.2s" }}>
-          <EscenaEscritorio foto={HERO_PHOTO} />
+          <div className="lg:w-[120%]">
+            <EscenaSistema />
+          </div>
         </div>
       </div>
 
       <div className="wrap mt-10 md:mt-14">
-        <FilaModulos size={64} />
+        <FilaModulos size={64} modulos={MODULOS_HERO} className="mx-auto max-w-[58rem]" />
+      </div>
+
+      <div className="wrap mt-10 md:mt-12">
+        <Metricas />
       </div>
     </section>
   );

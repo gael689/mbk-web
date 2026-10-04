@@ -19,10 +19,10 @@ const FORMAS = [
   {
     id: "acompanado",
     titulo: "Sistema + acompañamiento",
-    lema: "Además, Belén te acompaña.",
+    lema: "Además, te acompañamos.",
     items: [
       "Todo lo del sistema",
-      "Belén ve tu negocio desde su panel de asesora",
+      "Nuestro equipo ve tu negocio desde el panel de asesoría",
       "Te acompaña a entender tus números",
       "La forma del acompañamiento se define en conjunto, según tu negocio",
     ],
@@ -62,8 +62,8 @@ export function Formas() {
                   </li>
                 ))}
               </ul>
-              <Link href={f.acomp ? "/?acomp=1#probar" : "/#probar"} className="btn btn-pink mt-8 self-start">
-                Quiero probar MBK
+              <Link href={f.acomp ? "/?acomp=1&demo=1#probar" : "/?demo=1#probar"} className="btn btn-pink mt-8 self-start">
+                Solicitar demo
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Link>
             </article>

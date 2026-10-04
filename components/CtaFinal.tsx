@@ -11,12 +11,12 @@ export function CtaFinal() {
       <span className="blob -right-24 -top-24 -z-10 h-96 w-96" style={{ background: "radial-gradient(circle, rgb(255 255 255 / 0.14), transparent 65%)" }} aria-hidden="true" />
       <div className="wrap grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <div data-reveal>
-          <span className="inline-flex min-h-9 items-center rounded-full bg-white px-4 py-1 text-[1.05rem] font-bold text-ink">Quiero probar MBK</span>
+          <span className="inline-flex min-h-9 items-center rounded-full bg-white px-4 py-1 text-[1.05rem] font-bold text-ink">Solicitar demo</span>
           <h2 id="t-probar" className="h2 mt-5">
             ¿Listo para saber <span className="text-[#ffd0ea]">cuánto ganás</span> de verdad?
           </h2>
           <p className="mt-4 text-[1.2rem] leading-relaxed text-white/90">
-            Dejanos tus datos y Belén te escribe por WhatsApp para contarte cómo empezar. Sin compromiso.
+            Pedí tu demo: te escribimos por WhatsApp, te mostramos el sistema funcionando y te armamos la propuesta según tu negocio. Sin compromiso.
           </p>
           <a
             href={whatsappUrl()}

@@ -7,8 +7,9 @@
 - Problemas que resuelve: no saber si el negocio gana plata, no saber cuánto te deben, poner los precios a ojo, quedarse sin mercadería, no saber cuánta plata hay en caja, turnos que se pisan.
 - Hoy incluye: ventas, cobros, clientes, productos, servicios y turnos, costos y gastos, metas mensuales, notificaciones, mensajes y descarga a Excel.
 - Novedades (sin fecha): control de stock con avisos, caja por medio de pago, costo del producto dividido en cinco partes.
-- Dos formas de usarlo: solo el sistema, o sistema + acompañamiento de Belén desde su panel de asesora.
-- Costo: depende de cómo se use; se arma una propuesta según el negocio. Se consulta por WhatsApp o desde el formulario de la web.
+- Dos formas de usarlo: solo el sistema, o sistema + acompañamiento del equipo de MBK desde el panel de asesoría.
+- Contacto: WhatsApp +54 9 2954 36-2919 (MBK Consultoría).
+- Costo: depende de cómo se use; se arma una propuesta según el negocio. Se puede pedir una demo del sistema antes de decidir. Se consulta por WhatsApp o desde el formulario de la web.
 
 ## Enlaces
 - Inicio: https://mbk.com.ar/

@@ -4,7 +4,7 @@ import { EncabezadoSeccion } from "./Piezas";
 
 const PASOS = [
   { n: "1", t: "Pedís tu acceso", d: "Completás el formulario corto. Son dos minutos.", c: "bg-pink" },
-  { n: "2", t: "Belén te llama", d: "Te escucha y te ayuda a configurar tu negocio.", c: "bg-blue" },
+  { n: "2", t: "Te llamamos", d: "Te escuchamos y te ayudamos a configurar tu negocio.", c: "bg-blue" },
   { n: "3", t: "Empezás a cargar", d: "Cargás tus ventas y ya ves cómo va tu negocio.", c: "bg-green" },
 ];
 
@@ -33,8 +33,8 @@ export function Pasos() {
           ))}
         </ol>
         <div className="mt-10 text-center">
-          <Link href="/#probar" className="btn btn-pink">
-            Quiero probar MBK
+          <Link href="/?demo=1#probar" className="btn btn-pink">
+            Solicitar demo
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </Link>
         </div>

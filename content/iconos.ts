@@ -21,6 +21,7 @@ export {
   Menu,
   MessageCircle,
   Package,
+  Plus,
   Play,
   Search,
   Settings,

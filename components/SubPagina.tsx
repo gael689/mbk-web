@@ -43,10 +43,10 @@ export function SubHero({ etiqueta, titulo, bajada, tono = "pink" }: { etiqueta:
 
 /* Cierre de cada página interna: una sola acción principal, más WhatsApp. */
 export function CtaCierre({
-  titulo = "¿Querés probar MBK en tu negocio?",
-  texto = "Dejanos tus datos y Belén te escribe por WhatsApp. Sin compromiso.",
-  ctaTexto = "Quiero probar MBK",
-  ctaHref = "/#probar",
+  titulo = "¿Querés ver el sistema funcionando?",
+  texto = "Dejanos tus datos y te escribimos por WhatsApp. Sin compromiso.",
+  ctaTexto = "Solicitar demo",
+  ctaHref = "/?demo=1#probar",
 }: {
   titulo?: string;
   texto?: string;

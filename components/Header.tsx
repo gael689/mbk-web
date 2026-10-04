@@ -18,8 +18,8 @@ export function Header() {
           <a href={LOGIN_URL} data-track="clic_iniciar_sesion" className="btn btn-line btn-sm">
             Iniciar sesión
           </a>
-          <Link href="/#probar" className="btn btn-pink btn-sm hidden md:inline-flex">
-            Quiero probar MBK
+          <Link href="/?demo=1#probar" className="btn btn-pink btn-sm hidden md:inline-flex">
+            Solicitar demo
           </Link>
           <MenuMovil />
         </div>

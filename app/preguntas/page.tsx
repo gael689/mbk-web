@@ -6,7 +6,7 @@ import { metaPagina } from "@/lib/meta";
 export const metadata = metaPagina({
   titulo: "Preguntas frecuentes del Sistema MBK",
   descripcion:
-    "¿Sirve si no sé de computación? ¿Funciona en el celular? ¿Mis datos son míos? ¿Cuánto sale? Respuestas claras sobre el sistema de gestión para emprendedores de MBK.",
+    "¿Cómo sé cuánto gano? ¿Cómo calculo el margen de mis productos? ¿Sirve si no sé de computación? ¿Funciona en el celular? ¿Mis datos son míos? Respuestas claras sobre el sistema de gestión para emprendedores y pymes de MBK.",
   ruta: "/preguntas",
 });
 
@@ -24,7 +24,7 @@ export default function Preguntas() {
         bajada="Respuestas cortas y claras sobre cómo funciona el Sistema MBK."
       />
       <Faq />
-      <CtaCierre titulo="¿Te quedó alguna duda?" texto="Escribinos y te respondemos. O dejá tus datos y Belén te contacta." />
+      <CtaCierre titulo="¿Te quedó alguna duda?" texto="Escribinos y te respondemos. O dejá tus datos y te contactamos." />
       <JsonLdFaq />
     </>
   );

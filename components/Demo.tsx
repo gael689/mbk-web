@@ -6,8 +6,8 @@ import { EncabezadoSeccion } from "./Piezas";
 import { VideoCard } from "./VideoCard";
 
 /* 7 · Miralo funcionar: los tutoriales del canal (feed RSS, revalidado cada 6 h). */
-export async function Demo() {
-  const videos = await ultimosVideos(6);
+export async function Demo({ cantidad = 6 }: { cantidad?: number } = {}) {
+  const videos = await ultimosVideos(cantidad);
 
   return (
     <section id="demo" className="section" aria-labelledby="t-demo">

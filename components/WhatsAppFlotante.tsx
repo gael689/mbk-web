@@ -11,7 +11,7 @@ export function WhatsAppFlotante() {
         data-track="clic_whatsapp"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Escribir a Belén por WhatsApp"
+        aria-label="Escribir a MBK por WhatsApp"
         className="fixed bottom-4 right-4 z-50 inline-flex h-14 items-center gap-2.5 rounded-full bg-[#0d7a4a] px-4 font-bold text-white shadow-[0_10px_28px_-6px_rgba(13,122,74,0.7)] transition-transform hover:-translate-y-1 sm:bottom-6 sm:right-6 sm:px-5"
         style={{ animation: "wa-ping 2.6s ease-out 3" }}
       >

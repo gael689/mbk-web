@@ -12,7 +12,7 @@ export function Planillas() {
       <div className="wrap">
         <EncabezadoSeccion
           id="t-planillas"
-          etiqueta="Planillas"
+          etiqueta="Planillas de Excel"
           titulo={
             <>
               ¿Todavía no estás para un sistema? <span className="hl">Empezá con una planilla</span>
