@@ -16,7 +16,7 @@ export function Consultoria() {
               ¿Querés que alguien mire tu negocio <span className="hl">con lupa</span>?
             </>
           }
-          bajada="Además del sistema, Belén hace consultoría para pymes y emprendimientos desde Bahía Blanca: asesoramiento económico a medida de tu negocio."
+          bajada="Además del sistema, Belén y su equipo hacen consultoría para pymes y emprendimientos desde Bahía Blanca: asesoramiento económico a medida de tu negocio."
         />
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICIOS_CONSULTORIA.map((s, i) => (

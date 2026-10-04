@@ -6,7 +6,7 @@ import { metaPagina } from "@/lib/meta";
 export const metadata = metaPagina({
   titulo: "Consultoría económica en Bahía Blanca",
   descripcion:
-    "Belén Klundt, Licenciada y Profesora en Economía, acompaña a emprendimientos y pymes: rentabilidad y costos, precios, competidores, mercados y más. Bahía Blanca.",
+    "Belén Klundt, Licenciada y Profesora en Economía, y su equipo acompañan a emprendimientos y pymes en el día a día: rentabilidad y costos, precios, competidores y proveedores, mercados y más. Bahía Blanca.",
   ruta: "/consultoria",
 });
 
@@ -25,7 +25,7 @@ export default function ConsultoriaPagina() {
       />
       <Belen />
       <Consultoria />
-      <CtaCierre titulo="¿Querés que Belén mire tu negocio?" texto="Contanos qué querés resolver y te escribe por WhatsApp. Sin compromiso." />
+      <CtaCierre titulo="¿Querés que Belén y su equipo miren tu negocio?" texto="Contanos qué querés resolver y te escribimos por WhatsApp. Sin compromiso." />
     </>
   );
 }
