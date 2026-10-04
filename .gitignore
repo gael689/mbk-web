@@ -43,3 +43,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Capturas originales del sistema (regenerables con scripts/capturas-sistema)
+/assets/capturas/
+
+# videos de la demo (22 MB): se guardan fuera de git; quedan el guion, los .srt y las fuentes
+/assets/video/*.mp4

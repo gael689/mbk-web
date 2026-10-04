@@ -31,13 +31,6 @@ const seguridad = [
   ...(esProduccion ? [{ key: "Content-Security-Policy", value: csp }] : []),
 ];
 
-// Aviso al construir para producción: sin número de Belén, los botones de WhatsApp apuntan a uno de mentira.
-if (esProduccion && !(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").replace(/\D/g, "")) {
-  console.warn(
-    "\n[mbk-web] ATENCION: falta NEXT_PUBLIC_WHATSAPP_NUMBER (el numero de Belen). Los botones de WhatsApp apuntan a un numero de mentira. No publiques asi.\n",
-  );
-}
-
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,

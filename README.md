@@ -19,7 +19,7 @@ Next.js 16 (App Router) + TypeScript + Tailwind 4. **Vende el Sistema MBK** (con
 - **Home (`/`)**: hero con CTA → "Lo que te pasa hoy y lo que cambia" (6 tarjetas problema → lo que ganás, cada una lleva a `/sistema#...`) → "Empezá por donde estés" (tres puertas: Planillas, Sistema, Consultoría) → Belén en resumen → CTA final con formulario.
 - **`/sistema`**: los 7 bloques problema → solución → ganancia con mockups, para quién es, dos formas de usarlo, tutoriales, cómo empezar, Instagram.
 - **`/consultoria`**: Belén (experiencia, misión, valores) y los 8 servicios. **`/planillas`**: las 6 planillas. **`/preguntas`**: FAQ completo (y su JSON-LD FAQPage).
-- **Un solo CTA principal** ("Quiero probar MBK") repetido en cada página y siempre llevando al formulario de la home (`/#probar`); "Sistema + acompañamiento" lo abre con `/?acomp=1#probar`. El formulario tiene lo esencial a la vista (nombre, negocio, WhatsApp, qué querés resolver) y el mail y el acompañamiento en un bloque opcional.
+- **Un solo CTA principal** ("Solicitar demo", que lleva a `/?demo=1#probar` y deja elegida la opción "Quiero ver una demo del sistema") repetido en cada página y siempre llevando al formulario de la home (`/#probar`); "Sistema + acompañamiento" lo abre con `/?acomp=1#probar`. El formulario tiene lo esencial a la vista (nombre, negocio, WhatsApp, qué querés resolver) y el mail y el acompañamiento en un bloque opcional.
 - **Color y efectos**: los cuatro colores del logo (azul, naranja, verde, rosa) se reparten por bloque; el violeta queda solo para "Costos y gastos" (el color fijo de Belén). Efectos solo CSS y suaves: manchas de color, las cuatro barras del logo que crecen una vez, ondas entre secciones, tarjetas que se elevan al pasar el mouse. Todo se apaga con `prefers-reduced-motion`.
 
 ## Cómo correrlo
@@ -38,12 +38,12 @@ Las mismas van en `.env.local` y en Vercel (`.env.example` tiene el detalle).
 | Variable | Para qué | Si falta |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | Host canónico (metadataBase, canónico, sitemap, robots, OG, JSON-LD). Default `https://mbk.com.ar` | Usa el default |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | **Número de Belén**, formato `5492911234567` | Los botones apuntan a un número de mentira (`5490000000000`) y el build avisa |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Opcional: pisa el número de Belén (formato `5492954362919`) | Usa el que está en `content/site.ts` (+54 9 2954 36-2919, **público**: se muestra en el pie y en el JSON-LD) |
 | `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Envío del formulario | La ruta responde 503 con mensaje claro y el front muestra el WhatsApp como alternativa. **Nunca simula un envío** |
 
 ## TODO antes de publicar (lo que falta de parte de Belén)
 
-- [ ] **Su número de WhatsApp** → `NEXT_PUBLIC_WHATSAPP_NUMBER`. El +54 9 291 419 3031 de la propuesta es de Gael y **no se usa**.
+- [x] Número de WhatsApp de Belén (+54 9 2954 36-2919, público): cargado en `content/site.ts`. Confirmar con ella que es el correcto (el código de área 2954 es de La Pampa y la web dice Bahía Blanca).
 - [ ] **Mail donde quiere recibir los interesados** → `CONTACT_TO_EMAIL`.
 - [ ] Dominio `mbk.com.ar`: hoy no resuelve (NXDOMAIN el 26/09). Confirmar en nic.ar que esté registrado **a nombre de ella** o registrarlo. Para mandar mails desde `@mbk.com.ar` hay que verificar el dominio en Resend.
 - [ ] **Decisión www / sin www** (ver más abajo).
@@ -63,6 +63,10 @@ Las mismas van en `.env.local` y en Vercel (`.env.example` tiene el detalle).
 | Ventas, cobros, clientes, productos, servicios/turnos, costos y gastos, metas, notificaciones, mensajes, descarga a Excel | Control de stock con avisos · Caja por medio de pago · Costo del producto en cinco partes |
 
 Cuando una novedad salga: sacar `novedad: true` en `content/soluciones.ts` y moverla de `NOVEDADES` a `INCLUYE_HOY` en `content/modulos.ts`.
+
+## Capturas del sistema (hero y páginas)
+
+Las imágenes del hero (`public/capturas/web/laptop.webp` y `celular.webp`) son capturas reales del sistema con **datos 100 % ficticios** (negocio de ejemplo "Estilo Sur"). Los originales en alta (25 PNG, escritorio y celular: dashboard, ventas, nueva venta, productos, clientes, costos, turnos, y stock y caja de la v1.6) están en `assets/capturas/`, **fuera de `public/`** para no publicarlos. Se generan con `scripts/capturas-sistema/` (Playwright + Supabase simulado: nunca toca la base real): levantar el front de `system-mbk` con `REACT_APP_SUPABASE_URL=http://127.0.0.1:54321`, correr `node gen-shots.mjs` y `node capturar.mjs ./salida`, y recomprimir a webp. Regenerarlas cuando salga la v1.6 o cambie la interfaz.
 
 ## Dónde se edita cada cosa (todo el contenido está en `content/`)
 
