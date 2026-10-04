@@ -3,18 +3,15 @@
 Next.js 16 (App Router) + TypeScript + Tailwind 4. **Vende el Sistema MBK** (consultoría y planillas en chico), pensada para el celular. El plan aprobado está en
 `system-mbk/planes/plan-web-mbk.md`. **Sin precios en ninguna parte.**
 
-> Estado: terminada y lista para desplegar, **sin desplegar**. No hay remoto ni dominio configurado.
+> Estado: terminada, **sin desplegar**. Remoto: `gael689/mbk-web` (privado). Falta el dominio (`mbk.com.ar` sin registrar) y el mail del formulario: ver `planes/publicacion.md`.
 
-## Dos versiones para validar con Belén
+## Versión elegida: la corta (04/10/2026)
 
-| | Rama / tag | Qué es | Cómo verla |
-|---|---|---|---|
-| **v1: landing larga** | rama `v1-landing-larga`, tag `v1` | Una sola página con las 14 secciones del plan (~16.000 px de alto en escritorio, ~26.000 en móvil). Carpeta hermana `../mbk-web-v1` (es un `git worktree` de esa rama). | `cd ../mbk-web-v1 && npm run build && PORT=3200 npm start` |
-| **v2: corta + páginas** (rama actual `v2-corta`) | rama `v2-corta` | Home corta (~4.800 px escritorio, ~8.300 móvil) y el detalle en `/sistema`, `/consultoria`, `/planillas` y `/preguntas`, que se abren solo si la persona lo pide. Más variedad de colores del logo y efectos suaves. | `npm run build && PORT=3300 npm start` |
+Se publica la **v2: home corta + páginas** (rama `main`). Home corta y el detalle en `/sistema`, `/consultoria`, `/planillas` y `/preguntas`.
 
-`main` sigue en la v1. Cuando Belén elija: si es la v2, `git merge v2-corta` en `main`; si es la v1, no hay nada que hacer. **Los dos comparten el mismo contenido** (`content/`): un cambio de texto se hace en una rama y se lleva a la otra con `git cherry-pick`.
+La **v1 (landing larga, una sola página)** está **archivada**: rama `archivo/v1-landing-larga` y tags `v1` (la original) y `v1-final` (con el WhatsApp de Belén). No se mantiene. Para verla: `git worktree add ../mbk-web-v1 v1-final && cd ../mbk-web-v1 && npm install && npm run build && PORT=3200 npm start`.
 
-### Estructura de la v2
+### Estructura
 
 - **Home (`/`)**: hero con CTA → "Lo que te pasa hoy y lo que cambia" (6 tarjetas problema → lo que ganás, cada una lleva a `/sistema#...`) → "Empezá por donde estés" (tres puertas: Planillas, Sistema, Consultoría) → Belén en resumen → CTA final con formulario.
 - **`/sistema`**: los 7 bloques problema → solución → ganancia con mockups, para quién es, dos formas de usarlo, tutoriales, cómo empezar, Instagram.
