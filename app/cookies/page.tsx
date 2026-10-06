@@ -18,9 +18,9 @@ const FILAS: { nombre: string; quien: string; para: string; cuando: string }[] =
     cuando: "Siempre. Es necesaria y no guarda nada personal.",
   },
   {
-    nombre: "Medición de visitas (Vercel Web Analytics)",
-    quien: "Vercel",
-    para: "Contar visitas y clics (por ejemplo en WhatsApp o en “Solicitar demo”) para saber qué páginas sirven. No usa cookies ni te sigue entre sitios web.",
+    nombre: "mbk_vid",
+    quien: "MBK (propia)",
+    para: "Un código al azar que identifica a tu navegador, sin tu nombre ni ningún dato personal, para contar visitas y clics (por ejemplo en WhatsApp) y saber qué páginas sirven. Dura 13 meses. Los datos se guardan en el sistema de MBK y no se comparten con nadie.",
     cuando: "Solo si permitís la medición de visitas.",
   },
   {

@@ -53,7 +53,7 @@ export function Cookies() {
         Cookies
       </h2>
       <p className="mt-2 text-[0.98rem] leading-snug text-muted">
-        Para medir las visitas y mostrar videos de YouTube e Instagram usamos servicios de terceros. No cargamos nada de eso sin tu permiso.{" "}
+        Para contar las visitas de forma anónima y mostrar videos de YouTube e Instagram necesitamos tu permiso. No cargamos nada de eso sin él.{" "}
         <Link href="/cookies" className="font-semibold text-ink underline underline-offset-2">
           Más información
         </Link>
@@ -72,7 +72,7 @@ export function Cookies() {
           <label className="flex min-h-11 cursor-pointer items-start gap-3">
             <input type="checkbox" checked={medicion} onChange={(e) => setMedicion(e.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-[#c4187e]" />
             <span className="text-[0.98rem] leading-snug">
-              <strong>Medición de visitas.</strong> Cuenta visitas y clics, sin cookies de seguimiento.
+              <strong>Medición de visitas.</strong> Cuenta visitas y clics de forma anónima, con un código al azar. No sabemos quién sos.
             </span>
           </label>
           <label className="flex min-h-11 cursor-pointer items-start gap-3">

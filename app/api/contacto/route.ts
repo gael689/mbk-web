@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { esquemaContacto, etiquetaInteres, type ErroresContacto } from "@/lib/contacto";
+import { esquemaContacto, etiquetaInteres, type DatosContacto, type ErroresContacto } from "@/lib/contacto";
+import { medicionAceptada, visitanteDe } from "@/lib/medicion-servidor";
+import { llamarRpc, supabaseConfigurado } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -90,21 +92,50 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "rechazado", mensaje: "No pudimos procesar el envío." }, { status: 400 });
   }
 
-  // Sin configuración NO se simula un envío: se dice la verdad.
+  // Sin conexión a la base NO se simula un envío: se dice la verdad.
+  if (!supabaseConfigurado()) {
+    console.error("[contacto] Faltan SUPABASE_URL y/o SUPABASE_PUBLISHABLE_KEY: el formulario no puede guardar la consulta.");
+    return NextResponse.json({ ok: false, error: "no_configurado", mensaje: MENSAJE_NO_DISPONIBLE }, { status: 503 });
+  }
+
+  // Si la persona aceptó la medición, la consulta se asocia a su visita anónima (para saber de dónde vino).
+  const visitante = medicionAceptada(req) ? visitanteDe(req) : null;
+
+  const r = await llamarRpc("submit_web_lead", {
+    p_name: d.nombre,
+    p_business: d.negocio,
+    p_whatsapp: d.whatsapp,
+    p_interest: d.interes,
+    p_email: d.email || null,
+    p_accompaniment: d.acompanamiento,
+    p_visitor: visitante,
+  });
+
+  if (!r.ok) {
+    console.error("[contacto] Supabase respondió", r.estado, r.mensaje);
+    if (/demasiadas consultas/i.test(r.mensaje)) {
+      return NextResponse.json({ ok: false, error: "limite", mensaje: "Recibimos muchas consultas seguidas. Probá de nuevo en un rato o escribinos por WhatsApp." }, { status: 429 });
+    }
+    if (r.estado === 400 || r.estado === 409) {
+      return NextResponse.json({ ok: false, error: "validacion", mensaje: "Revisá los datos que cargaste." }, { status: 400 });
+    }
+    return NextResponse.json({ ok: false, error: "envio", mensaje: "No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp." }, { status: 502 });
+  }
+
+  // Aviso por mail a MBK: opcional y de apoyo. La consulta ya quedó guardada y le llega a la
+  // asesora a su panel; si el mail falla o no está configurado, no pasa nada.
+  void avisarPorMail(d);
+
+  return NextResponse.json({ ok: true });
+}
+
+const MENSAJE_NO_DISPONIBLE = "El formulario no está disponible en este momento. Escribinos por WhatsApp y te respondemos enseguida.";
+
+async function avisarPorMail(d: DatosContacto): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL;
-  if (!apiKey || !to || !from) {
-    console.error("[contacto] Faltan RESEND_API_KEY, CONTACT_TO_EMAIL y/o CONTACT_FROM_EMAIL: el formulario no puede enviar.");
-    return NextResponse.json(
-      {
-        ok: false,
-        error: "no_configurado",
-        mensaje: "El formulario no está disponible en este momento. Escribinos por WhatsApp y te respondemos enseguida.",
-      },
-      { status: 503 },
-    );
-  }
+  if (!apiKey || !to || !from) return;
 
   const digitos = d.whatsapp.replace(/\D/g, "");
   const enlaceWa = digitos.startsWith("54") ? `https://wa.me/${digitos}` : null;
@@ -116,7 +147,6 @@ export async function POST(req: Request) {
     ["Quiere resolver", etiquetaInteres(d.interes)],
     ["Quiere acompañamiento", d.acompanamiento ? "Sí" : "No"],
   ];
-
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#0A0A0A;max-width:560px">
       <h2 style="margin:0 0 12px">Nueva consulta desde la web de MBK</h2>
@@ -124,6 +154,7 @@ export async function POST(req: Request) {
         ${filas.map(([k, v]) => `<tr><td style="color:#555"><strong>${escapar(k)}</strong></td><td>${escapar(v)}</td></tr>`).join("")}
       </table>
       ${enlaceWa ? `<p><a href="${enlaceWa}">Abrir WhatsApp con ${escapar(d.nombre)}</a></p>` : ""}
+      <p style="color:#555">También la ves en el panel de asesora, en “Consultas web”.</p>
     </div>`;
   const text = filas.map(([k, v]) => `${k}: ${v}`).join("\n") + (enlaceWa ? `\n${enlaceWa}` : "");
 
@@ -133,7 +164,7 @@ export async function POST(req: Request) {
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from,
-        to: to.split(",").map((s) => s.trim()).filter(Boolean),
+        to: to.split(",").map((x) => x.trim()).filter(Boolean),
         subject: `Nueva consulta web: ${d.nombre} (${d.negocio})`,
         html,
         text,
@@ -141,20 +172,8 @@ export async function POST(req: Request) {
       }),
       signal: AbortSignal.timeout(10_000),
     });
-    if (!res.ok) {
-      console.error("[contacto] Resend respondió", res.status, await res.text().catch(() => ""));
-      return NextResponse.json(
-        { ok: false, error: "envio", mensaje: "No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp." },
-        { status: 502 },
-      );
-    }
+    if (!res.ok) console.error("[contacto] Resend respondió", res.status);
   } catch (e) {
-    console.error("[contacto] falló el envío", e);
-    return NextResponse.json(
-      { ok: false, error: "envio", mensaje: "No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp." },
-      { status: 502 },
-    );
+    console.error("[contacto] falló el aviso por mail", e);
   }
-
-  return NextResponse.json({ ok: true });
 }

@@ -7,6 +7,7 @@ Web pública de MBK (www.mbk.com.ar), cliente de Gael. **Todo el detalle está e
 - Sin precios ni "planes" en ninguna parte. Nada inventado (testimonios, números, clientes). El único crédito a Gael es "Desarrollado por Gael González" en el footer.
 - El WhatsApp de Belén (+54 9 2954 36-2919) es **público** y vive en `content/site.ts` (`NEXT_PUBLIC_WHATSAPP_NUMBER` lo pisa); el de la propuesta es de Gael y no se usa.
 - Un solo dominio canónico: `SITE_URL` en `content/site.ts`, **`https://www.mbk.com.ar`** (decidido 06/10/2026; el dominio raíz redirige 308). El host que sirve, no el que redirige.
+- Formulario y medición van al Supabase del sistema (`SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, solo servidor). La web no lee esas tablas: solo llama a `submit_web_lead` y `track_web_event`.
 - Cookies: nada de terceros (medición, YouTube, Instagram) se carga sin el permiso de `lib/consentimiento.ts`. Un servicio nuevo de terceros entra detrás de ese permiso y se anota en `/cookies`.
 - `app/favicon.ico` en la raíz de `app/`, nunca en un grupo de rutas.
 - Todo el contenido vive en `content/`. Stock, caja por medio de pago y costos divididos son "novedades", no funciones ya disponibles.

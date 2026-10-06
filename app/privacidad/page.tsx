@@ -43,8 +43,17 @@ export default function Privacidad() {
             <li>tu mail y si querés el acompañamiento del equipo, que son opcionales.</li>
           </ul>
           <p className={p}>
-            Si en cambio nos escribís por WhatsApp, recibimos lo que nos mandes por ese medio, bajo las condiciones de WhatsApp. Para frenar el spam, el formulario cuenta
-            los envíos por dirección IP durante unos minutos en la memoria del servidor; no la guardamos.
+            Tu consulta se guarda en el sistema de MBK y le llega a Belén y su equipo en su panel de asesoras. Si en cambio nos escribís por WhatsApp, recibimos lo que
+            nos mandes por ese medio, bajo las condiciones de WhatsApp. Para frenar el spam, el formulario cuenta los envíos por dirección IP durante unos minutos en la
+            memoria del servidor; no la guardamos.
+          </p>
+
+          <h2 className={h2}>Medición de visitas</h2>
+          <p className={p}>
+            Solo si aceptás la medición en el aviso de cookies, contamos las visitas y los clics de forma anónima: guardamos un código al azar, la página que miraste, de qué
+            sitio llegaste (por ejemplo Instagram), el tipo de dispositivo (celular, tablet o computadora) y la fecha. No guardamos tu IP, tu nombre ni nada que te
+            identifique. Si después enviás una consulta, la asociamos a ese código para saber de dónde vino. Estos registros se borran a los 14 meses, y podés retirar el
+            permiso cuando quieras desde “Configurar cookies”.
           </p>
 
           <h2 className={h2}>Para qué los usamos</h2>
@@ -55,8 +64,8 @@ export default function Privacidad() {
 
           <h2 className={h2}>Con quién se comparten</h2>
           <p className={p}>
-            Solo con los proveedores que hacen posible la web: Vercel (alojamiento) y Resend (envío del aviso por mail a MBK con los datos del formulario). Pueden procesar
-            los datos fuera de Argentina.
+            Solo con los proveedores que hacen posible la web y el sistema: Vercel (alojamiento de la web) y Supabase (base de datos donde se guardan las consultas y las
+            visitas anónimas). Si MBK tiene configurado el aviso por mail, el envío se hace con Resend. Pueden procesar los datos fuera de Argentina.
           </p>
 
           <h2 className={h2}>Cuánto tiempo los guardamos</h2>

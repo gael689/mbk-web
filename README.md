@@ -36,7 +36,8 @@ Las mismas van en `.env.local` y en Vercel (`.env.example` tiene el detalle).
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | Host canónico (metadataBase, canónico, sitemap, robots, OG, JSON-LD). Default `https://www.mbk.com.ar` (**decidido el 06/10/2026: gana `www`**) | Usa el default |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Opcional: pisa el número de Belén (formato `5492954362919`) | Usa el que está en `content/site.ts` (+54 9 2954 36-2919, **público**: se muestra en el pie y en el JSON-LD) |
-| `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Envío del formulario | La ruta responde 503 con mensaje claro y el front muestra el WhatsApp como alternativa. **Nunca simula un envío** |
+| `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` | Conexión al Supabase del sistema (`mbk-system`): guarda las consultas del formulario y la medición de visitas | El formulario responde 503 con mensaje claro y el front muestra el WhatsApp como alternativa. **Nunca simula un envío**. La medición no guarda nada |
+| `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | **Opcional**: aviso por mail además del panel | Se omite el mail; la consulta igual queda guardada |
 
 ## TODO antes de publicar (lo que falta de parte de Belén)
 
@@ -78,18 +79,20 @@ Las imágenes del hero (`public/capturas/web/laptop.webp` y `celular.webp`) son 
 - **Instagram**: sin API key no se puede leer el feed (Plan B del plan). La sección siempre muestra "Seguinos en Instagram" con el link. Para mostrar publicaciones, pegar sus URLs en `content/instagram.ts` (`https://www.instagram.com/p/XXXX/`, hasta 6) y se embeben solas. Plan A (feed real con Graph API) requiere cuenta profesional vinculada a Facebook y renovar el token cada 60 días: no está hecho.
 - **Tienda**: los links a las planillas van a `/tienda` y `/tienda/<planilla>` (redirección en `next.config.ts` a la Tienda Nube con `utm_source=mbk.com.ar&utm_medium=web`). Los slugs de producto son los reales, verificados con 200.
 
-## Formulario (`app/api/contacto`)
+## Formulario (`app/api/contacto`) → panel de la asesora
 
-POST JSON. Validación en el servidor (zod, `lib/contacto.ts`, la misma que usa el navegador), honeypot (`sitio_web`, devuelve 400), tope de 8 KB, límite de 4 envíos por IP cada 10 min y envío por la API REST de Resend.
+POST JSON. Validación en el servidor (zod, `lib/contacto.ts`, la misma que usa el navegador), honeypot (`sitio_web`, devuelve 400), tope de 8 KB y límite de 4 envíos por IP cada 10 min. **Guarda la consulta en el Supabase del sistema** llamando a la función `submit_web_lead` (`lib/supabase.ts`, clave publishable, solo desde el servidor). La base valida de nuevo, frena inundaciones (20 consultas por hora), ignora el doble envío y les avisa a las asesoras con una notificación. Belén la ve en el panel del sistema: **Consultas web** (estado, WhatsApp asistido, notas) y **Visitas de la web**. Si la persona aceptó la medición, la consulta queda asociada a su primera visita (de dónde vino). El mail por Resend es opcional y de apoyo.
+
+Las tablas (`web_leads`, `web_events`) y las funciones viven en `system-mbk/supabase/migrations/v1_7_web_consultas_visitas.sql`. Anon no puede leer ni escribir las tablas directo.
 
 **Limitación del límite por IP**: está en memoria. En Vercel cada instancia lleva su propia cuenta y se reinicia al reciclarse, así que frena el abuso casual, no un ataque sostenido. Si llega spam: Upstash Redis o las reglas de rate limiting del Firewall de Vercel.
 
-Probar sin mandar mails reales: `node scripts/resend-falso.mjs 3199` y arrancar con `RESEND_API_URL=http://localhost:3199/emails` (variable solo para pruebas). **Antes de dar por cerrado el deploy, probar un envío real contra Resend** (llega el mail).
+Para probar el mail opcional sin mandar mails reales: `node scripts/resend-falso.mjs 3199` y arrancar con `RESEND_API_URL=http://localhost:3199/emails`. **Antes de dar por cerrado el deploy, mandar una consulta de prueba y comprobar que aparece en "Consultas web"** (y borrarla).
 
 ## Cookies y privacidad
 
 - Aviso de cookies (`components/Cookies.tsx`, `lib/consentimiento.ts`): cookie propia `mbk_cookies` (180 días, valor `m<medición>t<terceros>`, ej. `m1t0`). **Sin elección no se carga nada de terceros.** "Rechazar" y "Aceptar" de igual peso, "Elegir" por tipo, y "Configurar cookies" en el pie para cambiar.
-- **Medición** (Vercel Analytics) solo se monta si se aceptó (`AnalyticsConsentido`); `registrar()` no envía eventos sin ese permiso.
+- **Medición propia** (ya no hay Vercel Analytics): `MedicionPaginas` y `registrar()` mandan eventos a `/api/medir` solo si se aceptó la medición, y el servidor lo vuelve a comprobar con la cookie `mbk_cookies`. El identificador anónimo (`mbk_vid`, UUID al azar, HttpOnly, 13 meses) lo crea el servidor. Sin IP, sin nombre. Retirar el permiso borra `mbk_vid`. Se ve en el panel de asesora del sistema ("Visitas de la web").
 - **Terceros** (reproductores de YouTube e Instagram): al tocar play sin permiso se muestra `AvisoTerceros` con "Aceptar y ver" / "Verlo en YouTube|Instagram" / "Ahora no".
 - Páginas `/cookies` y `/privacidad` (de la web; la del sistema sigue en `mbksistema.com.ar/privacidad`). **Los textos legales los redactó Claude a partir de lo que la web hace de verdad: que Belén los revise** (especialmente conservación de datos y derechos).
 - Si se suma otro servicio de terceros (mapa, chat, píxel de Meta, Google Analytics…): agregarlo a `/cookies`, ponerlo detrás del permiso correspondiente y ajustar el CSP en `next.config.ts`.
@@ -136,6 +139,6 @@ Scripts de verificación en `scripts/` (usan el Playwright de `Desktop\taller`):
 ## Notas técnicas
 
 - Calidad medida con el motor de auditoría de `portfolio-next` (misma lógica, sin reglas propias); los encabezados de seguridad (CSP, HSTS, X-Frame-Options, Permissions-Policy, etc.) están en `next.config.ts`. El CSP solo se aplica en producción.
-- Analytics: `@vercel/analytics`, solo se monta si `VERCEL` está definida, con eventos `clic_whatsapp`, `envio_formulario`, `clic_iniciar_sesion`, `clic_tienda`, `reproduce_video` (delegados con `data-track`; `lib/analytics.ts` no rompe si falla).
+- Medición: eventos `page_view`, `clic_whatsapp`, `envio_formulario`, `clic_iniciar_sesion`, `clic_tienda`, `reproduce_video` (delegados con `data-track`; `lib/analytics.ts` no rompe si falla). Cada evento es una fila en `web_events` del Supabase del sistema.
 - Las secciones fuera de pantalla usan `content-visibility: auto` (baja el LCP móvil de ~6 s a ~1,9 s con CPU 4x + 4G). Las animaciones son CSS puro y se apagan con `prefers-reduced-motion`.
 - Solo hay tres pesos de Poppins (400/600/800); `font-bold` se mapea a 600 en `globals.css`.

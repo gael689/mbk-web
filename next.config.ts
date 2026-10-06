@@ -13,7 +13,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://i.ytimg.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://vitals.vercel-insights.com",
+  "connect-src 'self'",
   "frame-src https://www.youtube-nocookie.com https://www.instagram.com",
   "object-src 'none'",
   "base-uri 'self'",

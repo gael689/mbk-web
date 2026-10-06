@@ -40,6 +40,8 @@ export function guardarConsentimiento(c: Consentimiento) {
   } catch {
     /* sin cookies no se puede recordar: el aviso vuelve a aparecer */
   }
+  // Sin permiso de medición, el servidor borra el identificador anónimo del visitante.
+  if (!c.medicion) void fetch("/api/medir", { method: "DELETE", keepalive: true }).catch(() => {});
   window.dispatchEvent(new Event(CAMBIO));
 }
 
