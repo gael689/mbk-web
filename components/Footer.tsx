@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DEVELOPER_NAME, DEVELOPER_URL, INSTAGRAM_HANDLE, INSTAGRAM_URL, LOGIN_URL, PRIVACY_URL, TERMS_URL, YOUTUBE_URL, tiendaHref, whatsappUrl } from "@/content/site";
+import { BotonCookies } from "./BotonCookies";
 import { IconInstagram, IconWhatsApp, IconYouTube } from "./Marcas";
 
 const enlace = "inline-flex min-h-11 items-center gap-2 rounded-full py-2 font-medium text-white/90 hover:text-white hover:underline";
@@ -87,8 +88,21 @@ export function Footer() {
               </li>
               <li>
                 <a href={PRIVACY_URL} className={enlace}>
-                  Política de privacidad
+                  Privacidad del sistema
                 </a>
+              </li>
+              <li>
+                <Link href="/privacidad" className={enlace}>
+                  Privacidad de esta web
+                </Link>
+              </li>
+              <li>
+                <Link href="/cookies" className={enlace}>
+                  Cookies
+                </Link>
+              </li>
+              <li>
+                <BotonCookies className={enlace} />
               </li>
             </ul>
           </nav>

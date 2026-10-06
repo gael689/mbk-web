@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
+import { AnalyticsConsentido } from "@/components/AnalyticsConsentido";
+import { Cookies } from "@/components/Cookies";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Interacciones } from "@/components/Interacciones";
@@ -59,8 +60,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <WhatsAppFlotante />
         <Interacciones />
-        {/* Analytics solo se monta en Vercel: fuera de ahí no carga nada. */}
-        {process.env.VERCEL ? <Analytics /> : null}
+        <Cookies />
+        {/* Analytics solo se monta en Vercel y solo si la persona aceptó la medición. */}
+        {process.env.VERCEL ? <AnalyticsConsentido /> : null}
       </body>
     </html>
   );

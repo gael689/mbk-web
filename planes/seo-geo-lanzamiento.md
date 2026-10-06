@@ -1,5 +1,7 @@
 # mbk-web: plan de SEO, GEO y posicionamiento para el lanzamiento (06/10/2026)
 
+> **Estado 06/10/2026 (rama `seo/lanzamiento`):** Fase 1 hecha (OG por página, metadata, sitemap con fechas, llms.txt generado, JSON-LD con Service/migas/contactPoint, contenido para IA, aviso de cookies y páginas legales). **Decididos:** `www` es el canónico; el WhatsApp es el correcto. **Pendientes por decisión de Gael:** todas las integraciones y cuentas (dominio, Vercel, Resend, Search Console, Bing, Google Business Profile). Lo que sigue en este documento sobre 0.2, 0.3 y 1.x ya está resuelto.
+
 Punto de partida: `main` = `origin/main`, v2 corta ya commiteada, build limpio según `planes/publicacion.md` (del 04/10, parte de ese documento quedó vieja: ya hay remoto y la v2 está en `main`).
 
 ## Qué ya está bien (no tocar)

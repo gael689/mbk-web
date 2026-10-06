@@ -2,10 +2,13 @@ import { Demo } from "@/components/Demo";
 import { Formas } from "@/components/Formas";
 import { Instagram } from "@/components/Instagram";
 import { ParaQuien } from "@/components/ParaQuien";
+import { Actualizado } from "@/components/Actualizado";
+import { DatosClave } from "@/components/DatosClave";
 import { Pasos } from "@/components/Pasos";
 import { Soluciones } from "@/components/Soluciones";
 import { CtaCierre, SubHero } from "@/components/SubPagina";
 import { JsonLdMigas } from "@/components/JsonLd";
+import { ULTIMA_MODIFICACION } from "@/content/fechas";
 import { metaPagina } from "@/lib/meta";
 
 export const metadata = metaPagina({
@@ -37,6 +40,8 @@ export default function Sistema() {
       <Demo />
       <Pasos />
       <Instagram />
+      <DatosClave />
+      <Actualizado fecha={ULTIMA_MODIFICACION.sistema} />
       <CtaCierre />
       <JsonLdMigas nombre="Sistema MBK" ruta="/sistema" />
     </>

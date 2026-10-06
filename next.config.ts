@@ -39,6 +39,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     const utm = "utm_source=mbk.com.ar&utm_medium=web";
     return [
+      // El dominio raíz va al canónico (www) con 308. Vercel también lo hace desde el panel;
+      // esto lo deja garantizado aunque esa configuración falte.
+      { source: "/:path*", has: [{ type: "host", value: "mbk.com.ar" }], destination: "https://www.mbk.com.ar/:path*", permanent: true },
       { source: "/tienda", destination: `https://mbkconsultoria.mitiendanube.com/?${utm}`, permanent: false },
       { source: "/tienda/:planilla", destination: `https://mbkconsultoria.mitiendanube.com/productos/:planilla/?${utm}`, permanent: false },
     ];

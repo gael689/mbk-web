@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState, useSyncExternalStore, type FormEvent } from "react";
 import { ArrowRight, Check, ChevronDown } from "@/content/iconos";
 import { whatsappUrl } from "@/content/site";
@@ -218,7 +219,13 @@ export function ContactForm() {
         {enviando ? "Enviando…" : "Solicitar demo"}
         {enviando ? null : <ArrowRight className="h-5 w-5" aria-hidden="true" />}
       </button>
-      <p className="text-[0.92rem] text-muted">Usamos tus datos solo para contactarte por esta consulta.</p>
+      <p className="text-[0.92rem] text-muted">
+        Usamos tus datos solo para contactarte por esta consulta. Más información en la{" "}
+        <Link href="/privacidad" className="font-semibold text-ink underline underline-offset-2">
+          política de privacidad
+        </Link>
+        .
+      </p>
     </form>
   );
 }

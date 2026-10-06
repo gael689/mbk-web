@@ -7,4 +7,6 @@ export const ULTIMA_MODIFICACION = {
   consultoria: "2026-10-06",
   planillas: "2026-10-06",
   preguntas: "2026-10-06",
+  cookies: "2026-10-06",
+  privacidad: "2026-10-06",
 } as const;

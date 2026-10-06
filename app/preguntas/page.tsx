@@ -1,6 +1,8 @@
+import { Actualizado } from "@/components/Actualizado";
 import { Faq } from "@/components/Faq";
 import { JsonLdFaq, JsonLdMigas } from "@/components/JsonLd";
 import { CtaCierre, SubHero } from "@/components/SubPagina";
+import { ULTIMA_MODIFICACION } from "@/content/fechas";
 import { metaPagina } from "@/lib/meta";
 
 export const metadata = metaPagina({
@@ -24,6 +26,7 @@ export default function Preguntas() {
         bajada="Respuestas cortas y claras sobre cómo funciona el Sistema MBK."
       />
       <Faq />
+      <Actualizado fecha={ULTIMA_MODIFICACION.preguntas} />
       <CtaCierre titulo="¿Te quedó alguna duda?" texto="Escribinos y te respondemos. O dejá tus datos y te contactamos." />
       <JsonLdFaq />
       <JsonLdMigas nombre="Preguntas frecuentes" ruta="/preguntas" />

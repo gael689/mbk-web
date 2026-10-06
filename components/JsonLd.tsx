@@ -48,6 +48,12 @@ export function JsonLd() {
         telephone: `+${WHATSAPP_NUMBER}`,
         image: `${SITE_URL}/logo.png`,
         parentOrganization: { "@id": org },
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          telephone: `+${WHATSAPP_NUMBER}`,
+          availableLanguage: "es-AR",
+        },
         address: {
           "@type": "PostalAddress",
           addressLocality: "Bahía Blanca",

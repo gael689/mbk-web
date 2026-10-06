@@ -1,4 +1,4 @@
-# mbk-web — la web pública de MBK (mbk.com.ar)
+# mbk-web — la web pública de MBK (www.mbk.com.ar)
 
 Next.js 16 (App Router) + TypeScript + Tailwind 4. **Vende el Sistema MBK** (consultoría y planillas en chico), pensada para el celular. El plan aprobado está en
 `system-mbk/planes/plan-web-mbk.md`. **Sin precios en ninguna parte.**
@@ -34,16 +34,16 @@ Las mismas van en `.env.local` y en Vercel (`.env.example` tiene el detalle).
 
 | Variable | Para qué | Si falta |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Host canónico (metadataBase, canónico, sitemap, robots, OG, JSON-LD). Default `https://mbk.com.ar` | Usa el default |
+| `NEXT_PUBLIC_SITE_URL` | Host canónico (metadataBase, canónico, sitemap, robots, OG, JSON-LD). Default `https://www.mbk.com.ar` (**decidido el 06/10/2026: gana `www`**) | Usa el default |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Opcional: pisa el número de Belén (formato `5492954362919`) | Usa el que está en `content/site.ts` (+54 9 2954 36-2919, **público**: se muestra en el pie y en el JSON-LD) |
 | `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Envío del formulario | La ruta responde 503 con mensaje claro y el front muestra el WhatsApp como alternativa. **Nunca simula un envío** |
 
 ## TODO antes de publicar (lo que falta de parte de Belén)
 
-- [x] Número de WhatsApp de Belén (+54 9 2954 36-2919, público): cargado en `content/site.ts`. Confirmar con ella que es el correcto (el código de área 2954 es de La Pampa y la web dice Bahía Blanca).
+- [x] Número de WhatsApp (+54 9 2954 36-2919, público): cargado en `content/site.ts` y **confirmado por Gael el 06/10/2026**.
 - [ ] **Mail donde quiere recibir los interesados** → `CONTACT_TO_EMAIL`.
 - [ ] Dominio `mbk.com.ar`: hoy no resuelve (NXDOMAIN el 26/09). Confirmar en nic.ar que esté registrado **a nombre de ella** o registrarlo. Para mandar mails desde `@mbk.com.ar` hay que verificar el dominio en Resend.
-- [ ] **Decisión www / sin www** (ver más abajo).
+- [x] **www / sin www: decidido, gana `www`** (06/10/2026). Falta cargarlo en Vercel y el DNS; el 308 del dominio raíz ya está en `next.config.ts`.
 - [ ] Cuenta de Vercel a su nombre (o autoriza a crearla con su mail).
 - [ ] Una **foto suya** profesional (`BELEN_PHOTO` en `content/site.ts`) y, si tiene, su foto de escritorio con la notebook y el mate (`HERO_PHOTO`). Hoy hay una tarjeta con el logo y una ilustración.
 - [ ] **Capturas reales** del sistema (negocio Demo) para reemplazar los mockups en HTML/CSS.
@@ -86,20 +86,31 @@ POST JSON. Validación en el servidor (zod, `lib/contacto.ts`, la misma que usa 
 
 Probar sin mandar mails reales: `node scripts/resend-falso.mjs 3199` y arrancar con `RESEND_API_URL=http://localhost:3199/emails` (variable solo para pruebas). **Antes de dar por cerrado el deploy, probar un envío real contra Resend** (llega el mail).
 
+## Cookies y privacidad
+
+- Aviso de cookies (`components/Cookies.tsx`, `lib/consentimiento.ts`): cookie propia `mbk_cookies` (180 días, valor `m<medición>t<terceros>`, ej. `m1t0`). **Sin elección no se carga nada de terceros.** "Rechazar" y "Aceptar" de igual peso, "Elegir" por tipo, y "Configurar cookies" en el pie para cambiar.
+- **Medición** (Vercel Analytics) solo se monta si se aceptó (`AnalyticsConsentido`); `registrar()` no envía eventos sin ese permiso.
+- **Terceros** (reproductores de YouTube e Instagram): al tocar play sin permiso se muestra `AvisoTerceros` con "Aceptar y ver" / "Verlo en YouTube|Instagram" / "Ahora no".
+- Páginas `/cookies` y `/privacidad` (de la web; la del sistema sigue en `mbksistema.com.ar/privacidad`). **Los textos legales los redactó Claude a partir de lo que la web hace de verdad: que Belén los revise** (especialmente conservación de datos y derechos).
+- Si se suma otro servicio de terceros (mapa, chat, píxel de Meta, Google Analytics…): agregarlo a `/cookies`, ponerlo detrás del permiso correspondiente y ajustar el CSP en `next.config.ts`.
+
 ## SEO / GEO
 
 - `metadataBase` y canónico salen de `SITE_URL` (una constante); cada página arma su metadata con `lib/meta.ts` (canónico, Open Graph con imagen y Twitter). `app/sitemap.ts` (home + 4 páginas), `app/robots.ts` (abierto a los buscadores con IA), `public/llms.txt`, `app/opengraph-image.tsx` (+ `twitter-image`), JSON-LD en `components/JsonLd.tsx`: WebSite, Organization, ProfessionalService de Bahía Blanca, SoftwareApplication y Person en la home, y FAQPage solo en `/preguntas` (donde las respuestas están a la vista).
-- **`public/llms.txt` es un archivo estático**: tiene `https://mbk.com.ar` escrito. Si el host canónico termina siendo `www.mbk.com.ar`, editarlo.
+- **`/llms.txt` y `/llms-full.txt` se generan** (`lib/llms.ts`, rutas en `app/`) desde el contenido de la web y `SITE_URL`: no hay nada que editar a mano.
+- **Imagen OG por página**: `lib/og.tsx` (plantilla) + un `opengraph-image.tsx`/`twitter-image.tsx` en la carpeta de cada página. Para cambiar el texto, editar el de esa carpeta. `metaPagina` ya no declara imágenes.
+- **Fechas del sitemap** (y el "Actualizado el…" visible): `content/fechas.ts`. Actualizar la de una página cuando cambia su contenido.
+- **Contenido pensado para que lo citen**: el hero define qué es el sistema, quién lo creó y dónde; `/sistema` cierra con "El Sistema MBK en pocas palabras" (`components/DatosClave.tsx`); las respuestas del FAQ abren con la respuesta directa. Es el mismo texto que ve una persona, no hay contenido solo para IA.
 - `app/favicon.ico` está en la **raíz** de `app/` (nunca dentro de un grupo de rutas). Se genera del logo con `node scripts/generar-assets.mjs` (también genera `public/logo.png`, `public/logo-mark.png`, `app/icon.png`, `app/apple-icon.png`; el original está en `assets/logo-original.png`, copia de `system-mbk/frontend/src/assets/logo.png`).
 
-### www o sin www: hay que decidirlo (con Gael y Belén)
+### www o sin www: decidido (06/10/2026) → `www`
 
 `www` es más robusto (un CNAME sigue solo al hosting si cambia de IPs; el dominio raíz solo admite un registro A fijo). Sin `www` se ve mejor, pero es una decisión estética. Lo obligatorio: **`NEXT_PUBLIC_SITE_URL` tiene que ser el host que realmente sirve el sitio** (el de destino, no el que redirige) y la redirección del otro tiene que ser **308**. Si no, canónico, sitemap, robots, OG y JSON-LD apuntan a un host que redirige.
 
 ## Verificación (comandos)
 
 ```bash
-HOST=https://mbk.com.ar   # el host real
+HOST=https://www.mbk.com.ar   # el host real
 curl -s -o /dev/null -w "%{http_code}\n" $HOST/favicon.ico                      # 200
 curl -s $HOST/ | grep -o '<link[^>]*rel="icon"[^>]*>'                          # no vacío
 curl -s $HOST/ | grep -o 'rel="canonical" href="[^"]*"'                        # = HOST
@@ -117,7 +128,7 @@ Scripts de verificación en `scripts/` (usan el Playwright de `Desktop\taller`):
 1. Repo privado (`nuevo-cliente`) y push. **No hecho.**
 2. Proyecto en Vercel a nombre de Belén, framework Next.js, sin cambios de build.
 3. Cargar las variables de entorno (tabla de arriba) en Production y Preview.
-4. Dominio: agregar `mbk.com.ar` (y `www`) en Vercel, apuntar el DNS en nic.ar, definir el host canónico y la redirección 308 del otro.
+4. Dominio: agregar `www.mbk.com.ar` (principal) y `mbk.com.ar` en Vercel, apuntar el DNS en nic.ar. El dominio raíz redirige con 308 al `www` (Vercel y `next.config.ts`).
 5. Verificar el dominio en Resend y mandar un formulario de prueba real.
 6. Correr los comandos de verificación de arriba, purgar OG, dar de alta Search Console.
 7. En el sistema (`mbksistema.com.ar`): `robots.txt` y `sitemap.xml` pasan a indexar solo `/login`, `/terminos`, `/privacidad` (hoy indexan el sistema como si fuera la web). **No mover el sistema de dominio.**

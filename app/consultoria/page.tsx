@@ -22,7 +22,7 @@ export default function ConsultoriaPagina() {
             Un equipo mirando <span className="hl">tu negocio</span>
           </>
         }
-        bajada="Quién está detrás de MBK y los ocho servicios de consultoría para emprendimientos y pymes."
+        bajada="Quién está detrás de MBK y los ocho servicios de consultoría económica para emprendimientos y pymes de Bahía Blanca."
       />
       <Belen />
       <Consultoria />

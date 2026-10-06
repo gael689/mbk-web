@@ -3,16 +3,22 @@
 import { useState } from "react";
 import { Play } from "@/content/iconos";
 import { registrar } from "@/lib/analytics";
+import { useConsentimiento } from "@/lib/consentimiento";
+import { AvisoTerceros } from "./AvisoTerceros";
 
 /* Video de YouTube "liviano": al principio es solo la miniatura, y el reproductor
- * (youtube-nocookie) se carga recién cuando la persona toca play. */
+ * (youtube-nocookie) se carga recién cuando la persona toca play Y permitió los contenidos
+ * de terceros; si no, se le explica y puede aceptar o abrirlo en YouTube. */
 export function VideoCard({ id, titulo, miniatura }: { id: string; titulo: string; miniatura: string }) {
   const [activo, setActivo] = useState(false);
+  const consentimiento = useConsentimiento();
 
   return (
     <div className="overflow-hidden rounded-[1.5rem] border border-line bg-white shadow-[var(--shadow-soft)]">
       <div className="relative aspect-video bg-ink">
-        {activo ? (
+        {activo && !consentimiento?.terceros ? (
+          <AvisoTerceros servicio="YouTube" href={`https://www.youtube.com/watch?v=${id}`} onCancelar={() => setActivo(false)} />
+        ) : activo ? (
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
             title={titulo}

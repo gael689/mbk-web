@@ -4,12 +4,15 @@ import { useRef, useState } from "react";
 import { Play } from "@/content/iconos";
 import type { Reel } from "@/content/instagram";
 import { registrar } from "@/lib/analytics";
+import { useConsentimiento } from "@/lib/consentimiento";
+import { AvisoTerceros } from "./AvisoTerceros";
 
 /* Reel de Instagram "liviano": al principio es solo la portada. El reproductor de Instagram
  * se carga recién cuando la persona toca la tarjeta, dentro de una ventana encima de la página. */
 export function ReelCard({ reel }: { reel: Reel }) {
   const dialogo = useRef<HTMLDialogElement>(null);
   const [abierto, setAbierto] = useState(false);
+  const consentimiento = useConsentimiento();
 
   const abrir = () => {
     registrar("reproduce_video", { video: reel.id });
@@ -60,14 +63,20 @@ export function ReelCard({ reel }: { reel: Reel }) {
             >
               ×
             </button>
-            <div className="overflow-hidden rounded-[1.5rem] bg-white">
-              <iframe
-                src={`https://www.instagram.com/reel/${reel.id}/embed`}
-                title={`Reel de Instagram: ${reel.titulo}`}
-                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                allowFullScreen
-                className="block h-[min(78vh,44rem)] w-[min(92vw,26rem)]"
-              />
+            <div className="relative overflow-hidden rounded-[1.5rem] bg-white">
+              {consentimiento?.terceros ? (
+                <iframe
+                  src={`https://www.instagram.com/reel/${reel.id}/embed`}
+                  title={`Reel de Instagram: ${reel.titulo}`}
+                  allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                  allowFullScreen
+                  className="block h-[min(78vh,44rem)] w-[min(92vw,26rem)]"
+                />
+              ) : (
+                <div className="relative h-[min(60vh,22rem)] w-[min(92vw,26rem)]">
+                  <AvisoTerceros servicio="Instagram" href={`https://www.instagram.com/reel/${reel.id}/`} onCancelar={() => dialogo.current?.close()} />
+                </div>
+              )}
             </div>
           </div>
         ) : null}

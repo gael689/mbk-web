@@ -3,9 +3,10 @@
 
 /* ── Dominio ──────────────────────────────────────────────────────────────
  * UNA sola constante para metadataBase, canónico, sitemap, robots, OG y JSON-LD.
- * Tiene que ser el host que REALMENTE sirve el sitio (si el hosting redirige
- * apex -> www, poné el www). Ver README, "www o sin www". */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://mbk.com.ar").replace(/\/+$/, "");
+ * Decisión (06/10/2026): el host canónico es `www.mbk.com.ar`. El dominio raíz
+ * (`mbk.com.ar`) redirige con 308 al www (ver next.config.ts y el DNS). Tiene que ser
+ * el host que REALMENTE sirve el sitio. Ver README, "www o sin www". */
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mbk.com.ar").replace(/\/+$/, "");
 
 export const SITE_NAME = "MBK Consultoría";
 /* Sufijo de todos los títulos: el mismo en la home y en las páginas internas. */
@@ -42,6 +43,7 @@ export const DEVELOPER_URL = "https://gaelgonzalez.com.ar";
  * hace falta cambiarlo sin tocar el código. El de la propuesta original es de Gael
  * y NO se usa acá. */
 const WHATSAPP_DEFAULT = "5492954362919";
+/* Confirmado por Gael (06/10/2026): +54 9 2954 36-2919 es el número de MBK. */
 export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").replace(/\D/g, "") || WHATSAPP_DEFAULT;
 /** Cómo se lee en pantalla: +54 9 2954 36-2919. */
 export const WHATSAPP_DISPLAY = WHATSAPP_NUMBER.replace(/^54(9)(\d{4})(\d{2})(\d{4})$/, "+54 $1 $2 $3-$4");
