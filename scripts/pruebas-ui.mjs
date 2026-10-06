@@ -43,14 +43,14 @@ for (const [nombre, ancho, alto] of [["movil", 390, 844], ["escritorio", 1440, 9
   if (nombre === "movil" && (await page.locator("#nombre").count())) {
     // Formulario: validación en el navegador, y error claro (sin variables de entorno en este server).
     await page.locator("#probar").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: "Quiero probar MBK" }).last().click();
+    await page.getByRole("button", { name: "Solicitar demo" }).last().click();
     await page.waitForTimeout(300);
     console.log("[form] errores de validación visibles:", await page.locator("form p[id^=e-]").allTextContents());
     await page.fill("#nombre", "Ana Prueba");
     await page.fill("#negocio", "Ropa");
     await page.fill("#whatsapp", "2915551234");
     await page.selectOption("#interes", "ventas");
-    await page.getByRole("button", { name: "Quiero probar MBK" }).last().click();
+    await page.getByRole("button", { name: "Solicitar demo" }).last().click();
     await page.waitForTimeout(1200);
     const alerta = await page.locator("#form-error").innerText().catch(() => "(sin alerta)");
     console.log("[form] respuesta sin variables de entorno:", JSON.stringify(alerta));

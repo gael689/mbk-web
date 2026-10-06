@@ -62,7 +62,7 @@ export default function Cookies() {
           </p>
 
           <h2 className={h2}>Qué usamos</h2>
-          <div className="mt-4 overflow-x-auto">
+          <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabla de cookies y servicios de terceros">
             <table className="w-full min-w-[40rem] border-collapse text-left text-[1rem]">
               <caption className="sr-only">Cookies y servicios de terceros de la web</caption>
               <thead>
