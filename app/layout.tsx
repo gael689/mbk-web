@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Interacciones } from "@/components/Interacciones";
 import { WhatsAppFlotante } from "@/components/WhatsAppFlotante";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/content/site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_SUFFIX, SITE_TITLE, SITE_URL } from "@/content/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
+  title: { default: SITE_TITLE, template: `%s | ${SITE_SUFFIX}` },
   description: SITE_DESCRIPTION,
   applicationName: "Sistema MBK",
   authors: [{ name: "Belén Klundt" }],

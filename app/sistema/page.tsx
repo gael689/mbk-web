@@ -5,12 +5,13 @@ import { ParaQuien } from "@/components/ParaQuien";
 import { Pasos } from "@/components/Pasos";
 import { Soluciones } from "@/components/Soluciones";
 import { CtaCierre, SubHero } from "@/components/SubPagina";
+import { JsonLdMigas } from "@/components/JsonLd";
 import { metaPagina } from "@/lib/meta";
 
 export const metadata = metaPagina({
-  titulo: "Sistema MBK: ventas, cobros, costos y turnos",
+  titulo: "Sistema de gestión: ventas, cobros, costos y turnos",
   descripcion:
-    "Sistema de gestión para emprendedores y pymes: registrá ventas y cobros, calculá costos, controlá clientes y turnos desde el celular. Creado por una economista de Bahía Blanca.",
+    "Registrá ventas y cobros, calculá costos y controlá clientes y turnos desde el celular. Un sistema creado por una economista de Bahía Blanca.",
   ruta: "/sistema",
 });
 
@@ -37,6 +38,7 @@ export default function Sistema() {
       <Pasos />
       <Instagram />
       <CtaCierre />
+      <JsonLdMigas nombre="Sistema MBK" ruta="/sistema" />
     </>
   );
 }

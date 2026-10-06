@@ -8,9 +8,12 @@ const IA = [
   "ChatGPT-User",
   "OAI-SearchBot",
   "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
   "Claude-Web",
   "anthropic-ai",
   "PerplexityBot",
+  "Perplexity-User",
   "Google-Extended",
   "Applebot",
   "meta-externalagent",
@@ -20,6 +23,5 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: "*", allow: "/", disallow: ["/api/", "/tienda"] }, ...IA.map((userAgent) => ({ userAgent, allow: "/" }))],
     sitemap: `${SITE_URL}/sitemap.xml`,
-    host: SITE_URL,
   };
 }

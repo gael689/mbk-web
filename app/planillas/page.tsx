@@ -1,11 +1,12 @@
 import { Planillas } from "@/components/Planillas";
 import { CtaCierre, SubHero } from "@/components/SubPagina";
+import { JsonLdMigas } from "@/components/JsonLd";
 import { metaPagina } from "@/lib/meta";
 
 export const metadata = metaPagina({
-  titulo: "Planillas de Excel de gestión para emprendedores",
+  titulo: "Planillas de Excel para emprendedores",
   descripcion:
-    "Planillas listas para usar de MBK Consultoría: control de ventas, cálculo de precios, flujo de caja, control de stock, punto de equilibrio y planillas específicas para emprendedores.",
+    "Planillas de Excel listas para usar: control de ventas, cálculo de precios, flujo de caja, stock y punto de equilibrio para emprendedores y pymes.",
   ruta: "/planillas",
 });
 
@@ -29,6 +30,7 @@ export default function PlanillasPagina() {
         ctaTexto="Conocer el sistema"
         ctaHref="/sistema"
       />
+      <JsonLdMigas nombre="Planillas" ruta="/planillas" />
     </>
   );
 }

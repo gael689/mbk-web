@@ -8,9 +8,11 @@
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://mbk.com.ar").replace(/\/+$/, "");
 
 export const SITE_NAME = "MBK Consultoría";
-export const SITE_TITLE = "Sistema de gestión para emprendedores y pymes | MBK";
+/* Sufijo de todos los títulos: el mismo en la home y en las páginas internas. */
+export const SITE_SUFFIX = "MBK";
+export const SITE_TITLE = `Sistema de gestión para emprendedores y pymes | ${SITE_SUFFIX}`;
 export const SITE_DESCRIPTION =
-  "El Sistema MBK: ventas, cobros, costos, clientes y turnos en un solo lugar, desde el celular. Pensado por una economista que trabaja todos los días con emprendedores y pymes. Bahía Blanca.";
+  "El Sistema MBK: ventas, cobros, costos, clientes y turnos en un solo lugar, desde el celular. Creado por una economista de Bahía Blanca que trabaja con emprendedores y pymes.";
 
 /* ── Enlaces externos ───────────────────────────────────────────────────── */
 export const SYSTEM_URL = "https://mbksistema.com.ar";

@@ -88,6 +88,20 @@ export function JsonLd() {
         worksFor: { "@id": org },
         address: { "@type": "PostalAddress", addressLocality: "Bahía Blanca", addressCountry: "AR" },
         url: `${SITE_URL}/consultoria#belen`,
+        image: `${SITE_URL}/belen.jpg`,
+        sameAs: [INSTAGRAM_URL, YOUTUBE_URL],
+      },
+      {
+        "@type": "Service",
+        "@id": `${SITE_URL}/#consultoria`,
+        name: "Consultoría económica para emprendedores y pymes",
+        serviceType: "Consultoría económica y financiera",
+        description:
+          "Acompañamiento en el día a día, evaluación económico-financiera, diagnósticos, rentabilidad y costos, mercados, competidores y proveedores, y precios.",
+        url: `${SITE_URL}/consultoria`,
+        provider: { "@id": org },
+        areaServed: { "@type": "City", name: "Bahía Blanca" },
+        inLanguage: "es-AR",
       },
     ],
   };
@@ -99,6 +113,19 @@ export function JsonLd() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(grafo).replace(/</g, "\\u003c") }}
     />
   );
+}
+
+/* Migas de pan de las páginas internas: Home > página. */
+export function JsonLdMigas({ nombre, ruta }: { nombre: string; ruta: string }) {
+  const grafo = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: nombre, item: `${SITE_URL}${ruta}` },
+    ],
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(grafo).replace(/</g, "\\u003c") }} />;
 }
 
 /* FAQPage: solo en /preguntas, donde las preguntas y respuestas están a la vista. */

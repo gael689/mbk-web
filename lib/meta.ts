@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { SITE_NAME } from "@/content/site";
+import { SITE_NAME, SITE_SUFFIX } from "@/content/site";
 
-/* Metadata de cada página. Se arma completa (canónico, Open Graph y Twitter con
- * la imagen) porque en Next un `openGraph` propio de una página REEMPLAZA al del
- * layout: si no repetimos la imagen, se pierde al compartir. */
+/* Metadata de cada página. Se arma completa (canónico, Open Graph y Twitter) porque en Next
+ * un `openGraph` propio de una página REEMPLAZA al del layout. La imagen no se declara acá:
+ * cada página tiene su propio `opengraph-image.tsx` / `twitter-image.tsx` en su carpeta y
+ * Next agrega los meta (con tamaño y alt) solos. */
 export function metaPagina({ titulo, descripcion, ruta }: { titulo: string; descripcion: string; ruta: string }): Metadata {
-  const completo = `${titulo} | ${SITE_NAME}`;
+  const completo = `${titulo} | ${SITE_SUFFIX}`;
   return {
     title: titulo,
     description: descripcion,
@@ -17,8 +18,7 @@ export function metaPagina({ titulo, descripcion, ruta }: { titulo: string; desc
       siteName: SITE_NAME,
       title: completo,
       description: descripcion,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Sistema MBK: sistema de gestión para emprendedores y pymes" }],
     },
-    twitter: { card: "summary_large_image", title: completo, description: descripcion, images: ["/twitter-image"] },
+    twitter: { card: "summary_large_image", title: completo, description: descripcion },
   };
 }
