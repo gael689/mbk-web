@@ -1,7 +1,7 @@
 import Image from "./opengraph-image";
 
 export const runtime = "nodejs";
-export const alt = "Sistema MBK: ventas, cobros, costos y turnos en un solo lugar";
+export const alt = "Sistema MBK: ventas, cobros, costos, stock, caja y turnos en un solo lugar";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

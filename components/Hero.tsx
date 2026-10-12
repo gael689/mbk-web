@@ -20,7 +20,7 @@ export function Hero() {
             Mirá cómo saberlo en el <span className="font-extrabold text-pink-strong">Sistema MBK</span>.
           </p>
           <p className="lead rise mt-4 max-w-xl" style={{ ["--d" as string]: "0.22s" }}>
-            El Sistema MBK es un sistema de gestión online para emprendedores y pymes: ventas, cobros, costos, clientes y turnos en un solo
+            El Sistema MBK es un sistema de gestión online para emprendedores y pymes: ventas, cobros, costos, stock, caja, clientes y turnos en un solo
             lugar, desde el celular. Lo creó Belén Klundt, economista de Bahía Blanca.
           </p>
           <div className="rise mt-8 flex flex-col gap-3 sm:flex-row" style={{ ["--d" as string]: "0.3s" }}>

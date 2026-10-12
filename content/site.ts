@@ -13,7 +13,7 @@ export const SITE_NAME = "MBK Consultoría";
 export const SITE_SUFFIX = "MBK";
 export const SITE_TITLE = `Sistema de gestión para emprendedores y pymes | ${SITE_SUFFIX}`;
 export const SITE_DESCRIPTION =
-  "El Sistema MBK: ventas, cobros, costos, clientes y turnos en un solo lugar, desde el celular. Creado por una economista de Bahía Blanca que trabaja con emprendedores y pymes.";
+  "El Sistema MBK: ventas, cobros, costos, stock, caja, clientes y turnos en un solo lugar, desde el celular. Creado por una economista de Bahía Blanca que trabaja con emprendedores y pymes.";
 
 /* ── Enlaces externos ───────────────────────────────────────────────────── */
 export const SYSTEM_URL = "https://mbksistema.com.ar";

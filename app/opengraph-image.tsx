@@ -11,6 +11,6 @@ export default function Image() {
     antes: "¿Vendés todos los días y no sabés",
     resaltado: "cuánto ganás",
     despues: "?",
-    bajada: "Ventas, cobros, costos y turnos en un solo lugar.",
+    bajada: "Ventas, cobros, stock y turnos en un solo lugar.",
   });
 }

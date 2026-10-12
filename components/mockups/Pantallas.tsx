@@ -2,8 +2,8 @@ import { Banknote, Bell, CalendarDays, Clock, CreditCard, Landmark, Package, Use
 import { Mock, Money } from "./Mock";
 
 /* Mockups chicos, uno por problema. Datos de ejemplo obviamente ficticios
- * (nombres genéricos, "Producto A"). Stock, caja y costo en cinco partes son
- * novedades: en la web se rotulan como tales. */
+ * (nombres genéricos, "Producto A"). Stock, caja y costo en cinco partes están
+ * disponibles desde la v1.8.0. */
 
 function Encabezado({ Icon, tono, titulo, sub }: { Icon: typeof Users; tono: string; titulo: string; sub?: string }) {
   return (
@@ -101,7 +101,7 @@ export function MockCobros() {
   );
 }
 
-/* 3 · Costo del producto en cinco partes (novedad) */
+/* 3 · Costo del producto en cinco partes */
 export function MockCostos() {
   const partes = [
     ["Insumos", 2400, "bg-orange"],
@@ -138,7 +138,7 @@ export function MockCostos() {
   );
 }
 
-/* 4 · Alerta de stock (novedad) */
+/* 4 · Alerta de stock */
 export function MockStock() {
   const filas = [
     ["Producto A", "24 u.", 80, "Bien", "bg-green-soft text-green-strong", "bg-green"],
@@ -170,7 +170,7 @@ export function MockStock() {
   );
 }
 
-/* 5 · Caja por medio de pago (novedad) */
+/* 5 · Caja por medio de pago */
 export function MockCaja() {
   const filas = [
     ["Efectivo", "85.000", Banknote, "bg-green-soft text-green-strong"],

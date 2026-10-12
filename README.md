@@ -58,9 +58,9 @@ Las mismas van en `.env.local` y en Vercel (`.env.example` tiene el detalle).
 
 | Existe hoy | Novedades (se nombran sin fecha, con la etiqueta "Novedad") |
 |---|---|
-| Ventas, cobros, clientes, productos, servicios/turnos, costos y gastos, metas, notificaciones, mensajes, descarga a Excel | Control de stock con avisos · Caja por medio de pago · Costo del producto en cinco partes |
+| Ventas, cobros, caja por medio de pago, clientes, productos, costo del producto en cinco partes, control de stock con avisos, servicios/turnos, costos y gastos, metas, notificaciones, mensajes, descarga a Excel | Ninguna por ahora (stock, caja y costo en cinco partes salieron en la v1.8.0 del sistema) |
 
-Cuando una novedad salga: sacar `novedad: true` en `content/soluciones.ts` y moverla de `NOVEDADES` a `INCLUYE_HOY` en `content/modulos.ts`.
+Cuando una novedad salga: sacar `novedad: true` en `content/soluciones.ts` y moverla de `NOVEDADES` a `INCLUYE_HOY` en `content/modulos.ts`. Con `NOVEDADES` vacío, el bloque "Novedades que se vienen" de `/sistema`, la fila de "El Sistema MBK en pocas palabras" y la línea de `llms.txt` no se muestran.
 
 ## Capturas del sistema (hero y páginas)
 

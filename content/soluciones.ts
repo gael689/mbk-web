@@ -4,7 +4,8 @@ import type { Tono } from "./modulos";
 /* La regla de toda la copy: problema -> solución -> lo que ganás.
  * `titulo` es el titular-pregunta (lleva adentro la búsqueda que interesa).
  * `problema` lo dice el emprendedor, en sus palabras.
- * `novedad`: todavía no está disponible; en la web se muestra como "Novedad", sin fecha. */
+ * `novedad`: todavía no está disponible; en la web se muestra como "Novedad", sin fecha.
+ * Hoy ningún bloque la lleva (stock, caja y costo en cinco partes salieron en la v1.8.0). */
 export type MockId = "resultado" | "cobros" | "costos" | "stock" | "caja" | "turnos" | "celular";
 
 export type Solucion = {
@@ -53,7 +54,6 @@ export const SOLUCIONES: Solucion[] = [
     hace: "Armás el costo real de cada producto —insumos, mano de obra, packaging, inversión y otros— y el sistema lo suma por vos.",
     gana: "Precios que cubren lo que te cuesta y te dejan margen.",
     mock: "costos",
-    novedad: true,
   },
   {
     id: "stock",
@@ -65,7 +65,6 @@ export const SOLUCIONES: Solucion[] = [
     hace: "El stock se descuenta solo cada vez que vendés y el sistema te avisa cuando queda poco de algo.",
     gana: "Reponer a tiempo y no perder ventas.",
     mock: "stock",
-    novedad: true,
   },
   {
     id: "caja",
@@ -77,7 +76,6 @@ export const SOLUCIONES: Solucion[] = [
     hace: "Ves la caja separada por medio de pago: lo que hay en efectivo, en transferencia, en tarjeta y en Mercado Pago.",
     gana: "Saber cuánto hay en efectivo, en la cuenta y en Mercado Pago.",
     mock: "caja",
-    novedad: true,
   },
   {
     id: "turnos",

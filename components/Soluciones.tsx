@@ -143,15 +143,20 @@ export function Soluciones() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-[0.95rem] font-semibold text-muted">Novedades que se vienen:</p>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {NOVEDADES.map((x) => (
-              <li key={x} className="inline-flex items-center gap-2 rounded-full bg-blue-soft px-3.5 py-1.5 text-[0.95rem] font-medium">
-                <TagNovedad className="!px-2 !py-0.5 !text-[0.68rem]" />
-                {x}
-              </li>
-            ))}
-          </ul>
+          {/* Solo aparece si hay novedades anunciadas (hoy no hay: content/modulos.ts). */}
+          {NOVEDADES.length ? (
+            <>
+              <p className="mt-6 text-[0.95rem] font-semibold text-muted">Novedades que se vienen:</p>
+              <ul className="mt-2 flex flex-wrap gap-2">
+                {NOVEDADES.map((x) => (
+                  <li key={x} className="inline-flex items-center gap-2 rounded-full bg-blue-soft px-3.5 py-1.5 text-[0.95rem] font-medium">
+                    <TagNovedad className="!px-2 !py-0.5 !text-[0.68rem]" />
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
         </div>
       </div>
     </section>

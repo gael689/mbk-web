@@ -5,11 +5,11 @@ import { WHATSAPP_DISPLAY } from "@/content/site";
  * que se entienden sin el resto de la página. Es lo mismo que dice el resto de la web
  * (nada nuevo ni solo para buscadores): sirve a quien llega con prisa y a quien resume la página. */
 const DATOS: { t: string; d: string }[] = [
-  { t: "Qué es", d: "Un sistema de gestión online para llevar ventas, cobros, costos, clientes, productos y turnos en un solo lugar, y ver el resultado del mes." },
+  { t: "Qué es", d: "Un sistema de gestión online para llevar ventas, cobros, costos, stock, caja, clientes, productos y turnos en un solo lugar, y ver el resultado del mes." },
   { t: "Para quién", d: "Emprendedores y pymes que venden productos, servicios o ambos: indumentaria, pastelería, estética, lencería, oficios y más." },
   { t: "Cómo se usa", d: "Desde el navegador del celular o de la computadora, con la misma cuenta en todos lados. No hay que instalar nada." },
   { t: "Qué incluye hoy", d: `${INCLUYE_HOY.join(", ")}.` },
-  { t: "Novedades", d: `${NOVEDADES.join(", ")}.` },
+  ...(NOVEDADES.length ? [{ t: "Novedades", d: `${NOVEDADES.join(", ")}.` }] : []),
   { t: "Quién lo creó", d: "Belén Klundt, Licenciada y Profesora en Economía, a partir de su trabajo diario con emprendedores y pymes de Bahía Blanca." },
   { t: "Cómo se contrata", d: "Solo el sistema, o el sistema con acompañamiento de Belén y su equipo. Se arma una propuesta según el negocio y se puede pedir una demo antes." },
   { t: "Dónde", d: `Bahía Blanca, Buenos Aires, Argentina. WhatsApp ${WHATSAPP_DISPLAY}.` },

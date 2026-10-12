@@ -1,11 +1,12 @@
 /* Respuestas completas y citables: se muestran en la página y alimentan el
  * JSON-LD FAQPage. Cada una se entiende sola, sin el resto de la web.
  * Reglas: sin precios, sin números ni casos inventados, y lo que todavía no
- * salió (stock, caja por medio de pago, costo en cinco partes) no se promete. */
+ * salió no se promete. Stock, caja por medio de pago y costo en cinco partes
+ * están disponibles desde la v1.8.0. */
 export const FAQ = [
   {
     q: "¿Qué es el Sistema MBK?",
-    a: "El Sistema MBK es un sistema de gestión online para emprendedores y pymes, creado por la economista Belén Klundt (MBK Consultoría, Bahía Blanca). Permite registrar ventas, cobros, costos, clientes, productos y turnos en un solo lugar, ver el resultado del mes y ponerse metas. Se usa desde el celular o la computadora.",
+    a: "El Sistema MBK es un sistema de gestión online para emprendedores y pymes, creado por la economista Belén Klundt (MBK Consultoría, Bahía Blanca). Permite registrar ventas, cobros, costos, clientes, productos y turnos en un solo lugar, controlar el stock y la caja, ver el resultado del mes y ponerse metas. Se usa desde el celular o la computadora.",
   },
   {
     q: "¿Para qué tipo de negocios sirve?",
@@ -25,7 +26,7 @@ export const FAQ = [
   },
   {
     q: "¿Cómo calculo el costo y el margen de ganancia de mis productos?",
-    a: "Cargás el precio de venta y el costo de cada producto, y el sistema calcula cuánto ganás en cada venta y qué productos te dejan más margen. Es la forma de saber si tus precios cubren lo que te cuesta producir o comprar, algo que muchos emprendedores nunca llegan a medir. Si querés revisar tus precios con una mirada profesional, Belén y su equipo también lo hacen en la consultoría.",
+    a: "Cargás el precio de venta y armás el costo de cada producto en cinco partes (insumos, mano de obra, packaging, inversión y otros); el sistema lo suma y calcula cuánto ganás en cada venta y qué productos te dejan más margen. Es la forma de saber si tus precios cubren lo que te cuesta producir o comprar, algo que muchos emprendedores nunca llegan a medir. Si querés revisar tus precios con una mirada profesional, Belén y su equipo también lo hacen en la consultoría.",
   },
   {
     q: "¿Puedo llevar turnos, señas y cobros pendientes?",
@@ -33,7 +34,7 @@ export const FAQ = [
   },
   {
     q: "¿Qué diferencia hay entre el Sistema MBK y las planillas de Excel?",
-    a: "Las planillas de Excel de MBK son archivos listos para usar que te ayudan a ordenarte (ventas, precios, caja, stock) sin necesidad de un sistema. El Sistema MBK reúne todo en un solo lugar online, con tus clientes, productos y turnos, funciona desde el celular y te muestra el resultado del mes sin que tengas que armar fórmulas. Si recién empezás, las planillas son un buen primer paso; cuando el negocio crece, el sistema te ahorra el trabajo manual.",
+    a: "Las planillas de Excel de MBK son archivos listos para usar que te ayudan a ordenarte (ventas, precios, caja, stock) sin necesidad de un sistema. El Sistema MBK reúne todo en un solo lugar online, con tus clientes, productos, stock, caja y turnos, funciona desde el celular y te muestra el resultado del mes sin que tengas que armar fórmulas. Si recién empezás, las planillas son un buen primer paso; cuando el negocio crece, el sistema te ahorra el trabajo manual.",
   },
   {
     q: "¿Puedo pasar lo que tengo en Excel?",

@@ -43,7 +43,7 @@ export function JsonLd() {
         "@id": `${SITE_URL}/#servicio`,
         name: "MBK Consultoría",
         description:
-          "Consultoría económica y financiera para emprendedores y pymes de Bahía Blanca, y el Sistema MBK de gestión para llevar ventas, cobros, costos y turnos.",
+          "Consultoría económica y financiera para emprendedores y pymes de Bahía Blanca, y el Sistema MBK de gestión para llevar ventas, cobros, costos, stock, caja y turnos.",
         url: SITE_URL,
         telephone: `+${WHATSAPP_NUMBER}`,
         image: `${SITE_URL}/logo.png`,
@@ -78,8 +78,11 @@ export function JsonLd() {
         audience: { "@type": "Audience", audienceType: "Emprendedores y pymes" },
         featureList: [
           "Registro de ventas y cobros",
+          "Caja por medio de pago",
           "Costos y gastos",
+          "Costo del producto en cinco partes",
           "Clientes y productos",
+          "Control de stock con avisos",
           "Servicios y agenda de turnos",
           "Metas mensuales y notificaciones",
           "Descarga de registros a Excel",

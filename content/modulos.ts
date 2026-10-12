@@ -33,12 +33,16 @@ export const MODULOS_HERO: Modulo[] = [
   { id: "mas", label: "¡Y más!", tono: "blue", Icon: Plus },
 ];
 
-/* Qué existe hoy y qué viene. Las novedades se nombran sin fecha. */
+/* Qué existe hoy y qué viene. Las novedades se nombran sin fecha; cuando salen, pasan a INCLUYE_HOY.
+ * Stock, caja por medio de pago y costo en cinco partes están disponibles desde la v1.8.0. */
 export const INCLUYE_HOY = [
   "Ventas",
   "Cobros",
+  "Caja por medio de pago",
   "Clientes",
   "Productos",
+  "Costo del producto en cinco partes",
+  "Control de stock con avisos",
   "Servicios y turnos",
   "Costos y gastos",
   "Metas mensuales",
@@ -47,4 +51,5 @@ export const INCLUYE_HOY = [
   "Descarga a Excel",
 ] as const;
 
-export const NOVEDADES = ["Control de stock con avisos", "Caja por medio de pago", "Costo del producto en cinco partes"] as const;
+/* Vacío: hoy no hay novedades anunciadas. Si se suma una, aparece sola en /sistema y en llms.txt. */
+export const NOVEDADES: readonly string[] = [];

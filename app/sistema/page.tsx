@@ -14,7 +14,7 @@ import { metaPagina } from "@/lib/meta";
 export const metadata = metaPagina({
   titulo: "Sistema de gestión: ventas, cobros, costos y turnos",
   descripcion:
-    "Registrá ventas y cobros, calculá costos y controlá clientes y turnos desde el celular. Un sistema creado por una economista de Bahía Blanca.",
+    "Registrá ventas y cobros, calculá costos y controlá stock, caja y turnos desde el celular. Un sistema creado por una economista de Bahía Blanca.",
   ruta: "/sistema",
 });
 
