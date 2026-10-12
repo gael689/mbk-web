@@ -2,7 +2,12 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/content/site";
 
 /* Abierto a Google y también a los buscadores con IA (ChatGPT, Claude,
- * Perplexity…), para que puedan citar a MBK. Quedan afuera /api/ y /tienda (redirige a la tienda externa). */
+ * Perplexity…), para que puedan citar a MBK. Quedan afuera /api/ y /tienda (redirige a la tienda externa).
+ *
+ * Cada bot usa solo el grupo más específico que lo nombra e ignora el de "*": por eso
+ * todos los grupos llevan la misma lista de exclusiones, definida una sola vez acá. */
+const BLOQUEADO = ["/api/", "/tienda"];
+
 const IA = [
   "GPTBot",
   "ChatGPT-User",
@@ -21,7 +26,7 @@ const IA = [
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: "*", allow: "/", disallow: ["/api/", "/tienda"] }, ...IA.map((userAgent) => ({ userAgent, allow: "/" }))],
+    rules: ["*", ...IA].map((userAgent) => ({ userAgent, allow: "/", disallow: BLOQUEADO })),
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
