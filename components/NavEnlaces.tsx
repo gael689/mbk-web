@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 export const NAV = [
   { href: "/sistema", t: "Sistema" },
+  { href: "/rubros", t: "Tu rubro" },
   { href: "/consultoria", t: "Consultoría" },
   { href: "/planillas", t: "Planillas de Excel" },
   { href: "/preguntas", t: "Preguntas" },
@@ -16,7 +17,7 @@ export function NavEnlaces() {
   return (
     <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
       {NAV.map((n) => {
-        const activo = ruta === n.href;
+        const activo = ruta === n.href || ruta.startsWith(`${n.href}/`);
         return (
           <Link
             key={n.href}

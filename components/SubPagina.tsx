@@ -15,15 +15,27 @@ const TAG: Record<Tono, string> = {
 };
 
 /* Encabezado de las páginas internas: una etiqueta, el único h1 y una bajada. */
-export function SubHero({ etiqueta, titulo, bajada, tono = "pink" }: { etiqueta: string; titulo: ReactNode; bajada: string; tono?: Tono }) {
+export function SubHero({
+  etiqueta,
+  titulo,
+  bajada,
+  tono = "pink",
+  volver = { href: "/", texto: "Volver al inicio" },
+}: {
+  etiqueta: string;
+  titulo: ReactNode;
+  bajada: string;
+  tono?: Tono;
+  volver?: { href: string; texto: string };
+}) {
   const t = TONO[tono];
   return (
     <section className="relative isolate overflow-hidden pb-10 pt-8 md:pb-14 md:pt-14" aria-labelledby="t-pagina">
       <Manchas className="opacity-80" />
       <div className="wrap">
-        <Link href="/" className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-muted hover:text-ink">
+        <Link href={volver.href} className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-muted hover:text-ink">
           <ArrowRight className="h-4 w-4 rotate-180" aria-hidden="true" />
-          Volver al inicio
+          {volver.texto}
         </Link>
         <div className="mt-4 flex items-start justify-between gap-6">
           <div className="max-w-3xl">

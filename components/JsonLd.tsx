@@ -154,3 +154,67 @@ export function JsonLdFaq() {
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(grafo).replace(/</g, "\\u003c") }} />;
 }
+
+const incrustar = (grafo: object) => (
+  <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(grafo).replace(/</g, "\\u003c") }} />
+);
+
+/* Migas de pan de cualquier profundidad: Inicio > sección > página. */
+export function JsonLdMigasN({ migas }: { migas: { nombre: string; ruta: string }[] }) {
+  return incrustar({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+      ...migas.map((m, i) => ({ "@type": "ListItem", position: i + 2, name: m.nombre, item: `${SITE_URL}${m.ruta}` })),
+    ],
+  });
+}
+
+/* FAQPage de una página que muestra esas preguntas a la vista (rubros, guías, Bahía Blanca). */
+export function JsonLdPreguntas({ ruta, preguntas }: { ruta: string; preguntas: { q: string; a: string }[] }) {
+  return incrustar({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}${ruta}#faq`,
+    url: `${SITE_URL}${ruta}`,
+    inLanguage: "es-AR",
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    mainEntity: preguntas.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  });
+}
+
+/* Guía: Article firmado por la organización (no se le atribuye a una persona lo que no escribió ella). */
+export function JsonLdArticulo({ ruta, titulo, descripcion, fecha }: { ruta: string; titulo: string; descripcion: string; fecha: string }) {
+  return incrustar({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${SITE_URL}${ruta}#articulo`,
+    mainEntityOfPage: `${SITE_URL}${ruta}`,
+    headline: titulo,
+    description: descripcion,
+    inLanguage: "es-AR",
+    datePublished: fecha,
+    dateModified: fecha,
+    author: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    image: `${SITE_URL}${ruta}/opengraph-image`,
+  });
+}
+
+/* Página de un rubro: el Sistema MBK como servicio pensado para ese tipo de negocio. */
+export function JsonLdRubro({ ruta, nombre, descripcion }: { ruta: string; nombre: string; descripcion: string }) {
+  return incrustar({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${SITE_URL}${ruta}#servicio`,
+    name: `Sistema MBK para ${nombre.toLowerCase()}`,
+    serviceType: "Sistema de gestión online",
+    description: descripcion,
+    url: `${SITE_URL}${ruta}`,
+    provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: { "@type": "Country", name: "Argentina" },
+    audience: { "@type": "Audience", audienceType: nombre },
+    inLanguage: "es-AR",
+  });
+}

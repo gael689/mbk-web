@@ -2,6 +2,8 @@ import { FAQ } from "@/content/faq";
 import { SERVICIOS_CONSULTORIA } from "@/content/consultoria";
 import { INCLUYE_HOY, NOVEDADES } from "@/content/modulos";
 import { PLANILLAS } from "@/content/planillas";
+import { GUIAS } from "@/content/guias";
+import { RUBROS } from "@/content/rubros";
 import {
   INSTAGRAM_URL,
   LOGIN_URL,
@@ -43,6 +45,12 @@ ${NOVEDADES.length ? `- Novedades (sin fecha): ${NOVEDADES.join(", ").toLowerCas
 - Ubicación: Bahía Blanca, Buenos Aires, Argentina.
 - Contacto: WhatsApp ${WHATSAPP_DISPLAY} o el formulario de ${SITE_URL}/#probar`;
 
+const RUBROS_MD = `## El sistema por rubro
+${RUBROS.map((r) => `- ${r.nombre}: ${SITE_URL}/rubros/${r.slug}`).join("\n")}`;
+
+const GUIAS_MD = `## Guías
+${GUIAS.map((g) => `- ${g.titulo}: ${SITE_URL}/guias/${g.slug}`).join("\n")}`;
+
 const CONSULTORIA = `## Consultoría (Bahía Blanca)
 La dan Belén Klundt y su equipo.
 ${SERVICIOS_CONSULTORIA.map((s) => `- ${s}`).join("\n")}`;
@@ -58,6 +66,10 @@ export function llmsTxt(): string {
 ${DATOS}
 
 ${ENLACES}
+
+${RUBROS_MD}
+
+${GUIAS_MD}
 
 ${CONSULTORIA}
 
@@ -75,6 +87,10 @@ export function llmsFullTxt(): string {
 > ${RESUMEN}
 
 ${DATOS}
+
+${RUBROS_MD}
+
+${GUIAS_MD}
 
 ${CONSULTORIA}
 

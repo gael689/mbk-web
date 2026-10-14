@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { RUBROS } from "@/content/rubros";
 import { DEVELOPER_NAME, DEVELOPER_URL, INSTAGRAM_HANDLE, INSTAGRAM_URL, LOGIN_URL, PRIVACY_URL, TERMS_URL, YOUTUBE_URL, tiendaHref, whatsappUrl } from "@/content/site";
 import { BotonCookies } from "./BotonCookies";
 import { IconInstagram, IconWhatsApp, IconYouTube } from "./Marcas";
@@ -11,7 +12,7 @@ export function Footer() {
   return (
     <footer className="on-dark bg-ink pb-24 pt-14 text-white md:pb-10">
       <div className="wrap">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
           <div>
             <span className="inline-block rounded-2xl bg-white p-3">
               <Image src="/logo.png" alt="MBK Consultoría" width={395} height={314} className="h-auto w-28" />
@@ -74,6 +75,29 @@ export function Footer() {
                 <a href={LOGIN_URL} data-track="clic_iniciar_sesion" className={enlace}>
                   Iniciar sesión
                 </a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav aria-label="Rubros y guías">
+            <h2 className="text-[0.85rem] font-bold uppercase tracking-[0.14em] text-white/60">Para tu rubro</h2>
+            <ul className="mt-3">
+              {RUBROS.map((r) => (
+                <li key={r.slug}>
+                  <Link href={`/rubros/${r.slug}`} className={enlace}>
+                    {r.nombre}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/guias" className={enlace}>
+                  Guías para emprendedores
+                </Link>
+              </li>
+              <li>
+                <Link href="/bahia-blanca" className={enlace}>
+                  MBK en Bahía Blanca
+                </Link>
               </li>
             </ul>
           </nav>

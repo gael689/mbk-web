@@ -12,4 +12,7 @@ export const ULTIMA_MODIFICACION = {
   preguntas: LANZAMIENTO_V1_8,
   cookies: "2026-10-06",
   privacidad: "2026-10-06",
+  rubros: "2026-10-14",
+  guias: "2026-10-14",
+  bahiaBlanca: "2026-10-14",
 } as const;
