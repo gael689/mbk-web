@@ -2,11 +2,11 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/content/site";
 
 /* Abierto a Google y también a los buscadores con IA (ChatGPT, Claude,
- * Perplexity…), para que puedan citar a MBK. Quedan afuera /api/ y /tienda (redirige a la tienda externa).
+ * Perplexity…), para que puedan citar a MBK. Quedan afuera /api/, /tienda (redirige a la tienda externa) y /baja (la baja de los mails).
  *
  * Cada bot usa solo el grupo más específico que lo nombra e ignora el de "*": por eso
  * todos los grupos llevan la misma lista de exclusiones, definida una sola vez acá. */
-const BLOQUEADO = ["/api/", "/tienda"];
+const BLOQUEADO = ["/api/", "/tienda", "/baja"];
 
 const IA = [
   "GPTBot",

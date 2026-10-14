@@ -2,8 +2,9 @@
  * servidor (rutas /api/*): el navegador nunca habla con Supabase.
  *
  * Se usa la clave "publishable" (la de anon), que es pública por diseño: lo único que
- * permite es llamar a dos funciones de la base (submit_web_lead y track_web_event), que
- * validan todo y tienen tope. Las tablas no se pueden leer ni escribir directo desde acá
+ * permite es llamar a tres funciones de la base: submit_web_lead y track_web_event, que
+ * validan todo y tienen tope, y unsubscribe_prospect (v1.9), que solo funciona con el token
+ * de baja que viaja en el mail. Las tablas no se pueden leer ni escribir directo desde acá
  * (RLS + sin permisos para anon). Ver system-mbk/supabase/migrations/v1_7_web_consultas_visitas.sql.
  *
  * Variables (en .env.local y en Vercel):

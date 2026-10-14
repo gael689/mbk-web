@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/planillas`, lastModified: F.planillas },
     { url: `${SITE_URL}/preguntas`, lastModified: F.preguntas },
     { url: `${SITE_URL}/bahia-blanca`, lastModified: F.bahiaBlanca },
+    { url: `${SITE_URL}/versiones`, lastModified: F.versiones },
     { url: `${SITE_URL}/rubros`, lastModified: F.rubros },
     ...RUBROS.map((r) => ({ url: `${SITE_URL}/rubros/${r.slug}`, lastModified: F.rubros })),
     { url: `${SITE_URL}/guias`, lastModified: F.guias },

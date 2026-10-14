@@ -4,6 +4,7 @@ import { INCLUYE_HOY, NOVEDADES } from "@/content/modulos";
 import { PLANILLAS } from "@/content/planillas";
 import { GUIAS } from "@/content/guias";
 import { RUBROS } from "@/content/rubros";
+import { VERSION_ACTUAL } from "@/content/versiones";
 import {
   INSTAGRAM_URL,
   LOGIN_URL,
@@ -29,6 +30,10 @@ const ENLACES = `## Enlaces
 - Consultoría y Belén Klundt: ${SITE_URL}/consultoria
 - Planillas: ${SITE_URL}/planillas
 - Preguntas frecuentes: ${SITE_URL}/preguntas
+- MBK en Bahía Blanca: ${SITE_URL}/bahia-blanca
+- El sistema para cada rubro: ${SITE_URL}/rubros
+- Guías para emprendedores: ${SITE_URL}/guias
+- Versiones del sistema (actual: ${VERSION_ACTUAL.version}): ${SITE_URL}/versiones
 - Sistema (iniciar sesión): ${LOGIN_URL}
 - Términos: ${TERMS_URL}
 - Privacidad: ${PRIVACY_URL}

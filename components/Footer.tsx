@@ -67,6 +67,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/versiones" className={enlace}>
+                  Versiones del sistema
+                </Link>
+              </li>
+              <li>
                 <a href={tiendaHref()} data-track="clic_tienda" target="_blank" rel="noopener noreferrer" className={enlace}>
                   Tienda de planillas
                 </a>
