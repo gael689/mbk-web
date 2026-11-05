@@ -9,7 +9,7 @@ export function Header() {
   return (
     <CabeceraFlotante>
       <Link href="/" className="flex shrink-0 items-center" aria-label="MBK Consultoría, ir al inicio">
-        <Image src="/logo.png" alt="MBK Consultoría" width={395} height={314} priority className="h-11 w-auto" />
+        <Image src="/logo.png" alt="MBK Consultoría" width={395} height={314} priority className="h-12 w-auto lg:h-14" />
       </Link>
 
       <NavEnlaces />

@@ -32,7 +32,7 @@ Pedido de Gael: mirar xubio.com/ar y traer lo que sirva. **El diseño de MBK se 
 ## Reglas que no se tocan
 
 - Solo se afirma lo que está en `system-mbk/frontend/src/lib/releaseNotes.ts` y publicado. Factura electrónica está **apagada** (`REACT_APP_FEATURE_ARCA`): va como "Próximamente".
-- Toda animación es CSS puro y queda quieta con "reducir movimiento". Nada de librerías nuevas.
+- Toda animación es CSS puro y se ve siempre (decisión de Gael: forzada también con "reducir movimiento"). Nada de librerías nuevas.
 
 ## Pendiente
 

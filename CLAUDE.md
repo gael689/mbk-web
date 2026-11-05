@@ -12,4 +12,4 @@ Web pública de MBK (www.mbk.com.ar), cliente de Gael. **Todo el detalle está e
 - `app/favicon.ico` en la raíz de `app/`, nunca en un grupo de rutas.
 - Todo el contenido vive en `content/`. Lo que incluye el sistema sale de `content/modulos.ts`; factura electrónica está apagada en el sistema y va como "Próximamente".
 - **Poco texto.** Decisión de Gael (05/11/2026): si la web explica todo, la gente no pregunta. Lo nuevo entra por los ojos (pantallitas animadas, tildes cortos) y empuja a pedir la demo. Antes de sumar una página o un párrafo, preguntarse si no alcanza con un tilde o una animación. Plan: `planes/plan-menu-tildes-v1.10.md`.
-- Animaciones: CSS puro, y quietas con "reducir movimiento" (`globals.css`).
+- Animaciones: CSS puro (`globals.css`) y **forzadas: se ven siempre**, también con "reducir movimiento" en el sistema. Decisión de Gael (05/11/2026), no volver a respetarlo sin que lo pida.

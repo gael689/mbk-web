@@ -277,7 +277,7 @@ main > section:not(#inicio) {
   }
 }
 
-/* Efectos suaves (solo CSS, sin librerías; se apagan con prefers-reduced-motion). */
+/* Efectos suaves (solo CSS, sin librerías). */
 .blob {
   position: absolute;
   border-radius: 999px;
@@ -362,62 +362,12 @@ main > section:not(#inicio) {
     transform: translateX(-50%);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none !important;
-    transform: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: auto;
-  }
-  .marquee-track > :nth-child(n + 5) {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    animation-delay: 0s !important;
-    transition-duration: 0.01ms !important;
-  }
-  /* Sin movimiento, pero con vida: en lugar de subir o deslizarse, los bloques aparecen con un
-   * fundido suave (cambiar la opacidad no marea). */
-  .rv,
-  .rv[data-reveal] {
-    transform: none;
-    transition: opacity 0.7s ease !important;
-  }
-  .rv.rv-in {
-    opacity: 1;
-  }
-  .rise {
-    animation-name: aparecer;
-    animation-duration: 0.7s !important;
-    animation-delay: var(--d, 0s) !important;
-  }
-  @keyframes aparecer {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-}
-
 /* ── Encabezado flotante ───────────────────────────────────────────────────
  * Tiene altura fija y `main` sube por debajo: el hero llega hasta arriba, sin corte, y el ::before de
  * la primera sección deja lugar para que su contenido no quede tapado. Fuera de la píldora, el
  * encabezado deja pasar los clics a lo que hay debajo. */
 :root {
-  --alto-cabecera: 4.75rem;
+  --alto-cabecera: 5rem;
 }
 main {
   margin-top: calc(-1 * var(--alto-cabecera));
@@ -429,20 +379,28 @@ main > :first-child::before {
 }
 .cabecera {
   height: var(--alto-cabecera);
-  padding: 0.5rem 0.5rem 0;
   pointer-events: none;
-  transition: padding 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+/* El contenido no se mueve ni cambia de tamaño: lo único que aparece es el fondo de vidrio, en su propia
+ * capa y solo con opacidad y escala. Por eso anda fluido aunque la página esté pesada. */
 .cabecera-pildora {
   position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  height: 4rem;
-  max-width: 74rem;
+  height: 100%;
+  max-width: 72rem;
   margin-inline: auto;
-  padding-inline: 1rem 0.75rem;
+  padding-inline: 1.25rem;
+  pointer-events: auto;
+}
+.cabecera-pildora::before {
+  content: "";
+  position: absolute;
+  inset: 0.375rem 0.375rem;
+  z-index: -1;
   border-radius: 999px;
   background: rgb(255 255 255 / 0.82);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
@@ -451,31 +409,17 @@ main > :first-child::before {
     0 18px 40px -24px rgb(0 0 0 / 0.45),
     inset 0 0 0 1px rgb(255 255 255 / 0.6),
     0 0 0 1px rgb(10 10 10 / 0.05);
-  pointer-events: auto;
+  will-change: opacity, transform;
   transition:
-    height 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
-    max-width 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
-    background-color 0.25s ease,
-    box-shadow 0.25s ease;
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.cabecera[data-arriba] {
-  padding: 0;
-}
-.cabecera[data-arriba] .cabecera-pildora {
-  height: var(--alto-cabecera);
-  max-width: 72rem;
-  background: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  box-shadow: none;
-}
-@media (min-width: 640px) {
-  .cabecera[data-arriba] .cabecera-pildora {
-    padding-inline: 1.5rem;
-  }
+.cabecera[data-arriba] .cabecera-pildora::before {
+  opacity: 0;
+  transform: scale(1.025, 0.92);
 }
 @media (min-width: 1024px) {
-  .cabecera[data-arriba] .cabecera-pildora {
+  .cabecera-pildora {
     padding-inline: 2rem;
   }
 }
@@ -487,9 +431,9 @@ main > :first-child::before {
   opacity: 0;
   transform: translateY(-6px);
   transition:
-    opacity 0.18s ease,
-    transform 0.18s ease,
-    visibility 0.18s;
+    opacity 0.2s ease,
+    transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+    visibility 0.2s;
 }
 .menu-panel-abierto {
   visibility: visible;
@@ -519,8 +463,8 @@ main > :first-child::before {
 }
 
 /* ── Pantallitas ───────────────────────────────────────────────────────────
- * Ciclos de 6 s, solo transform y opacity. El estado sin animar es el final de cada historia:
- * es el que queda con "reducir movimiento" (ver más abajo). */
+ * Ciclos de 6 s, solo transform y opacity. Decisión de Gael (05/11/2026): las animaciones se ven
+ * siempre, también con "reducir movimiento" activado en el sistema. */
 .an-escaner {
   animation: an-escaner 6s ease-in-out infinite;
 }
@@ -620,41 +564,6 @@ main > :first-child::before {
   0%, 4% { opacity: 0; transform: translateY(10px) scale(0.92); }
   10%, 34% { opacity: 1; transform: none; }
   40%, 100% { opacity: 0; transform: translateY(-6px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .an-escaner,
-  .an-leido,
-  .an-cuenta,
-  .an-celda,
-  .an-estado-a,
-  .an-estado-b,
-  .an-campana,
-  .an-meta,
-  .an-tipeo,
-  .an-cursor,
-  .an-resultados,
-  .an-aviso {
-    animation: none !important;
-  }
-  .an-escaner {
-    opacity: 0;
-  }
-  .tilde {
-    transform: none !important;
-  }
-  .cinta ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-inline: 1rem;
-  }
-  .cinta ul:last-child {
-    display: none;
-  }
-  /* Quietos, los avisos del hero se encimarían: queda uno solo. */
-  .an-aviso:not(:first-child) {
-    display: none;
-  }
 }
 
 /* ── Mockups del sistema ───────────────────────────────────────────────────

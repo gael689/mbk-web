@@ -3,7 +3,7 @@ import { Bell, Check } from "@/content/iconos";
 
 /* Pantallitas animadas de lo nuevo de la v1.10: entran por los ojos y dan ganas de pedir la demo. Son
  * ilustraciones decorativas (aria-hidden), con datos de ejemplo y sin signo de pesos. Las animaciones son
- * CSS puro (globals.css, "Pantallitas"): con "reducir movimiento" quedan quietas en su estado final. */
+ * CSS puro (globals.css, "Pantallitas") y se ven siempre, también con "reducir movimiento". */
 function Pantalla({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div aria-hidden="true" className={`select-none overflow-hidden rounded-2xl border border-black/5 bg-white p-3 text-[0.8rem] leading-snug text-ink shadow-[var(--shadow-soft)] ${className}`}>

@@ -7,8 +7,7 @@ import { registrar, type EventoWeb } from "@/lib/analytics";
  *  1. Eventos de analítica por delegación: cualquier elemento con data-track="..."
  *     (clic en WhatsApp, "Iniciar sesión", tienda) registra su evento.
  *  2. Aparición suave al hacer scroll para los elementos con data-reveal. Solo
- *     se ocultan los que están fuera de pantalla al cargar, así que sin JS (o
- *     con movimiento reducido se ve solo un fundido) todo el contenido se ve igual. */
+ *     se ocultan los que están fuera de pantalla al cargar, así que sin JS todo el contenido se ve igual. */
 export function Interacciones() {
   useEffect(() => {
     const alClic = (e: MouseEvent) => {
@@ -18,7 +17,6 @@ export function Interacciones() {
     document.addEventListener("click", alClic);
 
     let io: IntersectionObserver | undefined;
-    // Con "reducir movimiento" también se activa: el CSS cambia el movimiento por un fundido.
     if ("IntersectionObserver" in window) {
       const altoVentana = window.innerHeight;
       io = new IntersectionObserver(

@@ -60,15 +60,15 @@ function Odometro({ valor, retraso, fase }: { valor: number; retraso: number; fa
 }
 
 /* Números reales de uso, en una fila y sin caja. Cada cifra es un odómetro que gira la primera vez
- * que se ve la franja. El HTML ya trae los valores finales (Google, sin JS o con "reducir
- * movimiento"): el giro es solo un efecto. */
+ * que se ve la franja. El HTML ya trae los valores finales (Google o sin JS): el giro es
+ * solo un efecto. */
 export function Metricas() {
   const ref = useRef<HTMLDListElement>(null);
   const [fase, setFase] = useState<Fase>("listo");
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    if (!el || !("IntersectionObserver" in window)) return;
     let temporizador = 0;
     setFase("armado");
     const io = new IntersectionObserver(

@@ -17,7 +17,7 @@ La **v1 (landing larga, una sola página)** está **archivada**: rama `archivo/v
 - **`/sistema`**: los 7 bloques problema → solución → ganancia con mockups, para quién es, dos formas de usarlo, tutoriales, cómo empezar, Instagram.
 - **`/consultoria`**: Belén (experiencia, misión, valores) y los 8 servicios. **`/planillas`**: las 6 planillas. **`/preguntas`**: FAQ completo (y su JSON-LD FAQPage).
 - **Un solo CTA principal** ("Solicitar demo", que lleva a `/?demo=1#probar` y deja elegida la opción "Quiero ver una demo del sistema") repetido en cada página y siempre llevando al formulario de la home (`/#probar`); "Sistema + acompañamiento" lo abre con `/?acomp=1#probar`. El formulario tiene lo esencial a la vista (nombre, negocio, WhatsApp, qué querés resolver) y el mail y el acompañamiento en un bloque opcional.
-- **Color y efectos**: los cuatro colores del logo (azul, naranja, verde, rosa) se reparten por bloque; el violeta queda solo para "Costos y gastos" (el color fijo de Belén). Efectos solo CSS y suaves: manchas de color, las cuatro barras del logo que crecen una vez, ondas entre secciones, tarjetas que se elevan al pasar el mouse. Todo se apaga con `prefers-reduced-motion`.
+- **Color y efectos**: los cuatro colores del logo (azul, naranja, verde, rosa) se reparten por bloque; el violeta queda solo para "Costos y gastos" (el color fijo de Belén). Efectos solo CSS y suaves: manchas de color, las cuatro barras del logo que crecen una vez, ondas entre secciones, tarjetas que se elevan al pasar el mouse. Se ven siempre, también con "reducir movimiento" (decisión de Gael, 05/11/2026).
 
 ## Cómo correrlo
 
@@ -141,5 +141,5 @@ Scripts de verificación en `scripts/` (usan el Playwright de `Desktop\taller`):
 
 - Calidad medida con el motor de auditoría de `portfolio-next` (misma lógica, sin reglas propias); los encabezados de seguridad (CSP, HSTS, X-Frame-Options, Permissions-Policy, etc.) están en `next.config.ts`. El CSP solo se aplica en producción.
 - Medición: eventos `page_view`, `clic_whatsapp`, `envio_formulario`, `clic_iniciar_sesion`, `clic_tienda`, `reproduce_video` (delegados con `data-track`; `lib/analytics.ts` no rompe si falla). Cada evento es una fila en `web_events` del Supabase del sistema.
-- Las secciones fuera de pantalla usan `content-visibility: auto` (baja el LCP móvil de ~6 s a ~1,9 s con CPU 4x + 4G). Las animaciones son CSS puro y se apagan con `prefers-reduced-motion`.
+- Las secciones fuera de pantalla usan `content-visibility: auto` (baja el LCP móvil de ~6 s a ~1,9 s con CPU 4x + 4G). Las animaciones son CSS puro y se ven siempre.
 - Solo hay tres pesos de Poppins (400/600/800); `font-bold` se mapea a 600 en `globals.css`.
