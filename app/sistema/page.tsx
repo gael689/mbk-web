@@ -1,6 +1,8 @@
 import { Demo } from "@/components/Demo";
 import { Formas } from "@/components/Formas";
+import { Incluye } from "@/components/Incluye";
 import { Instagram } from "@/components/Instagram";
+import { LoNuevo } from "@/components/LoNuevo";
 import { ParaQuien } from "@/components/ParaQuien";
 import { Actualizado } from "@/components/Actualizado";
 import { DatosClave } from "@/components/DatosClave";
@@ -34,6 +36,8 @@ export default function Sistema() {
         }
         bajada="Cómo el Sistema MBK resuelve los problemas de todos los días de un emprendimiento, y lo que ganás con cada uno."
       />
+      <Incluye />
+      <LoNuevo />
       <Soluciones />
       <ParaQuien />
       <Formas />

@@ -1,8 +1,7 @@
 /* Respuestas completas y citables: se muestran en la página y alimentan el
  * JSON-LD FAQPage. Cada una se entiende sola, sin el resto de la web.
  * Reglas: sin precios, sin números ni casos inventados, y lo que todavía no
- * salió no se promete. Stock, caja por medio de pago y costo en cinco partes
- * están disponibles desde la v1.8.0. */
+ * salió no se promete. Factura electrónica todavía no está disponible. */
 export const FAQ = [
   {
     q: "¿Qué es el Sistema MBK?",

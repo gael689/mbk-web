@@ -412,6 +412,251 @@ main > section:not(#inicio) {
   }
 }
 
+/* ── Encabezado flotante ───────────────────────────────────────────────────
+ * Tiene altura fija y `main` sube por debajo: el hero llega hasta arriba, sin corte, y el ::before de
+ * la primera sección deja lugar para que su contenido no quede tapado. Fuera de la píldora, el
+ * encabezado deja pasar los clics a lo que hay debajo. */
+:root {
+  --alto-cabecera: 4.75rem;
+}
+main {
+  margin-top: calc(-1 * var(--alto-cabecera));
+}
+main > :first-child::before {
+  content: "";
+  display: block;
+  height: var(--alto-cabecera);
+}
+.cabecera {
+  height: var(--alto-cabecera);
+  padding: 0.5rem 0.5rem 0;
+  pointer-events: none;
+  transition: padding 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cabecera-pildora {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: 4rem;
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-inline: 1rem 0.75rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.82);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    0 18px 40px -24px rgb(0 0 0 / 0.45),
+    inset 0 0 0 1px rgb(255 255 255 / 0.6),
+    0 0 0 1px rgb(10 10 10 / 0.05);
+  pointer-events: auto;
+  transition:
+    height 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    max-width 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.cabecera[data-arriba] {
+  padding: 0;
+}
+.cabecera[data-arriba] .cabecera-pildora {
+  height: var(--alto-cabecera);
+  max-width: 72rem;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+@media (min-width: 640px) {
+  .cabecera[data-arriba] .cabecera-pildora {
+    padding-inline: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .cabecera[data-arriba] .cabecera-pildora {
+    padding-inline: 2rem;
+  }
+}
+
+/* ── Menú desplegable ──────────────────────────────────────────────────────
+ * Cerrado sigue en el HTML (Google ve los enlaces), pero `visibility` lo saca del foco. */
+.menu-panel {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0.18s;
+}
+.menu-panel-abierto {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
+.menu-panel:not(.menu-panel-abierto) * {
+  animation-play-state: paused !important;
+}
+
+/* Fondo de puntitos para las bandas oscuras. */
+.grilla-puntos {
+  background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* Los tildes saltan cuando su tarjeta aparece en pantalla (solo las que estaban fuera al cargar). */
+.tilde {
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(0.25s + var(--i, 0) * 0.09s);
+}
+.rv .tilde {
+  transform: scale(0);
+}
+.rv.rv-in .tilde {
+  transform: scale(1);
+}
+
+/* ── Pantallitas ───────────────────────────────────────────────────────────
+ * Ciclos de 6 s, solo transform y opacity. El estado sin animar es el final de cada historia:
+ * es el que queda con "reducir movimiento" (ver más abajo). */
+.an-escaner {
+  animation: an-escaner 6s ease-in-out infinite;
+}
+.an-leido {
+  animation: an-leido 6s ease-out infinite;
+}
+.an-cuenta {
+  transform: translateY(-50%);
+  animation: an-cuenta 6s cubic-bezier(0.34, 1.3, 0.64, 1) infinite;
+}
+.an-celda {
+  animation: an-celda 6s ease-out infinite;
+}
+.an-estado-a {
+  opacity: 0;
+  animation: an-estado-a 6s ease infinite;
+}
+.an-estado-b {
+  animation: an-estado-b 6s ease infinite;
+}
+.an-campana {
+  transform-origin: top center;
+  animation: an-campana 6s ease-in-out infinite;
+}
+.an-meta {
+  animation: an-meta 6s cubic-bezier(0.2, 0.7, 0.2, 1) infinite;
+}
+.an-tipeo {
+  width: 6ch;
+  animation: an-tipeo 6s steps(6) infinite;
+}
+.an-cursor {
+  animation: an-cursor 1s steps(2) infinite;
+}
+.an-resultados {
+  animation: an-resultados 6s ease infinite;
+}
+.an-aviso {
+  animation: an-aviso 9s ease-in-out infinite both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes an-escaner {
+  0%, 8% { transform: translateY(0); opacity: 1; }
+  45% { transform: translateY(3.6rem); opacity: 1; }
+  52%, 100% { transform: translateY(3.6rem); opacity: 0; }
+}
+@keyframes an-leido {
+  0%, 44% { opacity: 0; transform: translateY(6px) scale(0.96); }
+  52%, 92% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: none; }
+}
+@keyframes an-cuenta {
+  0%, 44% { transform: translateY(0); }
+  54%, 100% { transform: translateY(-50%); }
+}
+@keyframes an-celda {
+  0%, 44%, 72%, 100% { box-shadow: 0 0 0 0 rgb(228 46 154 / 0); }
+  54% { box-shadow: 0 0 0 2px rgb(228 46 154 / 0.9); }
+}
+@keyframes an-estado-a {
+  0%, 46% { opacity: 1; }
+  54%, 96% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes an-estado-b {
+  0%, 46% { opacity: 0; transform: scale(0.9); }
+  54% { opacity: 1; transform: scale(1.08); }
+  60%, 96% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+@keyframes an-campana {
+  0%, 6%, 24%, 100% { transform: rotate(0); }
+  10% { transform: rotate(16deg); }
+  14% { transform: rotate(-14deg); }
+  18% { transform: rotate(9deg); }
+  21% { transform: rotate(-6deg); }
+}
+@keyframes an-meta {
+  0% { transform: scaleX(0.08); }
+  60%, 94% { transform: scaleX(1); }
+  100% { transform: scaleX(0.08); }
+}
+@keyframes an-tipeo {
+  0%, 8% { width: 0; }
+  38%, 100% { width: 6ch; }
+}
+@keyframes an-cursor {
+  to { opacity: 0; }
+}
+@keyframes an-resultados {
+  0%, 36% { opacity: 0; transform: translateY(5px); }
+  46%, 94% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+@keyframes an-aviso {
+  0%, 4% { opacity: 0; transform: translateY(10px) scale(0.92); }
+  10%, 34% { opacity: 1; transform: none; }
+  40%, 100% { opacity: 0; transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .an-escaner,
+  .an-leido,
+  .an-cuenta,
+  .an-celda,
+  .an-estado-a,
+  .an-estado-b,
+  .an-campana,
+  .an-meta,
+  .an-tipeo,
+  .an-cursor,
+  .an-resultados,
+  .an-aviso {
+    animation: none !important;
+  }
+  .an-escaner {
+    opacity: 0;
+  }
+  .tilde {
+    transform: none !important;
+  }
+  .cinta ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-inline: 1rem;
+  }
+  .cinta ul:last-child {
+    display: none;
+  }
+  /* Quietos, los avisos del hero se encimarían: queda uno solo. */
+  .an-aviso:not(:first-child) {
+    display: none;
+  }
+}
+
 /* ── Mockups del sistema ───────────────────────────────────────────────────
  * Todo en `em`: el componente <Mock> fija la ilustración a N em de ancho y el
  * font-size sale del ancho del contenedor (cqw), así el mismo dibujo escala

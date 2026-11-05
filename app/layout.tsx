@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
+import { AvisoVersion } from "@/components/AvisoVersion";
 import { MedicionPaginas } from "@/components/MedicionPaginas";
 import { Cookies } from "@/components/Cookies";
 import { Footer } from "@/components/Footer";
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#contenido" className="skip-link">
           Saltar al contenido
         </a>
+        <AvisoVersion />
         <Header />
         <main id="contenido">{children}</main>
         <Footer />

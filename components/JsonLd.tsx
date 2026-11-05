@@ -9,6 +9,7 @@ import {
   WHATSAPP_NUMBER,
   YOUTUBE_URL,
 } from "@/content/site";
+import { VERSION_ACTUAL } from "@/content/versiones";
 
 /* Datos estructurados (schema.org) en un solo @graph. Los @id cuelgan de
  * SITE_URL, el host canónico. No se declara teléfono, precio ni valoraciones:
@@ -72,6 +73,7 @@ export function JsonLd() {
         description: SITE_DESCRIPTION,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web (celular y computadora)",
+        softwareVersion: VERSION_ACTUAL.version,
         inLanguage: "es-AR",
         publisher: { "@id": org },
         creator: { "@id": persona },
@@ -83,6 +85,11 @@ export function JsonLd() {
           "Costo del producto en cinco partes",
           "Clientes y productos",
           "Control de stock con avisos",
+          "Variantes de producto: talle, color y sabor",
+          "Combos",
+          "Códigos de barras, etiquetas y escáner con el celular",
+          "Órdenes de trabajo con logo",
+          "Gastos por pagar con aviso de vencimiento",
           "Servicios y agenda de turnos",
           "Metas mensuales y notificaciones",
           "Descarga de registros a Excel",

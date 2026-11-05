@@ -9,7 +9,7 @@ const DATOS: { t: string; d: string }[] = [
   { t: "Para quién", d: "Emprendedores y pymes que venden productos, servicios o ambos: indumentaria, pastelería, estética, lencería, oficios y más." },
   { t: "Cómo se usa", d: "Desde el navegador del celular o de la computadora, con la misma cuenta en todos lados. No hay que instalar nada." },
   { t: "Qué incluye hoy", d: `${INCLUYE_HOY.join(", ")}.` },
-  ...(NOVEDADES.length ? [{ t: "Novedades", d: `${NOVEDADES.join(", ")}.` }] : []),
+  ...(NOVEDADES.length ? [{ t: "Próximamente", d: `${NOVEDADES.join(", ")}.` }] : []),
   { t: "Quién lo creó", d: "Belén Klundt, Licenciada y Profesora en Economía, a partir de su trabajo diario con emprendedores y pymes de Bahía Blanca." },
   { t: "Cómo se contrata", d: "Solo el sistema, o el sistema con acompañamiento de Belén y su equipo. Se arma una propuesta según el negocio y se puede pedir una demo antes." },
   { t: "Dónde", d: `Bahía Blanca, Buenos Aires, Argentina. WhatsApp ${WHATSAPP_DISPLAY}.` },

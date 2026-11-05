@@ -5,7 +5,7 @@ import type { Tono } from "./modulos";
  * `titulo` es el titular-pregunta (lleva adentro la búsqueda que interesa).
  * `problema` lo dice el emprendedor, en sus palabras.
  * `novedad`: todavía no está disponible; en la web se muestra como "Novedad", sin fecha.
- * Hoy ningún bloque la lleva (stock, caja y costo en cinco partes salieron en la v1.8.0). */
+ * Hoy ningún bloque la lleva. */
 export type MockId = "resultado" | "cobros" | "costos" | "stock" | "caja" | "turnos" | "celular";
 
 export type Solucion = {
@@ -15,7 +15,8 @@ export type Solucion = {
   modulo: string;
   titulo: string;
   problema: string;
-  hace: string;
+  /** Lo que hace el sistema, en tildes: frases cortas. */
+  incluye: string[];
   gana: string;
   mock: MockId;
   novedad?: boolean;
@@ -29,7 +30,7 @@ export const SOLUCIONES: Solucion[] = [
     modulo: "Ventas",
     titulo: "¿Cómo saber si tu emprendimiento gana plata?",
     problema: "“Vendo todo el mes y no sé si gané plata.”",
-    hace: "Cargás tus ventas y tus gastos, y el Sistema MBK te muestra el resultado del mes apenas abrís el Dashboard.",
+    incluye: ["Vendido, cobrado, gastos y resultado", "Comparado con el mes anterior", "Tu meta del mes"],
     gana: "Saber si tu negocio te deja plata, sin hacer cuentas.",
     mock: "resultado",
   },
@@ -40,7 +41,7 @@ export const SOLUCIONES: Solucion[] = [
     modulo: "Cobros y clientes",
     titulo: "¿Sabés cuánto te deben tus clientes?",
     problema: "“No sé cuánto me deben.”",
-    hace: "Anotás lo que queda pendiente en cada venta y el sistema te muestra el Pendiente a cobrar, con las ventas y los clientes que todavía no pagaron.",
+    incluye: ["Lo que te falta cobrar, a la vista", "Cobros en partes", "Cada cobro con su fecha y medio de pago"],
     gana: "Cobrar lo que es tuyo, sin perseguir a nadie de memoria.",
     mock: "cobros",
   },
@@ -51,7 +52,7 @@ export const SOLUCIONES: Solucion[] = [
     modulo: "Productos",
     titulo: "¿Cómo calcular el precio de un producto?",
     problema: "“Pongo los precios a ojo.”",
-    hace: "Armás el costo real de cada producto —insumos, mano de obra, packaging, inversión y otros— y el sistema lo suma por vos.",
+    incluye: ["Costo en cinco partes", "El sistema lo suma por vos", "Tu margen, antes de guardar"],
     gana: "Precios que cubren lo que te cuesta y te dejan margen.",
     mock: "costos",
   },
@@ -62,7 +63,7 @@ export const SOLUCIONES: Solucion[] = [
     modulo: "Stock",
     titulo: "Control de stock para emprendedores: ¿cómo no quedarte sin mercadería?",
     problema: "“Me quedo sin mercadería sin darme cuenta.”",
-    hace: "El stock se descuenta solo cada vez que vendés y el sistema te avisa cuando queda poco de algo.",
+    incluye: ["Baja solo con cada venta", "Aviso cuando queda poco", "Por talle, color y sabor", "Códigos de barras"],
     gana: "Reponer a tiempo y no perder ventas.",
     mock: "stock",
   },
@@ -73,7 +74,7 @@ export const SOLUCIONES: Solucion[] = [
     modulo: "Caja",
     titulo: "¿Cuánta plata tenés hoy y dónde está?",
     problema: "“A principio de mes no sé cuánta plata tengo.”",
-    hace: "Ves la caja separada por medio de pago: lo que hay en efectivo, en transferencia, en tarjeta y en Mercado Pago.",
+    incluye: ["Efectivo, transferencia, tarjeta y Mercado Pago", "Arqueo de caja", "Gastos por pagar, con aviso"],
     gana: "Saber cuánto hay en efectivo, en la cuenta y en Mercado Pago.",
     mock: "caja",
   },
@@ -84,7 +85,7 @@ export const SOLUCIONES: Solucion[] = [
     modulo: "Servicios y turnos",
     titulo: "¿Cómo organizar los turnos de tu negocio sin que se te pisen?",
     problema: "“Se me pisan los turnos y me olvido de pedidos.”",
-    hace: "Cargás cada turno con su cliente, su servicio y su seña, ves cuáles están pendientes de cobro y cuáles pagos, y el sistema te avisa antes de cada turno.",
+    incluye: ["Cliente, servicio y seña", "Recordatorio antes de cada turno", "Pendientes y pagos, a la vista"],
     gana: "Cumplir con cada cliente.",
     mock: "turnos",
   },
@@ -95,7 +96,7 @@ export const SOLUCIONES: Solucion[] = [
     modulo: "Todo en un lugar",
     titulo: "Un programa para registrar ventas desde el celular, ¿y si tuvieras todo junto?",
     problema: "“Lo tengo todo en cuadernos y papelitos.”",
-    hace: "Clientes, productos, servicios, ventas y costos en un solo lugar, que abrís desde el celular en el mostrador o en el colectivo.",
+    incluye: ["Sin instalar nada", "Celular y compu, misma cuenta", "Clientes, productos, ventas y costos"],
     gana: "Tiempo para vender en vez de ordenar.",
     mock: "celular",
   },

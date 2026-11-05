@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { LucideIcon } from "@/content/iconos";
+import { Check, type LucideIcon } from "@/content/iconos";
 import { MODULOS, TONO, type Modulo, type Tono } from "@/content/modulos";
 
 /* Piezas chicas que se repiten en toda la página. */
@@ -52,6 +52,35 @@ export function TagNovedad({ className = "" }: { className?: string }) {
     <span className={`inline-flex items-center rounded-full bg-ink px-3 py-1 text-[0.8rem] font-bold uppercase tracking-wider text-white ${className}`}>
       Novedad
     </span>
+  );
+}
+
+/** Salió en la versión actual. */
+export function TagNuevo({ className = "" }: { className?: string }) {
+  return <span className={`inline-flex items-center rounded-full bg-pink-strong px-2 py-0.5 text-[0.68rem] font-bold uppercase tracking-wider text-white ${className}`}>Nuevo</span>;
+}
+
+/** Todavía no está disponible. */
+export function TagProximamente({ className = "" }: { className?: string }) {
+  return <span className={`inline-flex items-center rounded-full bg-ink px-2 py-0.5 text-[0.68rem] font-bold uppercase tracking-wider text-white ${className}`}>Próximamente</span>;
+}
+
+/** Lo que incluye algo: frases cortas, cada una con su tilde. */
+export function ListaTildes({ items, className = "", grande = false }: { items: readonly string[]; className?: string; grande?: boolean }) {
+  return (
+    <ul className={`space-y-2 ${className}`}>
+      {items.map((x, i) => (
+        <li key={x} className={`flex items-start gap-2.5 font-medium leading-snug ${grande ? "text-[1.1rem]" : "text-[1rem]"}`}>
+          <span
+            style={{ ["--i" as string]: i }}
+            className={`tilde mt-[0.08em] grid shrink-0 place-items-center rounded-full bg-green-soft text-green-strong ${grande ? "h-6 w-6" : "h-5 w-5"}`}
+          >
+            <Check className={grande ? "h-4 w-4" : "h-3.5 w-3.5"} strokeWidth={3} aria-hidden="true" />
+          </span>
+          {x}
+        </li>
+      ))}
+    </ul>
   );
 }
 

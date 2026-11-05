@@ -1,4 +1,4 @@
-import { Bell, BarChart3, CalendarDays, Clock, FileText, Package, Plus, Sparkles, Users, type LucideIcon } from "./iconos";
+import { Bell, BarChart3, CalendarDays, Clock, FileText, Package, Plus, ScanLine, Sparkles, Users, type LucideIcon } from "./iconos";
 
 /* Un color por módulo, el que Belén ya usa en sus piezas de Instagram.
  * Las clases van completas (no armadas con template strings) para que Tailwind
@@ -28,28 +28,38 @@ export const MODULOS: Modulo[] = [
 export const MODULOS_HERO: Modulo[] = [
   ...MODULOS,
   { id: "turnos", label: "Turnos", tono: "pink", Icon: Clock },
+  { id: "codigos", label: "Códigos de barras", tono: "violet", Icon: ScanLine },
   { id: "notificaciones", label: "Notificaciones automáticas", tono: "orange", Icon: Bell },
   { id: "actualizaciones", label: "Actualizaciones continuas", tono: "green", Icon: Sparkles },
   { id: "mas", label: "¡Y más!", tono: "blue", Icon: Plus },
 ];
 
-/* Qué existe hoy y qué viene. Las novedades se nombran sin fecha; cuando salen, pasan a INCLUYE_HOY.
- * Stock, caja por medio de pago y costo en cinco partes están disponibles desde la v1.8.0. */
+/* Qué existe hoy y qué viene. Lo que viene se nombra sin fecha; cuando sale, pasa a INCLUYE_HOY.
+ * Stock, caja y costo en cinco partes salieron en la v1.8.0; variantes, combos, códigos de barras,
+ * órdenes de trabajo, gastos por pagar y recomendaciones, en la v1.10.0. */
 export const INCLUYE_HOY = [
   "Ventas",
   "Cobros",
   "Caja por medio de pago",
   "Clientes",
   "Productos",
+  "Variantes: talle, color, sabor",
+  "Combos",
+  "Códigos de barras y etiquetas",
   "Costo del producto en cinco partes",
   "Control de stock con avisos",
   "Servicios y turnos",
+  "Órdenes de trabajo",
   "Costos y gastos",
+  "Gastos por pagar con aviso de vencimiento",
   "Metas mensuales",
+  "Recomendaciones en Inicio",
   "Notificaciones",
   "Mensajes",
   "Descarga a Excel",
 ] as const;
 
-/* Vacío: hoy no hay novedades anunciadas. Si se suma una, aparece sola en /sistema y en llms.txt. */
-export const NOVEDADES: readonly string[] = [];
+/* Lo que viene: se muestra como "Próximamente" en /sistema, en la home y en llms.txt.
+ * Factura electrónica: hecha y apagada en el sistema (REACT_APP_FEATURE_ARCA) hasta tener el certificado.
+ * Cuando se prenda, sacarla de acá, sumarla a INCLUYE_HOY y crear su página en content/funciones.ts. */
+export const NOVEDADES: readonly string[] = ["Factura electrónica de ARCA"];

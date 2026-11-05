@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Menu, X } from "@/content/iconos";
-import { NAV } from "./NavEnlaces";
 
-/* Menú desplegable del celular. Se cierra al elegir un enlace o con Escape. */
-export function MenuMovil() {
+/* Menú del celular. El contenido llega armado desde el servidor (ContenidoMenuMovil). Se cierra al
+ * elegir un enlace o con Escape, y no pasa de la altura de la pantalla: con todo abierto, se desplaza. */
+export function MenuMovil({ children }: { children: ReactNode }) {
   const [abierto, setAbierto] = useState(false);
 
   useEffect(() => {
@@ -32,22 +32,19 @@ export function MenuMovil() {
         id="menu-movil"
         aria-label="Menú"
         hidden={!abierto}
-        className="absolute inset-x-0 top-full border-b border-line bg-cream px-4 pb-6 pt-3 shadow-[var(--shadow-soft)]"
+        onClick={(e) => {
+          if ((e.target as HTMLElement).closest("a")) setAbierto(false);
+        }}
+        className="absolute inset-x-0 top-full mt-2 max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain rounded-[1.75rem] border border-line bg-cream px-4 pb-6 pt-3 shadow-[var(--shadow-lift)]"
       >
-        <ul className="mx-auto max-w-72 space-y-1 sm:max-w-none">
-          {NAV.map((e) => (
-            <li key={e.href}>
-              <Link href={e.href} onClick={() => setAbierto(false)} className="flex min-h-12 items-center rounded-2xl px-4 text-lg font-semibold hover:bg-blue-soft">
-                {e.t}
-              </Link>
-            </li>
-          ))}
-          <li className="pt-2">
-            <Link href="/?demo=1#probar" onClick={() => setAbierto(false)} className="btn btn-pink w-full">
+        <div className="mx-auto sm:max-w-none">
+          {children}
+          <div className="pt-3">
+            <Link href="/?demo=1#probar" className="btn btn-pink w-full">
               Solicitar demo
             </Link>
-          </li>
-        </ul>
+          </div>
+        </div>
       </nav>
     </div>
   );

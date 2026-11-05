@@ -85,7 +85,7 @@ export const RUBROS: Rubro[] = [
       "A la tarde otra paga por transferencia y la caja lo anota en ese medio de pago.",
       "A fin de mes abrís el Dashboard y ves ventas, cobrado, gastos y resultado neto.",
     ],
-    usa: ["Ventas", "Cobros", "Productos", "Control de stock con avisos", "Caja por medio de pago", "Clientes"],
+    usa: ["Ventas", "Cobros", "Variantes: talle, color, sabor", "Control de stock con avisos", "Códigos de barras y etiquetas", "Caja por medio de pago", "Clientes"],
     faq: [
       {
         q: "¿Puedo llevar lo que me deben las clientas?",
@@ -392,7 +392,7 @@ export const RUBROS: Rubro[] = [
       "Al cerrar, contás la caja y la comparás con lo calculado.",
       "El lunes mirás el listado de productos para reponer y hacés el pedido.",
     ],
-    usa: ["Ventas", "Control de stock con avisos", "Productos", "Caja por medio de pago", "Costos y gastos", "Descarga a Excel"],
+    usa: ["Ventas", "Control de stock con avisos", "Códigos de barras y etiquetas", "Productos", "Caja por medio de pago", "Costos y gastos", "Descarga a Excel"],
     faq: [
       {
         q: "¿Puedo cargar el stock de muchos productos a la vez?",
@@ -450,7 +450,7 @@ export const RUBROS: Rubro[] = [
       "Anotás la nafta y los materiales como gastos, con el medio de pago.",
       "El viernes mirás cuánto cobraste, cuánto gastaste y qué te queda.",
     ],
-    usa: ["Servicios y turnos", "Cobros", "Clientes", "Costos y gastos", "Metas mensuales", "Descarga a Excel"],
+    usa: ["Servicios y turnos", "Órdenes de trabajo", "Cobros", "Clientes", "Costos y gastos", "Metas mensuales"],
     faq: [
       {
         q: "¿Sirve si trabajo solo y mis clientes son pocos?",
@@ -462,7 +462,7 @@ export const RUBROS: Rubro[] = [
       },
       {
         q: "¿Genera presupuestos o facturas?",
-        a: "No. El sistema es para llevar la gestión del negocio (trabajos, cobros, gastos y resultado). No emite facturas ni presupuestos con membrete.",
+        a: "Todavía no emite facturas ni presupuestos: la factura electrónica de ARCA está en preparación. Lo que sí podés hacer es cargar un trabajo como orden de trabajo, con tu logo, el total, la seña y el saldo, e imprimirla o mandarla por WhatsApp.",
       },
     ],
     guias: ["como-organizar-los-turnos-de-tu-negocio", "como-saber-si-tu-emprendimiento-gana-plata"],

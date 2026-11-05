@@ -45,7 +45,7 @@ const DATOS = `## Qué es y para quién
 - Para: emprendedores, pymes, comercios y negocios de servicios (indumentaria, pastelería, estética, lencería, oficios y más).
 - Problemas que resuelve: no saber si el negocio gana plata, no saber cuánto te deben, poner los precios a ojo, quedarse sin mercadería, no saber cuánta plata hay en caja, turnos que se pisan.
 - Hoy incluye: ${INCLUYE_HOY.join(", ").toLowerCase().replace("excel", "Excel")}.
-${NOVEDADES.length ? `- Novedades (sin fecha): ${NOVEDADES.join(", ").toLowerCase()}.\n` : ""}- Dos formas de usarlo: solo el sistema, o sistema + acompañamiento del equipo de MBK desde el panel de asesoría.
+${NOVEDADES.length ? `- Próximamente, todavía no disponible: ${NOVEDADES.join(", ").toLowerCase().replace("arca", "ARCA")}.\n` : ""}- Dos formas de usarlo: solo el sistema, o sistema + acompañamiento del equipo de MBK desde el panel de asesoría.
 - Costo: depende de cómo se use; se arma una propuesta según el negocio. Se puede pedir una demo antes de decidir.
 - Ubicación: Bahía Blanca, Buenos Aires, Argentina.
 - Contacto: WhatsApp ${WHATSAPP_DISPLAY} o el formulario de ${SITE_URL}/#probar`;

@@ -1,5 +1,13 @@
 import Image from "next/image";
+import { Bell, Check, Wallet } from "@/content/iconos";
 import { BarrasLogo } from "./Decoracion";
+
+/* Avisos que aparecen de a uno sobre la escena, como si el sistema estuviera andando. Decorativos. */
+const AVISOS = [
+  { Icon: Check, t: "Venta registrada", c: "bg-green-strong" },
+  { Icon: Wallet, t: "Te pagaron por transferencia", c: "bg-blue-strong" },
+  { Icon: Bell, t: "Queda poco stock", c: "bg-orange-strong" },
+];
 
 /* La imagen del hero: el sistema de verdad (capturas del negocio de ejemplo "Estilo Sur", con datos
  * ficticios) en una notebook y un celular. Las capturas se regeneran con el script de
@@ -30,6 +38,21 @@ export function EscenaSistema() {
         <div className="mx-[-3%] h-[1.1em] rounded-b-[1.4em] bg-gradient-to-b from-[#d9d5d0] to-[#a9a49e] shadow-[0_10px_18px_-8px_rgba(60,30,10,0.55)]">
           <div className="mx-auto h-[0.35em] w-[18%] rounded-b-[0.4em] bg-[#8d8781]" />
         </div>
+      </div>
+
+      <div className="absolute bottom-[5%] left-[4%] z-10 grid" aria-hidden="true">
+        {AVISOS.map((a, i) => (
+          <span
+            key={a.t}
+            style={{ ["--d" as string]: `${i * 3}s` }}
+            className="an-aviso col-start-1 row-start-1 flex items-center gap-2 self-end justify-self-start rounded-full bg-white py-1.5 pl-1.5 pr-3.5 text-[clamp(0.72rem,1.6vw,0.92rem)] font-semibold shadow-[var(--shadow-lift)]"
+          >
+            <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-full text-white ${a.c}`}>
+              <a.Icon className="h-3.5 w-3.5" strokeWidth={3} />
+            </span>
+            {a.t}
+          </span>
+        ))}
       </div>
 
       {/* Celular: cargando una venta */}

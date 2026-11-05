@@ -58,9 +58,9 @@ Las mismas van en `.env.local` y en Vercel (`.env.example` tiene el detalle).
 
 | Existe hoy | Novedades (se nombran sin fecha, con la etiqueta "Novedad") |
 |---|---|
-| Ventas, cobros, caja por medio de pago, clientes, productos, costo del producto en cinco partes, control de stock con avisos, servicios/turnos, costos y gastos, metas, notificaciones, mensajes, descarga a Excel | Ninguna por ahora (stock, caja y costo en cinco partes salieron en la v1.8.0 del sistema) |
+| Lo de `INCLUYE_HOY` en `content/modulos.ts` (al día con la v1.10.0 del sistema) | Factura electrónica de ARCA, como "Próximamente" |
 
-Cuando una novedad salga: sacar `novedad: true` en `content/soluciones.ts` y moverla de `NOVEDADES` a `INCLUYE_HOY` en `content/modulos.ts`. Con `NOVEDADES` vacío, el bloque "Novedades que se vienen" de `/sistema`, la fila de "El Sistema MBK en pocas palabras" y la línea de `llms.txt` no se muestran.
+Cuando una novedad salga: sacar `novedad: true` en `content/soluciones.ts` y moverla de `NOVEDADES` a `INCLUYE_HOY` en `content/modulos.ts`. Con `NOVEDADES` vacío, el "Próximamente" de `Incluye` y del menú, la fila de "El Sistema MBK en pocas palabras" y la línea de `llms.txt` no se muestran.
 
 ## Capturas del sistema (hero y páginas)
 
@@ -75,7 +75,7 @@ Las imágenes del hero (`public/capturas/web/laptop.webp` y `celular.webp`) son 
 
 ## Datos vivos
 
-- **YouTube**: feed RSS público del canal (`channel_id` `UCILzW2QvXWs28zm-ES2S-ng`, resuelto desde @mbkconsultoria), pedido en el servidor y revalidado cada 6 h (`app/page.tsx` → `revalidate = 21600`; tiene que ser un literal). Si falla o viene vacío, la sección muestra una tarjeta con el link al canal. Los videos se cargan "livianos": el reproductor (youtube-nocookie) recién se descarga al tocar play.
+- **YouTube**: feed RSS público del canal (`channel_id` `UCILzW2QvXWs28zm-ES2S-ng`, resuelto desde @mbkconsultoria), pedido en el servidor y revalidado cada 6 h (`app/page.tsx` → `revalidate = 21600`; tiene que ser un literal). El feed anda de a ratos (500 y 404 en nov/2026): si falla o viene vacío, se usa la lista de `content/videos.ts` con los tutoriales reales, y la tarjeta con el link al canal queda solo si esa lista también estuviera vacía. Los videos se cargan "livianos": el reproductor (youtube-nocookie) recién se descarga al tocar play.
 - **Instagram**: sin API key no se puede leer el feed (Plan B del plan). La sección siempre muestra "Seguinos en Instagram" con el link. Para mostrar publicaciones, pegar sus URLs en `content/instagram.ts` (`https://www.instagram.com/p/XXXX/`, hasta 6) y se embeben solas. Plan A (feed real con Graph API) requiere cuenta profesional vinculada a Facebook y renovar el token cada 60 días: no está hecho.
 - **Tienda**: los links a las planillas van a `/tienda` y `/tienda/<planilla>` (redirección en `next.config.ts` a la Tienda Nube con `utm_source=mbk.com.ar&utm_medium=web`). Los slugs de producto son los reales, verificados con 200.
 

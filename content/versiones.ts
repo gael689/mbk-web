@@ -13,6 +13,21 @@ export type Version = {
 
 export const VERSIONES: Version[] = [
   {
+    version: "1.10.0",
+    fecha: "2026-11-01",
+    titulo: "Variantes, códigos de barras y órdenes de trabajo",
+    cambios: [
+      "Variantes de un producto (talle, color, sabor), cada una con su stock y, si hace falta, su precio.",
+      "Combos con precio propio, que descuentan el stock de cada producto.",
+      "Códigos de barras: se generan, se imprimen en etiquetas y se escanean con la cámara del celular o con un lector USB.",
+      "Órdenes de trabajo con tu logo, para imprimir o mandar por WhatsApp.",
+      "Gastos pendientes de pago, con aviso de vencimiento.",
+      "Recomendaciones en Inicio con un dato útil del negocio por vez.",
+      "Botón «+ Nuevo», buscador con Ctrl+K y barra fija en el celular.",
+      "Mi negocio: tu logo y tus datos de contacto.",
+    ],
+  },
+  {
     version: "1.8.0",
     fecha: "2026-10-12",
     titulo: "Stock y caja",
@@ -115,3 +130,8 @@ export const VERSIONES: Version[] = [
 ];
 
 export const VERSION_ACTUAL = VERSIONES[0];
+
+/* La franja de arriba de todo. Cambiarla junto con la versión nueva; vacía, la franja no se muestra. */
+export const ANUNCIO_VERSION = "variantes, combos, códigos de barras y órdenes de trabajo";
+/* La misma franja en el celular: tiene que entrar en un renglón. */
+export const ANUNCIO_VERSION_CORTO = "códigos de barras y más";

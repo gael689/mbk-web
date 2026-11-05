@@ -1,19 +1,19 @@
 /* Fecha de la última vez que cambió el contenido de cada página (YYYY-MM-DD).
  * Alimenta el sitemap. Se actualiza a mano cuando se edita el contenido de esa página:
  * declarar "cambió hoy" en cada build le enseña a Google a ignorar el dato. */
-/* Lanzamiento de stock, caja y costo en cinco partes (sistema v1.8.0). */
-const LANZAMIENTO_V1_8 = "2026-10-12";
+/* Menú, tildes y animaciones, con lo nuevo de la v1.10.0 del sistema. */
+const WEB_V1_10 = "2026-11-05";
 
 export const ULTIMA_MODIFICACION = {
-  home: LANZAMIENTO_V1_8,
-  sistema: LANZAMIENTO_V1_8,
+  home: WEB_V1_10,
+  sistema: WEB_V1_10,
   consultoria: "2026-10-06",
   planillas: "2026-10-06",
-  preguntas: LANZAMIENTO_V1_8,
+  preguntas: WEB_V1_10,
   cookies: "2026-10-06",
   privacidad: "2026-10-06",
-  rubros: "2026-10-14",
+  rubros: WEB_V1_10,
   guias: "2026-10-14",
   bahiaBlanca: "2026-10-14",
-  versiones: "2026-10-14",
+  versiones: WEB_V1_10,
 } as const;
