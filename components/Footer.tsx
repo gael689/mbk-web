@@ -100,6 +100,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/herramientas" className={enlace}>
+                  Calculadoras gratis
+                </Link>
+              </li>
+              <li>
                 <Link href="/bahia-blanca" className={enlace}>
                   MBK en Bahía Blanca
                 </Link>
