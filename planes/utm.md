@@ -14,7 +14,7 @@
 | Firma de mail | `https://www.mbk.com.ar/?utm_source=mail&utm_medium=firma&utm_campaign=firma` |
 | Referidos (desde el sistema) | `https://www.mbk.com.ar/?utm_source=referido&utm_medium=sistema&utm_campaign=<codigo>` |
 
-**Referidos:** el formato es el acordado, pero al 21/11/2026 no encontré en `system-mbk` código que arme ese enlace: mientras no exista, se arma a mano con el código de cada persona.
+**Referidos:** lo arma el sistema desde la v1.12 (tarjeta «¿Conocés a alguien a quien le sirva?» del Inicio, `system-mbk/frontend/src/lib/referral.ts`). `<codigo>` son los primeros 8 caracteres del id del negocio que recomienda: en Consultas web aparece como campaña de origen.
 
 Para compartir una calculadora puntual, cambiar la ruta y dejar el resto igual:
 
