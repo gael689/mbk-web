@@ -13,7 +13,7 @@ import { metaPagina } from "@/lib/meta";
 export const metadata = metaPagina({
   titulo: "Calculadoras gratis para emprendedores",
   descripcion:
-    "Tres calculadoras gratis para tu negocio: a cuánto vender un producto, cuánto tenés que vender para no perder y cuánto te queda después de la comisión.",
+    "Seis calculadoras gratis para tu negocio: precio de venta, punto de equilibrio, cuánto te queda, costo de un producto, valor de la hora y margen y markup.",
   ruta: "/herramientas",
 });
 
@@ -28,7 +28,7 @@ export default function Herramientas() {
             Hacé la cuenta <span className="hl">en un minuto</span>
           </>
         }
-        bajada="Tres calculadoras para ponerle números a tu negocio. Sin registrarte: lo que escribís queda en tu celular."
+        bajada="Seis calculadoras para ponerle números a tu negocio. Sin registrarte: lo que escribís queda en tu celular."
       />
 
       <nav className="pb-4" aria-label="Calculadoras">
