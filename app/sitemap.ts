@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { ULTIMA_MODIFICACION as F } from "@/content/fechas";
 import { GUIAS } from "@/content/guias";
+import { HERRAMIENTAS } from "@/content/herramientas";
 import { RUBROS } from "@/content/rubros";
 import { SITE_URL } from "@/content/site";
 
-/* Home + páginas internas + rubros, guías y Bahía Blanca. No se listan las anclas (#probar, #belen…): Google las
+/* Home + páginas internas + rubros, guías, herramientas y Bahía Blanca. No se listan las anclas (#probar, #belen…): Google las
  * descarta y las trata como duplicados. Sin changeFrequency ni priority (Google los ignora)
  * y con la fecha real de cada página (content/fechas.ts). */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -20,5 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...RUBROS.map((r) => ({ url: `${SITE_URL}/rubros/${r.slug}`, lastModified: F.rubros })),
     { url: `${SITE_URL}/guias`, lastModified: F.guias },
     ...GUIAS.map((g) => ({ url: `${SITE_URL}/guias/${g.slug}`, lastModified: g.fecha })),
+    { url: `${SITE_URL}/herramientas`, lastModified: F.herramientas },
+    ...HERRAMIENTAS.map((h) => ({ url: `${SITE_URL}/herramientas/${h.slug}`, lastModified: h.fecha })),
   ];
 }

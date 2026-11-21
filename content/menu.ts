@@ -1,4 +1,4 @@
-import { BarChart3, BookOpen, CalendarDays, CircleHelp, ClipboardList, FileSpreadsheet, GraduationCap, HandCoins, Heart, Landmark, MapPin, Package, Play, Rocket, ScanLine, Shirt, Store, Tag, Wallet, type LucideIcon } from "./iconos";
+import { BarChart3, BookOpen, Calculator, CalendarDays, CircleHelp, ClipboardList, FileSpreadsheet, GraduationCap, HandCoins, Heart, Landmark, MapPin, Package, Play, Rocket, ScanLine, Shirt, Store, Tag, Wallet, type LucideIcon } from "./iconos";
 import type { Tono } from "./modulos";
 import { RUBROS } from "./rubros";
 import { YOUTUBE_URL, tiendaHref } from "./site";
@@ -65,10 +65,11 @@ export const MENU: GrupoMenu[] = [
   {
     id: "recursos",
     etiqueta: "Recursos",
-    rutas: ["/guias", "/preguntas", "/versiones"],
+    rutas: ["/guias", "/herramientas", "/preguntas", "/versiones"],
     items: [
       { href: "/versiones", t: "Novedades del sistema", Icon: Rocket, tono: "green" },
       { href: "/guias", t: "Guías para emprendedores", Icon: BookOpen, tono: "blue" },
+      { href: "/herramientas", t: "Calculadoras gratis", Icon: Calculator, tono: "orange" },
       { href: "/preguntas", t: "Preguntas frecuentes", Icon: CircleHelp, tono: "pink" },
       { href: YOUTUBE_URL, t: "Tutoriales en YouTube", Icon: Play, tono: "orange", externo: true },
       { href: "/consultoria#belen", t: "Quién es Belén", Icon: Heart, tono: "violet" },

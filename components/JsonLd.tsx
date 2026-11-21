@@ -1,4 +1,5 @@
 import { FAQ } from "@/content/faq";
+import { HERRAMIENTAS } from "@/content/herramientas";
 import { SERVICIOS_CONSULTORIA } from "@/content/consultoria";
 import {
   INSTAGRAM_URL,
@@ -223,5 +224,37 @@ export function JsonLdRubro({ ruta, nombre, descripcion }: { ruta: string; nombr
     areaServed: { "@type": "Country", name: "Argentina" },
     audience: { "@type": "Audience", audienceType: nombre },
     inLanguage: "es-AR",
+  });
+}
+
+/* Calculadora: una aplicación web de uso libre. Sin `offers` ni valoraciones: no se declara precio. */
+export function JsonLdHerramienta({ ruta, nombre, descripcion, fecha }: { ruta: string; nombre: string; descripcion: string; fecha: string }) {
+  return incrustar({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": `${SITE_URL}${ruta}#herramienta`,
+    name: nombre,
+    description: descripcion,
+    url: `${SITE_URL}${ruta}`,
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Web (celular y computadora)",
+    browserRequirements: "Requiere JavaScript",
+    isAccessibleForFree: true,
+    inLanguage: "es-AR",
+    dateModified: fecha,
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    audience: { "@type": "Audience", audienceType: "Emprendedores y pymes" },
+    image: `${SITE_URL}${ruta}/opengraph-image`,
+  });
+}
+
+/* Índice de herramientas: la lista de las calculadoras, en orden. */
+export function JsonLdListaHerramientas() {
+  return incrustar({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/herramientas#lista`,
+    name: "Calculadoras gratis para emprendedores",
+    itemListElement: HERRAMIENTAS.map((h, i) => ({ "@type": "ListItem", position: i + 1, name: h.nombre, url: `${SITE_URL}/herramientas/${h.slug}` })),
   });
 }

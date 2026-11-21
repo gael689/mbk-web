@@ -16,4 +16,5 @@ export const ULTIMA_MODIFICACION = {
   guias: "2026-10-14",
   bahiaBlanca: "2026-10-14",
   versiones: WEB_V1_10,
+  herramientas: "2026-11-21",
 } as const;

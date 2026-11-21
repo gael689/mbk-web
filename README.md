@@ -15,6 +15,7 @@ La **v1 (landing larga, una sola página)** está **archivada**: rama `archivo/v
 
 - **Home (`/`)**: hero con CTA → "Lo que te pasa hoy y lo que cambia" (6 tarjetas problema → lo que ganás, cada una lleva a `/sistema#...`) → "Empezá por donde estés" (tres puertas: Planillas, Sistema, Consultoría) → Belén en resumen → CTA final con formulario.
 - **`/sistema`**: los 7 bloques problema → solución → ganancia con mockups, para quién es, dos formas de usarlo, tutoriales, cómo empezar, Instagram.
+- **`/herramientas`** (21/11/2026): tres calculadoras gratis (precio de venta, punto de equilibrio, cuánto te queda), juntas en el índice y cada una con su URL (`/herramientas/<slug>`). Cada una cierra con lo que hace el sistema y "Solicitar demo". Lo que la persona escribe no sale del navegador.
 - **`/consultoria`**: Belén (experiencia, misión, valores) y los 8 servicios. **`/planillas`**: las 6 planillas. **`/preguntas`**: FAQ completo (y su JSON-LD FAQPage).
 - **Un solo CTA principal** ("Solicitar demo", que lleva a `/?demo=1#probar` y deja elegida la opción "Quiero ver una demo del sistema") repetido en cada página y siempre llevando al formulario de la home (`/#probar`); "Sistema + acompañamiento" lo abre con `/?acomp=1#probar`. El formulario tiene lo esencial a la vista (nombre, negocio, WhatsApp, qué querés resolver) y el mail y el acompañamiento en un bloque opcional.
 - **Color y efectos**: los cuatro colores del logo (azul, naranja, verde, rosa) se reparten por bloque; el violeta queda solo para "Costos y gastos" (el color fijo de Belén). Efectos solo CSS y suaves: manchas de color, las cuatro barras del logo que crecen una vez, ondas entre secciones, tarjetas que se elevan al pasar el mouse. Se ven siempre, también con "reducir movimiento" (decisión de Gael, 05/11/2026).
@@ -70,6 +71,7 @@ Las imágenes del hero (`public/capturas/web/laptop.webp` y `celular.webp`) son 
 
 - `site.ts`: dominio, links (login, legales, Instagram, YouTube, tienda), WhatsApp, fotos, flags.
 - `soluciones.ts`: los problemas y los 7 bloques problema → solución → lo que ganás.
+- `herramientas.ts`: títulos, bajadas, la cuenta en una línea y el cierre de cada calculadora. Las cuentas están en `lib/calculadoras.ts` (funciones puras) y los campos en `components/Calculadora.tsx`. Sin comisiones "reales" de ningún medio de cobro: las escribe cada persona.
 - `faq.ts` (también alimenta el JSON-LD), `consultoria.ts`, `planillas.ts`, `modulos.ts`, `instagram.ts`.
 - `components/mockups/`: Dashboard (notebook y celular) y los mockups chicos. Datos de ejemplo obviamente ficticios; aparece el signo `$` **solo ahí**, dentro de esos mockups, nunca como precio del producto.
 
@@ -100,6 +102,7 @@ Para probar el mail opcional sin mandar mails reales: `node scripts/resend-falso
 ## SEO / GEO
 
 - **Páginas por rubro, guías y ciudad (14/10/2026)**: `/rubros` + 9 rubros (`content/rubros.ts`), `/guias` + 5 guías (`content/guias.ts`) y `/bahia-blanca`. Una sola plantilla por familia (`app/rubros/[rubro]`, `app/guias/[guia]`), estáticas con `generateStaticParams` y `dynamicParams = false`. Cada página tiene contenido propio (problemas, un día de ejemplo, preguntas) y su JSON-LD (Service o Article + FAQPage + BreadcrumbList). Se enlazan desde el menú ("Tu rubro"), el pie, "Para quién es" de `/sistema`, el sitemap y `llms.txt`. **Para sumar un rubro o una guía alcanza con agregarlo al archivo de `content/`**; respetar las mismas reglas (sin precios, nada inventado, solo lo que el sistema hace hoy).
+- **Herramientas (21/11/2026)**: `/herramientas` + 3 calculadoras (`content/herramientas.ts`, plantilla `app/herramientas/[herramienta]`), con JSON-LD `WebApplication` (sin `offers`: no se declara precio) + BreadcrumbList, e `ItemList` en el índice. Están en el menú (Recursos), el pie, el sitemap y `llms.txt`. Enlaces con UTM para difundirlas: `planes/utm.md`.
 - `metadataBase` y canónico salen de `SITE_URL` (una constante); cada página arma su metadata con `lib/meta.ts` (canónico, Open Graph con imagen y Twitter). `app/sitemap.ts` (home + 4 páginas), `app/robots.ts` (abierto a los buscadores con IA), `public/llms.txt`, `app/opengraph-image.tsx` (+ `twitter-image`), JSON-LD en `components/JsonLd.tsx`: WebSite, Organization, ProfessionalService de Bahía Blanca, SoftwareApplication y Person en la home, y FAQPage solo en `/preguntas` (donde las respuestas están a la vista).
 - **`/llms.txt` y `/llms-full.txt` se generan** (`lib/llms.ts`, rutas en `app/`) desde el contenido de la web y `SITE_URL`: no hay nada que editar a mano.
 - **Imagen OG por página**: `lib/og.tsx` (plantilla) + un `opengraph-image.tsx`/`twitter-image.tsx` en la carpeta de cada página. Para cambiar el texto, editar el de esa carpeta. `metaPagina` ya no declara imágenes.

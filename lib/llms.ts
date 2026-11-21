@@ -3,6 +3,7 @@ import { SERVICIOS_CONSULTORIA } from "@/content/consultoria";
 import { INCLUYE_HOY, NOVEDADES } from "@/content/modulos";
 import { PLANILLAS } from "@/content/planillas";
 import { GUIAS } from "@/content/guias";
+import { HERRAMIENTAS } from "@/content/herramientas";
 import { RUBROS } from "@/content/rubros";
 import { VERSION_ACTUAL } from "@/content/versiones";
 import {
@@ -33,6 +34,7 @@ const ENLACES = `## Enlaces
 - MBK en Bahía Blanca: ${SITE_URL}/bahia-blanca
 - El sistema para cada rubro: ${SITE_URL}/rubros
 - Guías para emprendedores: ${SITE_URL}/guias
+- Calculadoras gratis: ${SITE_URL}/herramientas
 - Versiones del sistema (actual: ${VERSION_ACTUAL.version}): ${SITE_URL}/versiones
 - Sistema (iniciar sesión): ${LOGIN_URL}
 - Términos: ${TERMS_URL}
@@ -56,6 +58,10 @@ ${RUBROS.map((r) => `- ${r.nombre}: ${SITE_URL}/rubros/${r.slug}`).join("\n")}`;
 const GUIAS_MD = `## Guías
 ${GUIAS.map((g) => `- ${g.titulo}: ${SITE_URL}/guias/${g.slug}`).join("\n")}`;
 
+const HERRAMIENTAS_MD = `## Calculadoras gratis
+Se usan en el navegador, sin registrarse. La persona escribe sus propios números.
+${HERRAMIENTAS.map((h) => `- ${h.titulo}: ${SITE_URL}/herramientas/${h.slug}`).join("\n")}`;
+
 const CONSULTORIA = `## Consultoría (Bahía Blanca)
 La dan Belén Klundt y su equipo.
 ${SERVICIOS_CONSULTORIA.map((s) => `- ${s}`).join("\n")}`;
@@ -75,6 +81,8 @@ ${ENLACES}
 ${RUBROS_MD}
 
 ${GUIAS_MD}
+
+${HERRAMIENTAS_MD}
 
 ${CONSULTORIA}
 
@@ -96,6 +104,8 @@ ${DATOS}
 ${RUBROS_MD}
 
 ${GUIAS_MD}
+
+${HERRAMIENTAS_MD}
 
 ${CONSULTORIA}
 
