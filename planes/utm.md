@@ -21,6 +21,9 @@ Para compartir una calculadora puntual, cambiar la ruta y dejar el resto igual:
 - `https://www.mbk.com.ar/herramientas/precio-de-venta?utm_source=instagram&utm_medium=historia&utm_campaign=precio-de-venta`
 - `https://www.mbk.com.ar/herramientas/punto-de-equilibrio?utm_source=instagram&utm_medium=historia&utm_campaign=punto-de-equilibrio`
 - `https://www.mbk.com.ar/herramientas/cuanto-te-queda?utm_source=instagram&utm_medium=historia&utm_campaign=cuanto-te-queda`
+- `https://www.mbk.com.ar/herramientas/costo-de-un-producto?utm_source=instagram&utm_medium=historia&utm_campaign=costo-de-un-producto`
+- `https://www.mbk.com.ar/herramientas/valor-de-la-hora?utm_source=instagram&utm_medium=historia&utm_campaign=valor-de-la-hora`
+- `https://www.mbk.com.ar/herramientas/margen-y-markup?utm_source=instagram&utm_medium=historia&utm_campaign=margen-y-markup`
 
 ## Reglas para armar uno nuevo
 

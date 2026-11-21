@@ -201,3 +201,152 @@ export function cuantoTeQueda(precioTxt: string, costoTxt: string, comisionTxt: 
   const acreditado = precio - comision;
   return { ok: true, acreditado, comision, ganancia: acreditado - costo, gananciaEfectivo: precio - costo, precio };
 }
+
+/* ── 4. Costo de un producto ─────────────────────────────────────────────── */
+
+export type CostoProducto =
+  | {
+      ok: true;
+      /** Lo que cuesta hacer cada unidad. */
+      porUnidad: number;
+      /** Lo que cuesta todo el lote, partido en sus tres partes. */
+      materiales: number;
+      manoDeObra: number;
+      otros: number;
+      total: number;
+      unidades: number;
+    }
+  | Falla;
+
+/** Costo por unidad de un lote.
+ *
+ *   mano de obra = horas × valor de la hora      (si se dejan vacías las dos, es 0)
+ *   total        = materiales + mano de obra + otros costos del lote
+ *   por unidad   = total ÷ unidades que salen
+ *  Materiales y unidades son obligatorios; horas, valor de la hora y otros vacíos cuentan como 0,
+ *  pero horas y valor de la hora van juntos. */
+export function costoDeUnProducto(materialesTxt: string, horasTxt: string, valorHoraTxt: string, otrosTxt: string, unidadesTxt: string): CostoProducto {
+  const materiales = leerNumero(materialesTxt);
+  const horas = leerNumero(horasTxt);
+  const valorHora = leerNumero(valorHoraTxt);
+  const otros = leerNumero(otrosTxt);
+  const unidades = leerNumero(unidadesTxt);
+  if (invalido(materiales, horas, valorHora, otros, unidades)) return error(NUMERO_INVALIDO);
+  if (materiales === null || unidades === null) return FALTA;
+  if (unidades <= 0) return error("Las unidades que salen del lote tienen que ser más de cero.");
+  if ((horas === null) !== (valorHora === null)) return error("Poné las horas y el valor de la hora, o dejá los dos vacíos.");
+
+  const manoDeObra = (horas ?? 0) * (valorHora ?? 0);
+  const total = materiales + manoDeObra + (otros ?? 0);
+  if (total <= 0) return error("Poné al menos un costo mayor a cero.");
+  return { ok: true, porUnidad: total / unidades, materiales, manoDeObra, otros: otros ?? 0, total, unidades };
+}
+
+/* ── 5. Valor de la hora ─────────────────────────────────────────────────── */
+
+export const SEMANAS_POR_DEFECTO = 4;
+
+export type ValorHora =
+  | {
+      ok: true;
+      /** Lo que hay que cobrar cada hora facturable. */
+      porHora: number;
+      /** Lo que hay que facturar al mes (lo que querés ganar + los gastos fijos). */
+      aFacturar: number;
+      horasAlMes: number;
+      /** Lo que hay que facturar por día de trabajo; null si no se indicaron los días por semana. */
+      porDia: number | null;
+      horasPorDia: number | null;
+    }
+  | Falla;
+
+/** Cuánto cobrar la hora.
+ *
+ *   a facturar   = lo que querés ganar + gastos fijos del mes (vacío = 0)
+ *   horas al mes = horas facturables por semana × semanas al mes (vacío = 4)
+ *   por hora     = a facturar ÷ horas al mes
+ *   por día      = a facturar ÷ (semanas × días por semana), solo si se dijeron los días
+ *  Las horas son las que realmente se facturan, no todas las trabajadas. */
+export function valorDeLaHora(quieroTxt: string, fijosTxt: string, horasSemanaTxt: string, semanasTxt: string, diasSemanaTxt: string): ValorHora {
+  const quiero = leerNumero(quieroTxt);
+  const fijos = leerNumero(fijosTxt) ?? 0;
+  const horasSemana = leerNumero(horasSemanaTxt);
+  const semanas = leerNumero(semanasTxt) ?? SEMANAS_POR_DEFECTO;
+  const dias = leerNumero(diasSemanaTxt);
+  if (invalido(quiero, fijos, horasSemana, semanas, dias)) return error(NUMERO_INVALIDO);
+  if (quiero === null || horasSemana === null) return FALTA;
+  if (horasSemana <= 0) return error("Las horas que facturás por semana tienen que ser más de cero.");
+  if (horasSemana > 168) return error("Una semana tiene 168 horas: revisá las horas que facturás.");
+  if (semanas <= 0 || semanas > 5) return error("Las semanas al mes tienen que estar entre 1 y 5.");
+  if (dias !== null && (dias <= 0 || dias > 7)) return error("Los días por semana tienen que estar entre 1 y 7.");
+  const aFacturar = quiero + fijos;
+  if (aFacturar <= 0) return error("Poné lo que querés ganar al mes.");
+
+  const horasAlMes = horasSemana * semanas;
+  const diasAlMes = dias === null ? null : dias * semanas;
+  return {
+    ok: true,
+    porHora: aFacturar / horasAlMes,
+    aFacturar,
+    horasAlMes,
+    porDia: diasAlMes === null ? null : aFacturar / diasAlMes,
+    horasPorDia: dias === null ? null : horasSemana / dias,
+  };
+}
+
+/* ── 6. Margen y markup ──────────────────────────────────────────────────── */
+
+export type MargenMarkup =
+  | {
+      ok: true;
+      costo: number;
+      precio: number;
+      /** Precio menos costo (negativo si se vende con pérdida). */
+      ganancia: number;
+      /** Ganancia sobre el precio, en %. */
+      margen: number;
+      /** Ganancia sobre el costo, en %. */
+      markup: number;
+    }
+  | Falla;
+
+/** Margen y markup de un producto del que se conocen el costo y el precio.
+ *
+ *   ganancia = precio − costo
+ *   margen   = ganancia ÷ precio × 100     (sobre el precio: nunca llega a 100 %)
+ *   markup   = ganancia ÷ costo × 100      (sobre el costo: puede pasar de 100 %) */
+export function margenYMarkup(costoTxt: string, precioTxt: string): MargenMarkup {
+  const costo = leerNumero(costoTxt);
+  const precio = leerNumero(precioTxt);
+  if (invalido(costo, precio)) return error(NUMERO_INVALIDO);
+  if (costo === null || precio === null) return FALTA;
+  if (costo <= 0) return error("El costo tiene que ser mayor a cero.");
+  if (precio <= 0) return error("El precio tiene que ser mayor a cero.");
+  const ganancia = precio - costo;
+  return { ok: true, costo, precio, ganancia, margen: (ganancia / precio) * 100, markup: (ganancia / costo) * 100 };
+}
+
+/** Lo que la persona fija para sacar el precio: un margen (sobre el precio) o un markup (sobre el costo). */
+export type BaseMargen = "margen" | "markup";
+
+export type PrecioPorMargen = { ok: true; costo: number; precio: number; ganancia: number; margen: number; markup: number } | Falla;
+
+/** El camino inverso: el precio que da el margen o el markup que se quiere.
+ *
+ *   con m = porcentaje ÷ 100:
+ *   · margen: precio = costo ÷ (1 − m)      (el margen tiene que ser menor al 100 %)
+ *   · markup: precio = costo × (1 + m)
+ *   ganancia = precio − costo; y el otro porcentaje sale de la ganancia como en `margenYMarkup`. */
+export function precioPorMargen(costoTxt: string, porcentajeTxt: string, base: BaseMargen): PrecioPorMargen {
+  const costo = leerNumero(costoTxt);
+  const pct = leerNumero(porcentajeTxt);
+  if (invalido(costo, pct)) return error(NUMERO_INVALIDO);
+  if (costo === null || pct === null) return FALTA;
+  if (costo <= 0) return error("El costo tiene que ser mayor a cero.");
+  if (base === "margen" && pct >= 100) return error("Un margen sobre el precio tiene que ser menor al 100 %: para ganar más que el costo, usá el markup.");
+
+  const m = pct / 100;
+  const precio = base === "margen" ? costo / (1 - m) : costo * (1 + m);
+  const ganancia = precio - costo;
+  return { ok: true, costo, precio, ganancia, margen: (ganancia / precio) * 100, markup: (ganancia / costo) * 100 };
+}
